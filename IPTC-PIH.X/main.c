@@ -31,7 +31,6 @@ void main(void) /// This function performs the folowing tasks:
         if (SECF) /// <ul> <li> Check the #SECF flag, if it is set, 1 second has passed since last execution, so the folowing task are executed:
         {
             scaling(); /// <li> Scale the average measured values by calling the #scaling function
-            state_machine(); /// <li> Call the #state_machine function
             log_control(); /// <li> Print the log in the serial terminal by calling the #log_control function
             if (basic_configuration.version == 1){
                 cc_cv_mode(vavg, basic_configuration.const_voltage, cmode); /// <li> Check if the system shall change to CV mode by calling the #cc_cv_mode function
@@ -54,7 +53,6 @@ void __interrupt() ISR(void) /// This function performs the folowing tasks:
             RC1STAbits.CREN = 1;
             //UART_send_byte(false);
             UART_send_string((char*)"OERR_ERROR");
-            state = IDLE;
         }
         else
         {

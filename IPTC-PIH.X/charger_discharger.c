@@ -133,7 +133,6 @@ bool command_interpreter()
     uint16_t checksum = 0x0000;
     uint16_t calc_checksum = 0x0000;
     basic_configuration_ptr = &basic_configuration;
-    test_configuration_ptr = &test_configuration;
     converter_configuration_ptr = &converter_configuration;
     if (!start)
     {
@@ -168,12 +167,6 @@ bool command_interpreter()
                                 UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
                                 calc_checksum = calculate_checksum(code, length, (uint8_t*)basic_configuration_ptr);
                                 break;
-                            case 0x05:
-                                length = sizeof(test_configuration);
-                                UART_send_byte(length);
-                                UART_send_some_bytes(length, (uint8_t*)test_configuration_ptr);
-                                calc_checksum = calculate_checksum(code, length, (uint8_t*)test_configuration_ptr);
-                                break;
                             case 0x07:
                                 length = sizeof(converter_configuration);
                                 UART_send_byte(length);
@@ -189,17 +182,9 @@ bool command_interpreter()
                         {
                             case 0x03: //BASIC CONFIGURATION
                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)basic_configuration_ptr);
-                                vref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ; //Scale the voltage reference to be compare with v;
-                                i_char = (uint16_t) ( ( ( (float) basic_configuration.const_current_char * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
-                                i_disc = (uint16_t) ( ( ( (float) basic_configuration.const_current_disc * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
+                                v_ref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ; //Scale the voltage reference to be compare with v;
+                                i_ref = (uint16_t) ( ( ( (float) basic_configuration.const_current * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
                                 capacity = basic_configuration.capacity;
-                                EOC_variable = basic_configuration.end_of_charge;
-                                EOPC_variable = basic_configuration.end_of_precharge;
-                                EOD_voltage = basic_configuration.end_of_discharge;
-                                EOPD_capacity = basic_configuration.end_of_postdischarge;
-                                break;
-                            case 0x05: // TEST CONFIGURATION
-                                put_data_into_structure(length, (uint8_t*)data, (uint8_t*)test_configuration_ptr);
                                 break;
                             case 0x07: // CONVERTER CONFIGURATION
                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)converter_configuration_ptr);
@@ -216,10 +201,7 @@ bool command_interpreter()
                     case 0x0F:  // START CONVERTER
                         if (code == 0x05)
                         {
-                            counter_state = 0;
-                            state = test_configuration.order_of_states[counter_state];
                             cell_count = 0x01;
-                            repetition_counter = 0x01;
                             converter_settings();
                             start = true;
                         }
@@ -232,18 +214,6 @@ bool command_interpreter()
         code = UART_get_byte();
         switch (code)
         {
-            case 0x03: // RESET
-                state = IDLE;
-                break;
-            case 0x07: // NEXT CELL
-                counter_state = test_configuration.number_of_states + 1;
-                wait_count = getTime();
-                state = WAIT;
-                break;
-            case 0x09: // NEXT STATE
-                wait_count = getTime();
-                state = WAIT;
-                break;
             default:
                 test = false;
                 break;
@@ -258,10 +228,10 @@ void control_loop()
 {   
     if(!cmode) /// If #cmode is cleared then
     {
-        pid(v, vref);/// * The #pid() function is called with @p feedback = #v and @p setpoint = #vref
+        pid(v, v_ref);/// * The #pid() function is called with @p feedback = #v and @p setpoint = #vref
     }else /// Else,
     {
-        pid(i, iref); /// * The #pid() function is called with @p feedback = #i and @p setpoint = #iref
+        pid(i, i_ref); /// * The #pid() function is called with @p feedback = #i and @p setpoint = #iref
     }
     set_DC();
 }
@@ -277,7 +247,6 @@ void pid(float feedback, float setpoint)
     er = setpoint - feedback; /// * Calculate the error by substract the @p feedback from the @p setpoint and store it in @p er
     if(er > ERR_MAX) er = ERR_MAX; /// * Make sure error is never above #ERR_MAX
     if(er < ERR_MIN) er = ERR_MIN; /// * Make sure error is never below #ERR_MIN
-    
     
 	pidi += (ki * er); /// * Calculate #integral component of compensator
     pidt += (er * kp + pidi); /// * Calculate #proportional component of compensator
@@ -297,23 +266,6 @@ void set_DC()
     PSMC1CONbits.PSMC1LD = 1; /// * Set the load register. This will load all the setting as once*/
 }
 
-/**@brief This function switches between CC and CV mode.
-* @param current_voltage average of current voltage
-* @param referece_voltage voltage setpoint
-* @param CC_mode_status current condition of #cmode variable
-*/
-void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, bool CC_mode_status)
-{
-/// If the current voltage is bigger than the CV setpoint and the system is in CC mode, then:
-    if( ( ( (uint16_t) ( ( ( (float)current_voltage * 5000.0 ) / 4096.0 ) + 0.5 ) ) > reference_voltage ) && CC_mode_status )
-    {        
-        pidi = 0;       /// <ol> <li> The integral acummulator is cleared
-        cmode = 0;      /// <li> The system is set in CV mode by clearing the #cmode variable
-        kp = CV_kp;     /// <li> The proportional constant is set to #CV_kp 
-        ki = CV_ki;     /// <li> The integral constant is set to #CV_ki
-        kd = CV_kd;     /// <li> The derivative constant is set to #CV_kd
-    }    
-}
 /**@brief This function takes care of scaling the average values to correspond with their real values.
 */
 void scaling() /// This function performs the folowing tasks:
@@ -322,31 +274,19 @@ void scaling() /// This function performs the folowing tasks:
     log_data.voltage = (uint16_t) ( ( ( (float)vavg * 5000.0 ) / 4096.0 ) + 0.5 ); /// <li> Scale #vavg according to the 12-bit ADC resolution (4096)
     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0; /// <li> Perform the discrete integration of #iavg over one second and accumulate in #qavg 
     log_data.capacity = (uint16_t) (qavg);
-    if (basic_configuration.version == 2)
-    {
-        if (vavg > vmax)
-        {
-            (vmax = vavg); /// <li> If the chemistry is Ni-MH and #vavg is bigger than #vmax then set #vmax equal to #vavg
-        }
-    } 
 }
-/**@brief This function takes care of calculating the average values printing the log data using the UART.
-*/
-void log_control()
-{
-    if(start)
-    {
-        log_data_ptr = &log_data;
-        log_data.cell_counter = cell_count;
-        log_data.state = state;
-        log_data.repetition_counter = repetition_counter;
-        log_data.elapsed_time = second;
-        log_data.duty_cycle = (uint16_t) pidt;
-        UART_send_byte(0xDD);
-        UART_send_some_bytes(sizeof(log_data),(uint8_t*)log_data_ptr);
-        UART_send_byte(0x77);
-    }else second = 0;
-}
+///**@brief This function takes care of calculating the average values printing the log data using the UART.
+//*/
+//void log_control()
+//{
+//    if(start)
+//    {
+//        log_data_ptr = &log_data;
+//        UART_send_byte(0xDD);
+//        UART_send_some_bytes(sizeof(log_data),(uint8_t*)log_data_ptr);
+//        UART_send_byte(0x77);
+//    }else second = 0;
+//}
 
 /**@brief This function read the ADC and store the data in the coresponding variable
 */
@@ -395,6 +335,29 @@ void calculate_avg()
             vacum += (uint24_t) v; /// * Accumulate #v in #vavg
     }   
 }
+
+/**@brief Function to set the configurations of the converter.
+*/
+void converter_settings()
+{
+    // POR VERIFICAR 
+    cmode = 1; /// * Start in constant current mode by setting. #cmode
+    pidi = 0; /// * The #integral component of the compensator is set to zero.*/
+    qavg = 0; /// * Average capacity, #q_prom is set to zero.*/
+    vmax = 0; /// * Maximum averaged voltage, #vmax is set to zero.*/
+    pidt = DC_MIN;
+    set_DC();  /// * The #set_DC() function is called
+    Cell_ON(); /// * The #Cell_ON() function is called
+    
+    // iref
+    // set_char
+    // timeout
+    
+    __delay_ms(10); 
+    second = 0;
+    conv = 1;
+}
+
 /**@brief This function activate the UART reception interruption 
 */
 void interrupt_enable()
@@ -560,16 +523,4 @@ void Cell_OFF()
     __delay_ms(10);
     CELL4_OFF(); /// * Turn OFF cell #4 by calling #CELL4_OFF  
     __delay_ms(10);
-}
-
-uint8_t getTime(){
-    if ((counter_state + 1 <= test_configuration.number_of_states) && (test_configuration.order_of_states[counter_state + 1] != 0x00)){
-        return test_configuration.wait_time;
-    }
-    else if (cell_count < test_configuration.number_of_cells){
-        return test_configuration.wait_time;
-    }
-    else{
-        return test_configuration.end_wait_time;
-    }
 }

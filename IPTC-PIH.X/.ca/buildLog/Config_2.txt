@@ -1,0 +1,113 @@
+make -f nbproject/Makefile-Config_2.mk SUBPROJECTS= .clean-conf
+make[1]: Entering directory 'C:/Repositories/IPTC-PIH/IPTC-PIH.X'
+rm -f  -r .ca/build/Config_2/production
+rm -f  -r .ca/dist/Config_2/production
+make[1]: Leaving directory 'C:/Repositories/IPTC-PIH/IPTC-PIH.X'
+[32mCLEAN SUCCESSFUL (total time: 152ms)[0m
+make -f nbproject/Makefile-Config_2.mk SUBPROJECTS= .build-conf
+make[1]: Entering directory 'C:/Repositories/IPTC-PIH/IPTC-PIH.X'
+make  -f nbproject/Makefile-Config_2.mk .ca/dist/Config_2/production/IPTC-PIH.X.production.hex
+make[2]: Entering directory 'C:/Repositories/IPTC-PIH/IPTC-PIH.X'
+"C:\Program Files\Microchip\xc8\v2.40\bin\xc8-cc.exe"  -mcpu=16F1786 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8"  -fno-short-double -fno-short-float -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_2=Config_2  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o .ca/build/Config_2/production/charger_discharger.p1 charger_discharger.c 
+"C:\Program Files\Microchip\xc8\v2.40\bin\xc8-cc.exe"  -mcpu=16F1786 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8"  -fno-short-double -fno-short-float -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_2=Config_2  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o .ca/build/Config_2/production/main.p1 main.c 
+"C:\Program Files\Microchip\xc8\v2.40\bin\xc8-cc.exe"  -mcpu=16F1786 -c   -mdfp="C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8"  -fno-short-double -fno-short-float -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_Config_2=Config_2  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits   -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o .ca/build/Config_2/production/state_machine_b.p1 state_machine_b.c 
+charger_discharger.c:192:108: warning: implicit conversion loses floating-point precision: 'double' to 'float' [-Wconversion]
+                                vref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ; //Scale the voltage reference to be compare with v;
+                                     ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+charger_discharger.c:357:22: warning: implicit conversion loses integer precision: 'uint16_t' (aka 'unsigned short') to 'unsigned char' [-Wconversion]
+    ADCON0bits.CHS = channel;
+                   ~ ^~~~~~~
+charger_discharger.c:567:35: warning: implicit conversion loses integer precision: 'uint16_t' (aka 'unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wconversion]
+        return test_configuration.wait_time;
+        ~~~~~~ ~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+charger_discharger.c:570:35: warning: implicit conversion loses integer precision: 'uint16_t' (aka 'unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wconversion]
+        return test_configuration.wait_time;
+        ~~~~~~ ~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+charger_discharger.c:573:35: warning: implicit conversion loses integer precision: 'uint16_t' (aka 'unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wconversion]
+        return test_configuration.end_wait_time;
+        ~~~~~~ ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+5 warnings generated.
+"C:\Program Files\Microchip\xc8\v2.40\bin\xc8-cc.exe"  -mcpu=16F1786 -Wl,-Map=.ca/dist/Config_2/production/IPTC-PIH.X.production.map  -DXPRJ_Config_2=Config_2  -Wl,--defsym=__MPLAB_BUILD=1   -mdfp="C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8"  -fno-short-double -fno-short-float -O2 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto      -Wl,--memorysummary,.ca/dist/Config_2/production/memoryfile.xml -o .ca/dist/Config_2/production/IPTC-PIH.X.production.elf  .ca/build/Config_2/production/charger_discharger.p1 .ca/build/Config_2/production/main.p1 .ca/build/Config_2/production/state_machine_b.p1     
+./charger_discharger.h:205:: warning: (1478) initial value for "_CV_kp" differs to that in ./charger_discharger.h:205
+./charger_discharger.h:206:: warning: (1478) initial value for "_CV_ki" differs to that in ./charger_discharger.h:206
+./charger_discharger.h:207:: warning: (1478) initial value for "_CV_kd" differs to that in ./charger_discharger.h:207
+./charger_discharger.h:210:: warning: (1478) initial value for "_CC_char_kp" differs to that in ./charger_discharger.h:210
+./charger_discharger.h:211:: warning: (1478) initial value for "_CC_char_ki" differs to that in ./charger_discharger.h:211
+./charger_discharger.h:212:: warning: (1478) initial value for "_CC_disc_kp" differs to that in ./charger_discharger.h:212
+./charger_discharger.h:213:: warning: (1478) initial value for "_CC_disc_ki" differs to that in ./charger_discharger.h:213
+charger_discharger.c:290:: advisory: (1510) non-reentrant function "_set_DC" appears in multiple call graphs and has been duplicated by the compiler
+charger_discharger.c:461:: advisory: (1510) non-reentrant function "_UART_send_byte" appears in multiple call graphs and has been duplicated by the compiler
+charger_discharger.c:469:: advisory: (1510) non-reentrant function "_UART_send_some_bytes" appears in multiple call graphs and has been duplicated by the compiler
+charger_discharger.c:508:: advisory: (1510) non-reentrant function "_Cell_ON" appears in multiple call graphs and has been duplicated by the compiler
+charger_discharger.c:565:: advisory: (1510) non-reentrant function "_getTime" appears in multiple call graphs and has been duplicated by the compiler
+state_machine_b.c:208:: advisory: (1510) non-reentrant function "_converter_settings" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\flge.c:4:: advisory: (1510) non-reentrant function "___flge" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\fltol.c:43:: advisory: (1510) non-reentrant function "___fltol" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\sprcadd.c:10:: advisory: (1510) non-reentrant function "___fladd" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\sprcdiv.c:8:: advisory: (1510) non-reentrant function "___fldiv" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\sprcmul.c:8:: advisory: (1510) non-reentrant function "___flmul" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\Umul8_16.c:4:: advisory: (1510) non-reentrant function "__Umul8_16" appears in multiple call graphs and has been duplicated by the compiler
+C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\xxtofl.c:10:: advisory: (1510) non-reentrant function "___xxtofl" appears in multiple call graphs and has been duplicated by the compiler
+charger_discharger.c:124:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+charger_discharger.c:240:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+charger_discharger.c:244:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+charger_discharger.c:266:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:58:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:70:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:71:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:80:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:81:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:89:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:90:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:103:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:104:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:114:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:115:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:123:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:124:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:153:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:154:: warning: (1518) direct function call made with an incomplete prototype (getTime)
+state_machine_b.c:164:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+state_machine_b.c:216:: warning: (1518) direct function call made with an incomplete prototype (set_DC)
+:0:: error: (1347) can't find 0x16F words (0x16f withtotal) for psect "text44" in class "CODE" (largest unused contiguous range 0x108)
+Non line specific message::: advisory: (1493) updated 32-bit floating-point routines might trigger "can't find space" messages appearing after updating to this release; consider using the smaller 24-bit floating-point types
+:0:: error: (1347) can't find 0x13C words (0x13c withtotal) for psect "text19" in class "CODE" (largest unused contiguous range 0x108)
+:0:: error: (1347) can't find 0xA5 words (0xa5 withtotal) for psect "text7" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x98 words (0x98 withtotal) for psect "text46" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x93 words (0x93 withtotal) for psect "text23" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x93 words (0x93 withtotal) for psect "text41" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x89 words (0x89 withtotal) for psect "text22" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x7D words (0x7d withtotal) for psect "text54" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x7B words (0x7b withtotal) for psect "text13" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x7B words (0x7b withtotal) for psect "text34" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x6C words (0x6c withtotal) for psect "text24" in class "CODE" (largest unused contiguous range 0x64)
+:0:: error: (1347) can't find 0x53 words (0x53 withtotal) for psect "text32" in class "CODE" (largest unused contiguous range 0x31)
+:0:: error: (1347) can't find 0x45 words (0x45 withtotal) for psect "text15" in class "CODE" (largest unused contiguous range 0x31)
+:0:: error: (1347) can't find 0x37 words (0x37 withtotal) for psect "maintext" in class "CODE" (largest unused contiguous range 0x31)
+:0:: error: (1347) can't find 0x30 words (0x30 withtotal) for psect "text31" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x2D words (0x2d withtotal) for psect "text21" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x2A words (0x2a withtotal) for psect "text2" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x28 words (0x28 withtotal) for psect "text12" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x27 words (0x27 withtotal) for psect "text37" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x20 words (0x20 withtotal) for psect "text3" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x20 words (0x20 withtotal) for psect "text39" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x20 words (0x20 withtotal) for psect "text49" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x1F words (0x1f withtotal) for psect "text26" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x1F words (0x1f withtotal) for psect "text43" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x1D words (0x1d withtotal) for psect "text35" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x1C words (0x1c withtotal) for psect "text8" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x1B words (0x1b withtotal) for psect "text5" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x1A words (0x1a withtotal) for psect "text4" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x19 words (0x19 withtotal) for psect "text20" in class "CODE" (largest unused contiguous range 0xD)
+:0:: error: (1347) can't find 0x18 words (0x18 withtotal) for psect "text30" in class "CODE" (largest unused contiguous range 0xD)
+:0:: advisory: (1) too many errors (31)
+(908) exit status = 1
+nbproject/Makefile-Config_2.mk:164: recipe for target '.ca/dist/Config_2/production/IPTC-PIH.X.production.hex' failed
+make[2]: Leaving directory 'C:/Repositories/IPTC-PIH/IPTC-PIH.X'
+nbproject/Makefile-Config_2.mk:85: recipe for target '.build-conf' failed
+make[1]: Leaving directory 'C:/Repositories/IPTC-PIH/IPTC-PIH.X'
+nbproject/Makefile-impl.mk:39: recipe for target '.build-impl' failed
+[31mmake[2]: *** [.ca/dist/Config_2/production/IPTC-PIH.X.production.hex] Error 1
+make[1]: *** [.build-conf] Error 2
+make: *** [.build-impl] Error 2[0m
+[31mBUILD FAILED (exit value 2, total time: 5s)[0m
