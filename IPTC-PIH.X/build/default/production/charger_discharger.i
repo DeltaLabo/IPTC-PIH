@@ -9544,8 +9544,6 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void set_DC();
     uint16_t read_ADC(uint16_t channel);
     void scaling(void);
-    void log_control(void);
-    void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status);
     void control_loop(void);
     void calculate_avg(void);
     void interrupt_enable(void);
@@ -9556,23 +9554,18 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void UART_send_byte(uint8_t byte);
     void UART_get_some_bytes(uint8_t length, uint8_t* data);
     void UART_send_some_bytes(uint8_t length, uint8_t* data);
-    uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data);
     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
     void UART_send_string(char* st_pt);
     void Cell_ON(void);
     void Cell_OFF(void);
     void timing(void);
-# 113 "./charger_discharger.h"
+# 101 "./charger_discharger.h"
     typedef struct basic_configuration_struct {
-        uint8_t version;
         uint16_t const_voltage;
-        uint16_t const_current_char;
-        uint16_t const_current_disc;
+        uint16_t const_current;
         uint16_t capacity;
         uint16_t end_of_charge;
-        uint16_t end_of_precharge;
         uint16_t end_of_discharge;
-        uint16_t end_of_postdischarge;
     }basic_configuration_type, *basic_configuration_type_ptr;
 
     typedef struct converter_configuration_struct {
@@ -9586,12 +9579,10 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     }converter_configuration_type, *converter_configuration_type_ptr;
 
     typedef struct log_data_struct {
-        uint16_t elapsed_time;
         uint16_t voltage;
         uint16_t current;
         uint16_t capacity;
         uint16_t temperature;
-        uint16_t duty_cycle;
     }log_data_type, *log_data_type_ptr;
 
 
@@ -9616,8 +9607,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     float CV_kd = 0.020;
 
 
-    float CC_char_kp = 0.0130;
-    float CC_char_ki = 0.0025;
+    float CC_char_kp = 0.003;
+    float CC_char_ki = 0.0005;
     float CC_disc_kp = 0.006;
     float CC_disc_ki = 0.001;
     uint8_t CC_char_disc_kd = 0;
@@ -9640,8 +9631,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     float kp;
     float ki;
     float kd;
-    float vref = 0;
-    uint16_t iref = 0;
+    float v_ref = 0;
+    uint16_t i_ref = 0;
     _Bool cmode = 1;
     float pidt = 0;
     float er = 0;
@@ -9767,8 +9758,6 @@ _Bool command_interpreter()
     uint8_t code = 0x00;
     uint8_t length = 0x00;
     uint8_t data[20] = {0x00};
-    uint16_t checksum = 0x0000;
-    uint16_t calc_checksum = 0x0000;
     basic_configuration_ptr = &basic_configuration;
     converter_configuration_ptr = &converter_configuration;
     if (!start)
@@ -9779,17 +9768,6 @@ _Bool command_interpreter()
             code = UART_get_byte();
             length = UART_get_byte();
             if (length>0) UART_get_some_bytes(length, (uint8_t*)data);
-            checksum = UART_get_byte();
-            checksum += UART_get_byte()* 256;
-            calc_checksum = calculate_checksum(code, length, (uint8_t*)data);
-            if(UART_get_byte() != 0x77)
-            {
-                test = 0;
-            }
-            if (checksum != calc_checksum)
-            {
-                test = 0;
-            }
             if(!start)
             {
                 switch (operation)
@@ -9802,16 +9780,13 @@ _Bool command_interpreter()
                                 length = sizeof(basic_configuration);
                                 UART_send_byte(length);
                                 UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
-                                calc_checksum = calculate_checksum(code, length, (uint8_t*)basic_configuration_ptr);
                                 break;
                             case 0x07:
                                 length = sizeof(converter_configuration);
                                 UART_send_byte(length);
                                 UART_send_some_bytes(length, (uint8_t*)converter_configuration_ptr);
-                                calc_checksum = calculate_checksum(code, length, (uint8_t*)converter_configuration_ptr);
                                 break;
                         }
-                        UART_send_some_bytes(2,(uint8_t*)&calc_checksum);
                         UART_send_byte(0x77);
                         break;
                     case 0x5A:
@@ -9819,9 +9794,8 @@ _Bool command_interpreter()
                         {
                             case 0x03:
                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)basic_configuration_ptr);
-                                vref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ;
-                                i_char = (uint16_t) ( ( ( (float) basic_configuration.const_current_char * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
-                                i_disc = (uint16_t) ( ( ( (float) basic_configuration.const_current_disc * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
+                                v_ref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ;
+                                i_ref = (uint16_t) ( ( ( (float) basic_configuration.const_current * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
                                 capacity = basic_configuration.capacity;
                                 break;
                             case 0x07:
@@ -9866,10 +9840,10 @@ void control_loop()
 {
     if(!cmode)
     {
-        pid(v, vref);
+        pid(v, v_ref);
     }else
     {
-        pid(i, iref);
+        pid(i, i_ref);
     }
     set_DC();
 }
@@ -9906,54 +9880,14 @@ void set_DC()
 
 
 
-
-
-
-void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status)
-{
-
-    if( ( ( (uint16_t) ( ( ( (float)current_voltage * 5000.0 ) / 4096.0 ) + 0.5 ) ) > reference_voltage ) && CC_mode_status )
-    {
-        pidi = 0;
-        cmode = 0;
-        kp = CV_kp;
-        ki = CV_ki;
-        kd = CV_kd;
-    }
-}
-
-
 void scaling()
 {
     log_data.current = (uint16_t) ( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 );
     log_data.voltage = (uint16_t) ( ( ( (float)vavg * 5000.0 ) / 4096.0 ) + 0.5 );
     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0;
     log_data.capacity = (uint16_t) (qavg);
-    if (basic_configuration.version == 2)
-    {
-        if (vavg > vmax)
-        {
-            (vmax = vavg);
-        }
-    }
 }
-
-
-void log_control()
-{
-    if(start)
-    {
-        log_data_ptr = &log_data;
-        log_data.elapsed_time = second;
-        log_data.duty_cycle = (uint16_t) pidt;
-        UART_send_byte(0xDD);
-        UART_send_some_bytes(sizeof(log_data),(uint8_t*)log_data_ptr);
-        UART_send_byte(0x77);
-    }else second = 0;
-}
-
-
-
+# 278 "charger_discharger.c"
 uint16_t read_ADC(uint16_t channel)
 {
     uint16_t ad_res = 0;
@@ -9999,6 +9933,29 @@ void calculate_avg()
             vacum += (uint24_t) v;
     }
 }
+
+
+
+void converter_settings()
+{
+
+    cmode = 1;
+    pidi = 0;
+    qavg = 0;
+    vmax = 0;
+    pidt = 50.0;
+    set_DC();
+    Cell_ON();
+
+
+
+
+
+    _delay((unsigned long)((10)*(32000000/4000.0)));
+    second = 0;
+    conv = 1;
+}
+
 
 
 void interrupt_enable()
@@ -10076,17 +10033,6 @@ void UART_send_some_bytes(uint8_t length, uint8_t* data)
     {
         UART_send_byte(*data++);
     }
-}
-
-uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data)
-{
-    uint16_t result = 0x00;
-    result = (uint16_t)code + (uint16_t)length;
-    while(length--)
-    {
-        result += *data++;
-    }
-    return (result);
 }
 
 void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure)

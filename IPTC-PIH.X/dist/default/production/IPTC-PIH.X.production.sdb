@@ -35,143 +35,129 @@
 [v _initialize initialize `(v  1 e 1 0 ]
 "126
 [v _command_interpreter command_interpreter `(a  1 e 1 0 ]
-"228
+"211
 [v _control_loop control_loop `(v  1 e 1 0 ]
-"244
+"227
 [v _pid pid `(v  1 e 1 0 ]
-"260
+"243
 [v _set_DC set_DC `(v  1 e 1 0 ]
 [v i1_set_DC set_DC `(v  1 e 1 0 ]
-"275
-[v _cc_cv_mode cc_cv_mode `(v  1 e 1 0 ]
-"289
+"255
 [v _scaling scaling `(v  1 e 1 0 ]
-"305
-[v _log_control log_control `(v  1 e 1 0 ]
-"320
+"278
 [v _read_ADC read_ADC `(us  1 e 2 0 ]
-"334
+"292
 [v _timing timing `(v  1 e 1 0 ]
-"348
+"306
 [v _calculate_avg calculate_avg `(v  1 e 1 0 ]
-"367
+"326
+[v _converter_settings converter_settings `(v  1 e 1 0 ]
+"348
 [v _interrupt_enable interrupt_enable `(v  1 e 1 0 ]
-"386
+"367
 [v _UART_send_char UART_send_char `(v  1 e 1 0 ]
-"394
+"375
 [v _UART_send_header UART_send_header `(v  1 e 1 0 ]
-"404
+"385
 [v _UART_get_byte UART_get_byte `(uc  1 e 1 0 ]
-"415
+"396
 [v _UART_get_some_bytes UART_get_some_bytes `(v  1 e 1 0 ]
-"428
+"409
 [v _UART_send_byte UART_send_byte `(v  1 e 1 0 ]
-[v i1_UART_send_byte UART_send_byte `(v  1 e 1 0 ]
-"436
+"417
 [v _UART_send_some_bytes UART_send_some_bytes `(v  1 e 1 0 ]
-[v i1_UART_send_some_bytes UART_send_some_bytes `(v  1 e 1 0 ]
-"444
-[v _calculate_checksum calculate_checksum `(us  1 e 2 0 ]
-"455
+"425
 [v _put_data_into_structure put_data_into_structure `(v  1 e 1 0 ]
-"466
+"436
 [v _UART_send_string UART_send_string `(v  1 e 1 0 ]
-"475
+"445
 [v _Cell_ON Cell_ON `(v  1 e 1 0 ]
-"520
+"490
 [v _Cell_OFF Cell_OFF `(v  1 e 1 0 ]
 "24 C:\Repositories\IPTC-PIH\IPTC-PIH.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"45
+"41
 [v _ISR ISR `II(v  1 e 1 0 ]
-"18 C:\Repositories\IPTC-PIH\IPTC-PIH.X\state_machine_b.c
-[v _converter_settings converter_settings `(v  1 e 1 0 ]
-[s S22 basic_configuration_struct 17 `uc 1 version 1 0 `us 1 const_voltage 2 1 `us 1 const_current_char 2 3 `us 1 const_current_disc 2 5 `us 1 capacity 2 7 `us 1 end_of_charge 2 9 `us 1 end_of_precharge 2 11 `us 1 end_of_discharge 2 13 `us 1 end_of_postdischarge 2 15 ]
-"146 C:\Repositories\IPTC-PIH\IPTC-PIH.X/charger_discharger.h
-[v _basic_configuration basic_configuration `S22  1 e 17 0 ]
-"147
-[v _basic_configuration_ptr basic_configuration_ptr `*.6S22  1 e 1 0 ]
-[s S32 converter_configuration_struct 14 `us 1 CVKp 2 0 `us 1 CVKi 2 2 `us 1 CVKd 2 4 `us 1 CCKpC 2 6 `us 1 CCKiC 2 8 `us 1 CCKpD 2 10 `us 1 CCKiD 2 12 ]
-"148
-[v _converter_configuration converter_configuration `S32  1 e 14 0 ]
-"149
-[v _converter_configuration_ptr converter_configuration_ptr `*.6S32  1 e 1 0 ]
-[s S40 log_data_struct 12 `us 1 elapsed_time 2 0 `us 1 voltage 2 2 `us 1 current 2 4 `us 1 capacity 2 6 `us 1 temperature 2 8 `us 1 duty_cycle 2 10 ]
-"150
-[v _log_data log_data `S40  1 e 12 0 ]
-"151
-[v _log_data_ptr log_data_ptr `*.6S40  1 e 1 0 ]
-"152
+[s S22 basic_configuration_struct 10 `us 1 const_voltage 2 0 `us 1 const_current 2 2 `us 1 capacity 2 4 `us 1 end_of_charge 2 6 `us 1 end_of_discharge 2 8 ]
+"128 C:\Repositories\IPTC-PIH\IPTC-PIH.X/charger_discharger.h
+[v _basic_configuration basic_configuration `S22  1 e 10 0 ]
+"129
+[v _basic_configuration_ptr basic_configuration_ptr `*.5S22  1 e 1 0 ]
+[s S28 converter_configuration_struct 14 `us 1 CVKp 2 0 `us 1 CVKi 2 2 `us 1 CVKd 2 4 `us 1 CCKpC 2 6 `us 1 CCKiC 2 8 `us 1 CCKpD 2 10 `us 1 CCKiD 2 12 ]
+"130
+[v _converter_configuration converter_configuration `S28  1 e 14 0 ]
+"131
+[v _converter_configuration_ptr converter_configuration_ptr `*.6S28  1 e 1 0 ]
+[s S36 log_data_struct 8 `us 1 voltage 2 0 `us 1 current 2 2 `us 1 capacity 2 4 `us 1 temperature 2 6 ]
+"132
+[v _log_data log_data `S36  1 e 8 0 ]
+"134
 [v _start start `a  1 e 1 0 ]
-"153
+"135
 [v _SECF SECF `a  1 e 1 0 ]
-"155
+"137
 [v _capacity capacity `us  1 e 2 0 ]
-"156
-[v _i_char i_char `us  1 e 2 0 ]
-"157
-[v _i_disc i_disc `us  1 e 2 0 ]
-"158
+"140
 [v _cell_count cell_count `uc  1 e 1 0 ]
-"161
+"143
 [v _CV_kp CV_kp `f  1 e 4 0 ]
-"162
+"144
 [v _CV_ki CV_ki `f  1 e 4 0 ]
-"163
+"145
 [v _CV_kd CV_kd `f  1 e 4 0 ]
-"166
+"148
 [v _CC_char_kp CC_char_kp `f  1 e 4 0 ]
-"167
+"149
 [v _CC_char_ki CC_char_ki `f  1 e 4 0 ]
-"168
+"150
 [v _CC_disc_kp CC_disc_kp `f  1 e 4 0 ]
-"169
+"151
 [v _CC_disc_ki CC_disc_ki `f  1 e 4 0 ]
-"172
+"154
 [v _conv conv `a  1 e 1 0 ]
-"173
+"155
 [v _count count `us  1 e 2 0 ]
-"177
+"159
 [v _v v `us  1 e 2 0 ]
-"178
+"160
 [v _i i `us  1 e 2 0 ]
-"179
+"161
 [v _vacum vacum `um  1 e 3 0 ]
-"180
+"162
 [v _iacum iacum `um  1 e 3 0 ]
-"182
+"164
 [v _vavg vavg `us  1 e 2 0 ]
-"183
+"165
 [v _iavg iavg `us  1 e 2 0 ]
-"184
+"166
 [v _qavg qavg `f  1 e 4 0 ]
-"185
+"167
 [v _vmax vmax `us  1 e 2 0 ]
-"186
+"168
 [v _pidi pidi `f  1 e 4 0 ]
-"187
+"169
 [v _kp kp `f  1 e 4 0 ]
-"188
+"170
 [v _ki ki `f  1 e 4 0 ]
-"189
+"171
 [v _kd kd `f  1 e 4 0 ]
-"190
-[v _vref vref `f  1 e 4 0 ]
-"191
-[v _iref iref `us  1 e 2 0 ]
-"192
+"172
+[v _v_ref v_ref `f  1 e 4 0 ]
+"173
+[v _i_ref i_ref `us  1 e 2 0 ]
+"174
 [v _cmode cmode `a  1 e 1 0 ]
-"193
+"175
 [v _pidt pidt `f  1 e 4 0 ]
-"194
+"176
 [v _er er `f  1 e 4 0 ]
-"195
+"177
 [v _second second `us  1 e 2 0 ]
 "884 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h
 [v _TMR1L TMR1L `VEuc  1 e 1 @22 ]
 "904
 [v _TMR1H TMR1H `VEuc  1 e 1 @23 ]
-[s S49 . 1 `uc 1 SCS0 1 0 :1:0 
+[s S43 . 1 `uc 1 SCS0 1 0 :1:0 
 `uc 1 SCS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 IRCF0 1 0 :1:3 
@@ -181,17 +167,17 @@
 `uc 1 SPLLEN 1 0 :1:7 
 ]
 "1892
-[s S58 . 1 `uc 1 SCS 1 0 :2:0 
+[s S52 . 1 `uc 1 SCS 1 0 :2:0 
 `uc 1 . 1 0 :1:2 
 `uc 1 IRCF 1 0 :4:3 
 ]
-[u S62 . 1 `S49 1 . 1 0 `S58 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES62  1 e 1 @153 ]
+[u S56 . 1 `S43 1 . 1 0 `S52 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES56  1 e 1 @153 ]
 "2011
 [v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
 "2031
 [v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
-[s S140 . 1 `uc 1 ADON 1 0 :1:0 
+[s S134 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -201,19 +187,19 @@
 `uc 1 ADRMD 1 0 :1:7 
 ]
 "2081
-[s S149 . 1 `uc 1 . 1 0 :1:0 
+[s S143 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 ADGO 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
-[s S153 . 1 `uc 1 . 1 0 :1:0 
+[s S147 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 ]
-[s S156 . 1 `uc 1 . 1 0 :1:0 
+[s S150 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[u S159 . 1 `S140 1 . 1 0 `S149 1 . 1 0 `S153 1 . 1 0 `S156 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES159  1 e 1 @157 ]
-[s S184 . 1 `uc 1 ADPREF0 1 0 :1:0 
+[u S153 . 1 `S134 1 . 1 0 `S143 1 . 1 0 `S147 1 . 1 0 `S150 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES153  1 e 1 @157 ]
+[s S178 . 1 `uc 1 ADPREF0 1 0 :1:0 
 `uc 1 ADPREF1 1 0 :1:1 
 `uc 1 ADNREF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -223,13 +209,13 @@
 `uc 1 ADFM 1 0 :1:7 
 ]
 "2168
-[s S193 . 1 `uc 1 ADPREF 1 0 :2:0 
+[s S187 . 1 `uc 1 ADPREF 1 0 :2:0 
 `uc 1 . 1 0 :2:2 
 `uc 1 ADCS 1 0 :3:4 
 ]
-[u S197 . 1 `S184 1 . 1 0 `S193 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES197  1 e 1 @158 ]
-[s S214 . 1 `uc 1 CHSN0 1 0 :1:0 
+[u S191 . 1 `S178 1 . 1 0 `S187 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES191  1 e 1 @158 ]
+[s S208 . 1 `uc 1 CHSN0 1 0 :1:0 
 `uc 1 CHSN1 1 0 :1:1 
 `uc 1 CHSN2 1 0 :1:2 
 `uc 1 CHSN3 1 0 :1:3 
@@ -239,11 +225,11 @@
 `uc 1 TRIGSEL3 1 0 :1:7 
 ]
 "2239
-[s S223 . 1 `uc 1 CHSN 1 0 :4:0 
+[s S217 . 1 `uc 1 CHSN 1 0 :4:0 
 `uc 1 TRIGSEL 1 0 :4:4 
 ]
-[u S226 . 1 `S214 1 . 1 0 `S223 1 . 1 0 ]
-[v _ADCON2bits ADCON2bits `VES226  1 e 1 @159 ]
+[u S220 . 1 `S208 1 . 1 0 `S217 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES220  1 e 1 @159 ]
 "3878
 [v _RC1REG RC1REG `VEuc  1 e 1 @409 ]
 "3932
@@ -252,7 +238,7 @@
 [v _SP1BRGL SP1BRGL `VEuc  1 e 1 @411 ]
 "4063
 [v _SP1BRGH SP1BRGH `VEuc  1 e 1 @412 ]
-[s S596 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S548 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -262,24 +248,24 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "4143
-[u S605 . 1 `S596 1 . 1 0 ]
-[v _RC1STAbits RC1STAbits `VES605  1 e 1 @413 ]
+[u S557 . 1 `S548 1 . 1 0 ]
+[v _RC1STAbits RC1STAbits `VES557  1 e 1 @413 ]
 "8269
 [v _PSMC1CON PSMC1CON `VEuc  1 e 1 @2065 ]
-[s S321 . 1 `uc 1 P1MODE 1 0 :4:0 
+[s S308 . 1 `uc 1 P1MODE 1 0 :4:0 
 `uc 1 P1DBRE 1 0 :1:4 
 `uc 1 P1DBFE 1 0 :1:5 
 `uc 1 PSMC1LD 1 0 :1:6 
 `uc 1 PSMC1EN 1 0 :1:7 
 ]
 "8289
-[s S327 . 1 `uc 1 P1MODE0 1 0 :1:0 
+[s S314 . 1 `uc 1 P1MODE0 1 0 :1:0 
 `uc 1 P1MODE1 1 0 :1:1 
 `uc 1 P1MODE2 1 0 :1:2 
 `uc 1 P1MODE3 1 0 :1:3 
 ]
-[u S332 . 1 `S321 1 . 1 0 `S327 1 . 1 0 ]
-[v _PSMC1CONbits PSMC1CONbits `VES332  1 e 1 @2065 ]
+[u S319 . 1 `S308 1 . 1 0 `S314 1 . 1 0 ]
+[v _PSMC1CONbits PSMC1CONbits `VES319  1 e 1 @2065 ]
 "8339
 [v _PSMC1MDL PSMC1MDL `VEuc  1 e 1 @2066 ]
 "8455
@@ -449,64 +435,12 @@
 "24 C:\Repositories\IPTC-PIH\IPTC-PIH.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"41
+"37
 } 0
-"289 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+"255 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
 [v _scaling scaling `(v  1 e 1 0 ]
 {
-"302
-} 0
-"305
-[v _log_control log_control `(v  1 e 1 0 ]
-{
-"316
-} 0
-"436
-[v _UART_send_some_bytes UART_send_some_bytes `(v  1 e 1 0 ]
-{
-[v UART_send_some_bytes@length length `uc  1 a 1 wreg ]
-[v UART_send_some_bytes@length length `uc  1 a 1 wreg ]
-[v UART_send_some_bytes@data data `*.39uc  1 p 2 1 ]
-[v UART_send_some_bytes@length length `uc  1 a 1 3 ]
-"442
-} 0
-"428
-[v _UART_send_byte UART_send_byte `(v  1 e 1 0 ]
-{
-[v UART_send_byte@byte byte `uc  1 a 1 wreg ]
-[v UART_send_byte@byte byte `uc  1 a 1 wreg ]
-[v UART_send_byte@byte byte `uc  1 a 1 0 ]
-"434
-} 0
-"367
-[v _interrupt_enable interrupt_enable `(v  1 e 1 0 ]
-{
-"381
-} 0
-"18
-[v _initialize initialize `(v  1 e 1 0 ]
-{
-"125
-} 0
-"260
-[v _set_DC set_DC `(v  1 e 1 0 ]
-{
-"263
-[v set_DC@dc dc `us  1 a 2 16 ]
-"268
-} 0
-"520
-[v _Cell_OFF Cell_OFF `(v  1 e 1 0 ]
-{
-"530
-} 0
-"275
-[v _cc_cv_mode cc_cv_mode `(v  1 e 1 0 ]
-{
-[v cc_cv_mode@current_voltage current_voltage `us  1 p 2 16 ]
-[v cc_cv_mode@reference_voltage reference_voltage `us  1 p 2 18 ]
-[v cc_cv_mode@CC_mode_status CC_mode_status `a  1 p 1 20 ]
-"286
+"261
 } 0
 "10 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
@@ -523,30 +457,20 @@
 [v ___xxtofl@sign sign `uc  1 a 1 8 ]
 "44
 } 0
-"43 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\fltol.c
-[v ___fltol __fltol `(l  1 e 4 0 ]
-{
-"45
-[v ___fltol@exp1 exp1 `uc  1 a 1 79 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 78 ]
-"43
-[v ___fltol@f1 f1 `d  1 p 4 8 ]
-"70
-} 0
 "8 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1097 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S974 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1102 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S1105 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1097 1 fAsBytes 4 0 `S1102 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1105  1 a 4 34 ]
+[s S979 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S982 . 4 `l 1 i 4 0 `d 1 f 4 0 `S974 1 fAsBytes 4 0 `S979 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S982  1 a 4 34 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 28 ]
-[s S1174 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1051 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1177 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1174 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1177  1 a 2 38 ]
+[u S1054 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1051 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1054  1 a 2 38 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 33 ]
 "11
@@ -608,36 +532,68 @@
 [v ___fladd@a a `d  1 p 4 70 ]
 "237
 } 0
-"45 C:\Repositories\IPTC-PIH\IPTC-PIH.X\main.c
+"348 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+[v _interrupt_enable interrupt_enable `(v  1 e 1 0 ]
+{
+"362
+} 0
+"18
+[v _initialize initialize `(v  1 e 1 0 ]
+{
+"125
+} 0
+"243
+[v _set_DC set_DC `(v  1 e 1 0 ]
+{
+"246
+[v set_DC@dc dc `us  1 a 2 16 ]
+"251
+} 0
+"43 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 79 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 78 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 8 ]
+"70
+} 0
+"490 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+[v _Cell_OFF Cell_OFF `(v  1 e 1 0 ]
+{
+"500
+} 0
+"41 C:\Repositories\IPTC-PIH\IPTC-PIH.X\main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"77
+"76
 } 0
-"334 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+"292 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
 [v _timing timing `(v  1 e 1 0 ]
 {
-"345
+"303
 } 0
-"320
+"278
 [v _read_ADC read_ADC `(us  1 e 2 0 ]
 {
-"322
+"280
 [v read_ADC@ad_res ad_res `us  1 a 2 9 ]
-"320
+"278
 [v read_ADC@channel channel `us  1 p 2 0 ]
-"330
+"288
 } 0
-"228
+"211
 [v _control_loop control_loop `(v  1 e 1 0 ]
 {
-"238
+"221
 } 0
-"244
+"227
 [v _pid pid `(v  1 e 1 0 ]
 {
 [v pid@feedback feedback `f  1 p 4 54 ]
 [v pid@setpoint setpoint `f  1 p 4 58 ]
-"257
+"240
 } 0
 "242 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\sprcadd.c
 [v ___flsub __flsub `(d  1 e 4 0 ]
@@ -657,22 +613,18 @@
 [v _command_interpreter command_interpreter `(a  1 e 1 0 ]
 {
 "132
-[v command_interpreter@data data `[20]uc  1 a 20 16 ]
-"134
-[v command_interpreter@calc_checksum calc_checksum `us  1 a 2 40 ]
-"133
-[v command_interpreter@checksum checksum `us  1 a 2 36 ]
+[v command_interpreter@data data `[20]uc  1 a 20 15 ]
 "131
-[v command_interpreter@length length `uc  1 a 1 43 ]
+[v command_interpreter@length length `uc  1 a 1 38 ]
 "130
-[v command_interpreter@code code `uc  1 a 1 42 ]
+[v command_interpreter@code code `uc  1 a 1 37 ]
 "129
-[v command_interpreter@operation operation `uc  1 a 1 39 ]
+[v command_interpreter@operation operation `uc  1 a 1 36 ]
 "128
-[v command_interpreter@test test `a  1 a 1 38 ]
+[v command_interpreter@test test `a  1 a 1 35 ]
 "131
-[v command_interpreter@F5953 F5953 `[20]uc  1 s 20 F5953 ]
-"224
+[v command_interpreter@F5938 F5938 `[20]uc  1 s 20 F5938 ]
+"207
 } 0
 "10 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\xxtofl.c
 [v i1___xxtofl __xxtofl `(d  1 e 4 0 ]
@@ -692,17 +644,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\sprcmul.c
 [v i1___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1097 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S974 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1102 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S1105 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1097 1 fAsBytes 4 0 `S1102 1 fAsWords 4 0 ]
-[v i1___flmul@prod prod `S1105  1 a 4 48 ]
+[s S979 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S982 . 4 `l 1 i 4 0 `d 1 f 4 0 `S974 1 fAsBytes 4 0 `S979 1 fAsWords 4 0 ]
+[v i1___flmul@prod prod `S982  1 a 4 48 ]
 "12
 [v i1___flmul@grs grs `ul  1 a 4 42 ]
-[s S1174 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1051 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1177 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1174 1 nAsBytes 2 0 ]
-[v i1___flmul@temp temp `S1177  1 a 2 52 ]
+[u S1054 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1051 1 nAsBytes 2 0 ]
+[v i1___flmul@temp temp `S1054  1 a 2 52 ]
 "10
 [v i1___flmul@bexp bexp `uc  1 a 1 47 ]
 "11
@@ -764,36 +716,27 @@
 [v i1___fladd@a a `d  1 p 4 4 ]
 "237
 } 0
-"436 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
-[v i1_UART_send_some_bytes UART_send_some_bytes `(v  1 e 1 0 ]
-{
-[v i1UART_send_some_bytes@length length `uc  1 a 1 wreg ]
-[v i1UART_send_some_bytes@length length `uc  1 a 1 wreg ]
-[v i1UART_send_some_bytes@data data `*.39uc  1 p 2 1 ]
-[v i1UART_send_some_bytes@length length `uc  1 a 1 3 ]
-"442
-} 0
-"455
+"425 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
 [v _put_data_into_structure put_data_into_structure `(v  1 e 1 0 ]
 {
 [v put_data_into_structure@length length `uc  1 a 1 wreg ]
 [v put_data_into_structure@length length `uc  1 a 1 wreg ]
 [v put_data_into_structure@data data `*.4uc  1 p 1 0 ]
-[v put_data_into_structure@structure structure `*.6uc  1 p 1 1 ]
-[v put_data_into_structure@length length `uc  1 a 1 3 ]
-"461
+[v put_data_into_structure@structure structure `*.39uc  1 p 2 1 ]
+[v put_data_into_structure@length length `uc  1 a 1 4 ]
+"431
 } 0
-"18 C:\Repositories\IPTC-PIH\IPTC-PIH.X\state_machine_b.c
+"326
 [v _converter_settings converter_settings `(v  1 e 1 0 ]
 {
-"31
+"344
 } 0
-"260 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+"243
 [v i1_set_DC set_DC `(v  1 e 1 0 ]
 {
-"263
+"246
 [v i1set_DC@dc dc `us  1 a 2 10 ]
-"268
+"251
 } 0
 "43 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\fltol.c
 [v i1___fltol __fltol `(l  1 e 4 0 ]
@@ -805,62 +748,58 @@
 [v i1___fltol@f1 f1 `d  1 p 4 0 ]
 "70
 } 0
-"475 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+"445 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
 [v _Cell_ON Cell_ON `(v  1 e 1 0 ]
 {
-"517
+"487
 } 0
-"444
-[v _calculate_checksum calculate_checksum `(us  1 e 2 0 ]
+"417
+[v _UART_send_some_bytes UART_send_some_bytes `(v  1 e 1 0 ]
 {
-[v calculate_checksum@code code `uc  1 a 1 wreg ]
-"446
-[v calculate_checksum@result result `us  1 a 2 6 ]
-"444
-[v calculate_checksum@code code `uc  1 a 1 wreg ]
-[v calculate_checksum@length length `uc  1 p 1 0 ]
-[v calculate_checksum@data data `*.39uc  1 p 2 1 ]
-[v calculate_checksum@code code `uc  1 a 1 5 ]
-"453
+[v UART_send_some_bytes@length length `uc  1 a 1 wreg ]
+[v UART_send_some_bytes@length length `uc  1 a 1 wreg ]
+[v UART_send_some_bytes@data data `*.39uc  1 p 2 1 ]
+[v UART_send_some_bytes@length length `uc  1 a 1 3 ]
+"423
 } 0
-"394
+"375
 [v _UART_send_header UART_send_header `(v  1 e 1 0 ]
 {
 [v UART_send_header@start start `uc  1 a 1 wreg ]
 [v UART_send_header@start start `uc  1 a 1 wreg ]
 [v UART_send_header@operation operation `uc  1 p 1 1 ]
 [v UART_send_header@code code `uc  1 p 1 2 ]
-"396
+"377
 [v UART_send_header@start start `uc  1 a 1 3 ]
-"399
+"380
 } 0
-"428
-[v i1_UART_send_byte UART_send_byte `(v  1 e 1 0 ]
+"409
+[v _UART_send_byte UART_send_byte `(v  1 e 1 0 ]
 {
-[v i1UART_send_byte@byte byte `uc  1 a 1 wreg ]
-[v i1UART_send_byte@byte byte `uc  1 a 1 wreg ]
-[v i1UART_send_byte@byte byte `uc  1 a 1 0 ]
-"434
-} 0
+[v UART_send_byte@byte byte `uc  1 a 1 wreg ]
+[v UART_send_byte@byte byte `uc  1 a 1 wreg ]
+[v UART_send_byte@byte byte `uc  1 a 1 0 ]
 "415
+} 0
+"396
 [v _UART_get_some_bytes UART_get_some_bytes `(v  1 e 1 0 ]
 {
 [v UART_get_some_bytes@length length `uc  1 a 1 wreg ]
 [v UART_get_some_bytes@length length `uc  1 a 1 wreg ]
 [v UART_get_some_bytes@data data `*.4uc  1 p 1 0 ]
-"417
+"398
 [v UART_get_some_bytes@length length `uc  1 a 1 2 ]
-"426
+"407
 } 0
-"404
+"385
 [v _UART_get_byte UART_get_byte `(uc  1 e 1 0 ]
 {
-"413
+"394
 } 0
-"348
+"306
 [v _calculate_avg calculate_avg `(v  1 e 1 0 ]
 {
-"364
+"322
 } 0
 "1 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
@@ -868,17 +807,17 @@
 [v abs@a a `i  1 p 2 0 ]
 "4
 } 0
-"466 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
+"436 C:\Repositories\IPTC-PIH\IPTC-PIH.X\charger_discharger.c
 [v _UART_send_string UART_send_string `(v  1 e 1 0 ]
 {
 [v UART_send_string@st_pt st_pt `*.25uc  1 p 2 1 ]
-"470
+"440
 } 0
-"386
+"367
 [v _UART_send_char UART_send_char `(v  1 e 1 0 ]
 {
 [v UART_send_char@bt bt `uc  1 a 1 wreg ]
 [v UART_send_char@bt bt `uc  1 a 1 wreg ]
 [v UART_send_char@bt bt `uc  1 a 1 0 ]
-"392
+"373
 } 0

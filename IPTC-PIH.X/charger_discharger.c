@@ -130,8 +130,6 @@ bool command_interpreter()
     uint8_t code = 0x00;
     uint8_t length = 0x00;
     uint8_t data[20] = {0x00};
-    uint16_t checksum = 0x0000;
-    uint16_t calc_checksum = 0x0000;
     basic_configuration_ptr = &basic_configuration;
     converter_configuration_ptr = &converter_configuration;
     if (!start)
@@ -141,18 +139,7 @@ bool command_interpreter()
             operation = UART_get_byte();
             code = UART_get_byte();
             length = UART_get_byte();
-            if (length>0) UART_get_some_bytes(length, (uint8_t*)data);
-            checksum = UART_get_byte();
-            checksum += UART_get_byte()* 256;
-            calc_checksum = calculate_checksum(code, length, (uint8_t*)data);
-            if(UART_get_byte() != 0x77)
-            {
-                test = false;
-            }
-            if (checksum != calc_checksum)
-            {
-                test = false;
-            }        
+            if (length>0) UART_get_some_bytes(length, (uint8_t*)data);     
             if(!start)
             {
                 switch (operation)
@@ -165,16 +152,13 @@ bool command_interpreter()
                                 length = sizeof(basic_configuration);
                                 UART_send_byte(length);
                                 UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
-                                calc_checksum = calculate_checksum(code, length, (uint8_t*)basic_configuration_ptr);
                                 break;
                             case 0x07:
                                 length = sizeof(converter_configuration);
                                 UART_send_byte(length);
                                 UART_send_some_bytes(length, (uint8_t*)converter_configuration_ptr);
-                                calc_checksum = calculate_checksum(code, length, (uint8_t*)converter_configuration_ptr);
                                 break;
                         }
-                        UART_send_some_bytes(2,(uint8_t*)&calc_checksum);
                         UART_send_byte(0x77);                
                         break;   
                     case 0x5A:
@@ -275,6 +259,7 @@ void scaling() /// This function performs the folowing tasks:
     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0; /// <li> Perform the discrete integration of #iavg over one second and accumulate in #qavg 
     log_data.capacity = (uint16_t) (qavg);
 }
+
 ///**@brief This function takes care of calculating the average values printing the log data using the UART.
 //*/
 //void log_control()
@@ -435,17 +420,6 @@ void UART_send_some_bytes(uint8_t length, uint8_t* data)
     {
         UART_send_byte(*data++); /// * send a byte      
     }
-}
-
-uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data)
-{
-    uint16_t result = 0x00;
-    result = (uint16_t)code + (uint16_t)length;
-    while(length--)
-    {
-        result += *data++;
-    }
-    return (result);
 }
 
 void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure)

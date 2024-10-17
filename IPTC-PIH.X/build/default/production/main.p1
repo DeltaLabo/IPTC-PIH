@@ -1,16 +1,16 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"113 ./charger_discharger.h
-[; ;./charger_discharger.h: 113:     typedef struct basic_configuration_struct {
-[s S626 `uc 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
-[n S626 basic_configuration_struct version const_voltage const_current_char const_current_disc capacity end_of_charge end_of_precharge end_of_discharge end_of_postdischarge ]
-"125
-[; ;./charger_discharger.h: 125:     typedef struct converter_configuration_struct {
+"101 ./charger_discharger.h
+[; ;./charger_discharger.h: 101:     typedef struct basic_configuration_struct {
+[s S626 `us 1 `us 1 `us 1 `us 1 `us 1 ]
+[n S626 basic_configuration_struct const_voltage const_current capacity end_of_charge end_of_discharge ]
+"109
+[; ;./charger_discharger.h: 109:     typedef struct converter_configuration_struct {
 [s S627 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
 [n S627 converter_configuration_struct CVKp CVKi CVKd CCKpC CCKiC CCKpD CCKiD ]
-"135
-[; ;./charger_discharger.h: 135:     typedef struct log_data_struct {
-[s S628 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
-[n S628 log_data_struct elapsed_time voltage current capacity temperature duty_cycle ]
+"119
+[; ;./charger_discharger.h: 119:     typedef struct log_data_struct {
+[s S628 `us 1 `us 1 `us 1 `us 1 ]
+[n S628 log_data_struct voltage current capacity temperature ]
 [p mainexit ]
 "50
 [; ;./charger_discharger.h: 50:     void initialize(void);
@@ -19,18 +19,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\builtins.h
 [v __delay `JF192 ~T0 @X0 0 e ]
 [p i __delay ]
-"59 ./charger_discharger.h
-[; ;./charger_discharger.h: 59:     void interrupt_enable(void);
+"57 ./charger_discharger.h
+[; ;./charger_discharger.h: 57:     void interrupt_enable(void);
 [v _interrupt_enable `(v ~T0 @X0 0 ef ]
 "54
 [; ;./charger_discharger.h: 54:     void scaling(void);
 [v _scaling `(v ~T0 @X0 0 ef ]
-"55
-[; ;./charger_discharger.h: 55:     void log_control(void);
-[v _log_control `(v ~T0 @X0 0 ef ]
-"56
-[; ;./charger_discharger.h: 56:     void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status);
-[v _cc_cv_mode `(v ~T0 @X0 0 ef3`us`us`a ]
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
 "16652 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h
@@ -47,11 +41,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4143
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 4143: extern volatile RC1STAbits_t RC1STAbits __attribute__((address(0x19D)));
 [v _RC1STAbits `VS220 ~T0 @X0 0 e@413 ]
-"69 ./charger_discharger.h
-[; ;./charger_discharger.h: 69:     void UART_send_string(char* st_pt);
+"66 ./charger_discharger.h
+[; ;./charger_discharger.h: 66:     void UART_send_string(char* st_pt);
 [v _UART_send_string `(v ~T0 @X0 0 ef1`*uc ]
-"64
-[; ;./charger_discharger.h: 64:     void UART_send_byte(uint8_t byte);
+"62
+[; ;./charger_discharger.h: 62:     void UART_send_byte(uint8_t byte);
 [v _UART_send_byte `(v ~T0 @X0 0 ef1`uc ]
 "47
 [; ;./charger_discharger.h: 47:     _Bool command_interpreter(void);
@@ -71,14 +65,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "62 C:\Program Files\Microchip\xc8\v2.40\pic\include\c99\stdlib.h
 [; ;C:\Program Files\Microchip\xc8\v2.40\pic\include\c99\stdlib.h: 62: int abs (int);
 [v _abs `(i ~T0 @X0 0 ef1`i ]
-"57 ./charger_discharger.h
-[; ;./charger_discharger.h: 57:     void control_loop(void);
+"55 ./charger_discharger.h
+[; ;./charger_discharger.h: 55:     void control_loop(void);
 [v _control_loop `(v ~T0 @X0 0 ef ]
-"58
-[; ;./charger_discharger.h: 58:     void calculate_avg(void);
+"56
+[; ;./charger_discharger.h: 56:     void calculate_avg(void);
 [v _calculate_avg `(v ~T0 @X0 0 ef ]
-"72
-[; ;./charger_discharger.h: 72:     void timing(void);
+"69
+[; ;./charger_discharger.h: 69:     void timing(void);
 [v _timing `(v ~T0 @X0 0 ef ]
 "19 ./charger_discharger.h
 [p x FOSC  =  INTOSC     ]
@@ -951,209 +945,209 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13522
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 13522: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"146 ./charger_discharger.h
-[; ;./charger_discharger.h: 146:     basic_configuration_type basic_configuration;
+"128 ./charger_discharger.h
+[; ;./charger_discharger.h: 128:     basic_configuration_type basic_configuration;
 [v _basic_configuration `S626 ~T0 @X0 1 e ]
-"147
-[; ;./charger_discharger.h: 147:     basic_configuration_type_ptr basic_configuration_ptr;
+"129
+[; ;./charger_discharger.h: 129:     basic_configuration_type_ptr basic_configuration_ptr;
 [v _basic_configuration_ptr `*S626 ~T0 @X0 1 e ]
-"148
-[; ;./charger_discharger.h: 148:     converter_configuration_type converter_configuration;
+"130
+[; ;./charger_discharger.h: 130:     converter_configuration_type converter_configuration;
 [v _converter_configuration `S627 ~T0 @X0 1 e ]
-"149
-[; ;./charger_discharger.h: 149:     converter_configuration_type_ptr converter_configuration_ptr;
+"131
+[; ;./charger_discharger.h: 131:     converter_configuration_type_ptr converter_configuration_ptr;
 [v _converter_configuration_ptr `*S627 ~T0 @X0 1 e ]
-"150
-[; ;./charger_discharger.h: 150:     log_data_type log_data;
+"132
+[; ;./charger_discharger.h: 132:     log_data_type log_data;
 [v _log_data `S628 ~T0 @X0 1 e ]
-"151
-[; ;./charger_discharger.h: 151:     log_data_type_ptr log_data_ptr;
+"133
+[; ;./charger_discharger.h: 133:     log_data_type_ptr log_data_ptr;
 [v _log_data_ptr `*S628 ~T0 @X0 1 e ]
-"152
-[; ;./charger_discharger.h: 152:     _Bool start = 0;
+"134
+[; ;./charger_discharger.h: 134:     _Bool start = 0;
 [v _start `a ~T0 @X0 1 e ]
 [i _start
 -> -> 0 `i `a
 ]
-"153
-[; ;./charger_discharger.h: 153:     _Bool SECF = 1;
+"135
+[; ;./charger_discharger.h: 135:     _Bool SECF = 1;
 [v _SECF `a ~T0 @X0 1 e ]
 [i _SECF
 -> -> 1 `i `a
 ]
-"154
-[; ;./charger_discharger.h: 154:     _Bool SRXF = 0;
+"136
+[; ;./charger_discharger.h: 136:     _Bool SRXF = 0;
 [v _SRXF `a ~T0 @X0 1 e ]
 [i _SRXF
 -> -> 0 `i `a
 ]
-"155
-[; ;./charger_discharger.h: 155:     uint16_t capacity;
+"137
+[; ;./charger_discharger.h: 137:     uint16_t capacity;
 [v _capacity `us ~T0 @X0 1 e ]
-"156
-[; ;./charger_discharger.h: 156:     uint16_t i_char;
+"138
+[; ;./charger_discharger.h: 138:     uint16_t i_char;
 [v _i_char `us ~T0 @X0 1 e ]
-"157
-[; ;./charger_discharger.h: 157:     uint16_t i_disc;
+"139
+[; ;./charger_discharger.h: 139:     uint16_t i_disc;
 [v _i_disc `us ~T0 @X0 1 e ]
-"158
-[; ;./charger_discharger.h: 158:     unsigned char cell_count = 1;
+"140
+[; ;./charger_discharger.h: 140:     unsigned char cell_count = 1;
 [v _cell_count `uc ~T0 @X0 1 e ]
 [i _cell_count
 -> -> 1 `i `uc
 ]
-"161
-[; ;./charger_discharger.h: 161:     float CV_kp = 0.0018;
+"143
+[; ;./charger_discharger.h: 143:     float CV_kp = 0.0018;
 [v _CV_kp `f ~T0 @X0 1 e ]
 [i _CV_kp
 -> .0.0018 `f
 ]
-"162
-[; ;./charger_discharger.h: 162:     float CV_ki = 0.0005;
+"144
+[; ;./charger_discharger.h: 144:     float CV_ki = 0.0005;
 [v _CV_ki `f ~T0 @X0 1 e ]
 [i _CV_ki
 -> .0.0005 `f
 ]
-"163
-[; ;./charger_discharger.h: 163:     float CV_kd = 0.020;
+"145
+[; ;./charger_discharger.h: 145:     float CV_kd = 0.020;
 [v _CV_kd `f ~T0 @X0 1 e ]
 [i _CV_kd
 -> .0.020 `f
 ]
-"166
-[; ;./charger_discharger.h: 166:     float CC_char_kp = 0.0130;
+"148
+[; ;./charger_discharger.h: 148:     float CC_char_kp = 0.003;
 [v _CC_char_kp `f ~T0 @X0 1 e ]
 [i _CC_char_kp
--> .0.0130 `f
+-> .0.003 `f
 ]
-"167
-[; ;./charger_discharger.h: 167:     float CC_char_ki = 0.0025;
+"149
+[; ;./charger_discharger.h: 149:     float CC_char_ki = 0.0005;
 [v _CC_char_ki `f ~T0 @X0 1 e ]
 [i _CC_char_ki
--> .0.0025 `f
+-> .0.0005 `f
 ]
-"168
-[; ;./charger_discharger.h: 168:     float CC_disc_kp = 0.006;
+"150
+[; ;./charger_discharger.h: 150:     float CC_disc_kp = 0.006;
 [v _CC_disc_kp `f ~T0 @X0 1 e ]
 [i _CC_disc_kp
 -> .0.006 `f
 ]
-"169
-[; ;./charger_discharger.h: 169:     float CC_disc_ki = 0.001;
+"151
+[; ;./charger_discharger.h: 151:     float CC_disc_ki = 0.001;
 [v _CC_disc_ki `f ~T0 @X0 1 e ]
 [i _CC_disc_ki
 -> .0.001 `f
 ]
-"170
-[; ;./charger_discharger.h: 170:     uint8_t CC_char_disc_kd = 0;
+"152
+[; ;./charger_discharger.h: 152:     uint8_t CC_char_disc_kd = 0;
 [v _CC_char_disc_kd `uc ~T0 @X0 1 e ]
 [i _CC_char_disc_kd
 -> -> 0 `i `uc
 ]
-"172
-[; ;./charger_discharger.h: 172:     _Bool conv = 0;
+"154
+[; ;./charger_discharger.h: 154:     _Bool conv = 0;
 [v _conv `a ~T0 @X0 1 e ]
 [i _conv
 -> -> 0 `i `a
 ]
-"173
-[; ;./charger_discharger.h: 173:     uint16_t count = 1024;
+"155
+[; ;./charger_discharger.h: 155:     uint16_t count = 1024;
 [v _count `us ~T0 @X0 1 e ]
 [i _count
 -> -> 1024 `i `us
 ]
-"177
-[; ;./charger_discharger.h: 177:     uint16_t v;
+"159
+[; ;./charger_discharger.h: 159:     uint16_t v;
 [v _v `us ~T0 @X0 1 e ]
-"178
-[; ;./charger_discharger.h: 178:     uint16_t i;
+"160
+[; ;./charger_discharger.h: 160:     uint16_t i;
 [v _i `us ~T0 @X0 1 e ]
-"179
-[; ;./charger_discharger.h: 179:     uint24_t vacum = 0;
+"161
+[; ;./charger_discharger.h: 161:     uint24_t vacum = 0;
 [v _vacum `um ~T0 @X0 1 e ]
 [i _vacum
 -> -> -> 0 `i `m `um
 ]
-"180
-[; ;./charger_discharger.h: 180:     uint24_t iacum = 0;
+"162
+[; ;./charger_discharger.h: 162:     uint24_t iacum = 0;
 [v _iacum `um ~T0 @X0 1 e ]
 [i _iacum
 -> -> -> 0 `i `m `um
 ]
-"182
-[; ;./charger_discharger.h: 182:     uint16_t vavg = 0;
+"164
+[; ;./charger_discharger.h: 164:     uint16_t vavg = 0;
 [v _vavg `us ~T0 @X0 1 e ]
 [i _vavg
 -> -> 0 `i `us
 ]
-"183
-[; ;./charger_discharger.h: 183:     uint16_t iavg = 0;
+"165
+[; ;./charger_discharger.h: 165:     uint16_t iavg = 0;
 [v _iavg `us ~T0 @X0 1 e ]
 [i _iavg
 -> -> 0 `i `us
 ]
-"184
-[; ;./charger_discharger.h: 184:     float qavg = 0.0;
+"166
+[; ;./charger_discharger.h: 166:     float qavg = 0.0;
 [v _qavg `f ~T0 @X0 1 e ]
 [i _qavg
 -> .0.0 `f
 ]
-"185
-[; ;./charger_discharger.h: 185:     uint16_t vmax = 0;
+"167
+[; ;./charger_discharger.h: 167:     uint16_t vmax = 0;
 [v _vmax `us ~T0 @X0 1 e ]
 [i _vmax
 -> -> 0 `i `us
 ]
-"186
-[; ;./charger_discharger.h: 186:     float pidi;
+"168
+[; ;./charger_discharger.h: 168:     float pidi;
 [v _pidi `f ~T0 @X0 1 e ]
-"187
-[; ;./charger_discharger.h: 187:     float kp;
+"169
+[; ;./charger_discharger.h: 169:     float kp;
 [v _kp `f ~T0 @X0 1 e ]
-"188
-[; ;./charger_discharger.h: 188:     float ki;
+"170
+[; ;./charger_discharger.h: 170:     float ki;
 [v _ki `f ~T0 @X0 1 e ]
-"189
-[; ;./charger_discharger.h: 189:     float kd;
+"171
+[; ;./charger_discharger.h: 171:     float kd;
 [v _kd `f ~T0 @X0 1 e ]
-"190
-[; ;./charger_discharger.h: 190:     float vref = 0;
-[v _vref `f ~T0 @X0 1 e ]
-[i _vref
+"172
+[; ;./charger_discharger.h: 172:     float v_ref = 0;
+[v _v_ref `f ~T0 @X0 1 e ]
+[i _v_ref
 -> -> 0 `i `f
 ]
-"191
-[; ;./charger_discharger.h: 191:     uint16_t iref = 0;
-[v _iref `us ~T0 @X0 1 e ]
-[i _iref
+"173
+[; ;./charger_discharger.h: 173:     uint16_t i_ref = 0;
+[v _i_ref `us ~T0 @X0 1 e ]
+[i _i_ref
 -> -> 0 `i `us
 ]
-"192
-[; ;./charger_discharger.h: 192:     _Bool cmode = 1;
+"174
+[; ;./charger_discharger.h: 174:     _Bool cmode = 1;
 [v _cmode `a ~T0 @X0 1 e ]
 [i _cmode
 -> -> 1 `i `a
 ]
-"193
-[; ;./charger_discharger.h: 193:     float pidt = 0;
+"175
+[; ;./charger_discharger.h: 175:     float pidt = 0;
 [v _pidt `f ~T0 @X0 1 e ]
 [i _pidt
 -> -> 0 `i `f
 ]
-"194
-[; ;./charger_discharger.h: 194:     float er = 0;
+"176
+[; ;./charger_discharger.h: 176:     float er = 0;
 [v _er `f ~T0 @X0 1 e ]
 [i _er
 -> -> 0 `i `f
 ]
-"195
-[; ;./charger_discharger.h: 195:     uint16_t second = 0;
+"177
+[; ;./charger_discharger.h: 177:     uint16_t second = 0;
 [v _second `us ~T0 @X0 1 e ]
 [i _second
 -> -> 0 `i `us
 ]
-"196
-[; ;./charger_discharger.h: 196:     uint16_t timeout = 0;
+"178
+[; ;./charger_discharger.h: 178:     uint16_t timeout = 0;
 [v _timeout `us ~T0 @X0 1 e ]
 [i _timeout
 -> -> 0 `i `us
@@ -1192,142 +1186,128 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 33:             scaling();
 [e ( _scaling ..  ]
 "34
-[; ;main.c: 34:             log_control();
-[e ( _log_control ..  ]
-"35
-[; ;main.c: 35:             if (basic_configuration.version == 1){
-[e $ ! == -> . _basic_configuration 0 `i -> 1 `i 634  ]
-{
-"36
-[; ;main.c: 36:                 cc_cv_mode(vavg, basic_configuration.const_voltage, cmode);
-[e ( _cc_cv_mode (3 , , _vavg . _basic_configuration 1 _cmode ]
-"37
-[; ;main.c: 37:             }
-}
-[e :U 634 ]
-"38
-[; ;main.c: 38:             SECF = 0;
+[; ;main.c: 34:             SECF = 0;
 [e = _SECF -> -> 0 `i `a ]
-"39
-[; ;main.c: 39:         }
+"35
+[; ;main.c: 35:         }
 }
 [e :U 633 ]
-"40
-[; ;main.c: 40:  }
+"36
+[; ;main.c: 36:  }
 }
 [e :U 630 ]
 [e $U 631  ]
 [e :U 632 ]
-"41
-[; ;main.c: 41: }
+"37
+[; ;main.c: 37: }
 [e :UE 629 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"45
-[; ;main.c: 45: void __attribute__((picinterrupt(("")))) ISR(void)
+"41
+[; ;main.c: 41: void __attribute__((picinterrupt(("")))) ISR(void)
 [v _ISR `(v ~T1 @X0 1 ef ]
-"46
-[; ;main.c: 46: {
+"42
+[; ;main.c: 42: {
 {
 [e :U _ISR ]
 [f ]
-"47
-[; ;main.c: 47:     if(RCIF)
-[e $ ! _RCIF 636  ]
-"48
-[; ;main.c: 48:     {
+"43
+[; ;main.c: 43:     if(RCIF)
+[e $ ! _RCIF 635  ]
+"44
+[; ;main.c: 44:     {
 {
-"49
-[; ;main.c: 49:         RCIF = 0;
+"45
+[; ;main.c: 45:         RCIF = 0;
 [e = _RCIF -> -> 0 `i `b ]
-"50
-[; ;main.c: 50:         if(RC1STAbits.OERR)
-[e $ ! != -> . . _RC1STAbits 0 1 `i -> 0 `i 637  ]
-"51
-[; ;main.c: 51:         {
+"46
+[; ;main.c: 46:         if(RC1STAbits.OERR)
+[e $ ! != -> . . _RC1STAbits 0 1 `i -> 0 `i 636  ]
+"47
+[; ;main.c: 47:         {
 {
-"52
-[; ;main.c: 52:             RC1STAbits.CREN = 0;
+"48
+[; ;main.c: 48:             RC1STAbits.CREN = 0;
 [e = . . _RC1STAbits 0 4 -> -> 0 `i `uc ]
-"53
-[; ;main.c: 53:             RC1STAbits.CREN = 1;
+"49
+[; ;main.c: 49:             RC1STAbits.CREN = 1;
 [e = . . _RC1STAbits 0 4 -> -> 1 `i `uc ]
-"55
-[; ;main.c: 55:             UART_send_string((char*)"OERR_ERROR");
+"50
+[; ;main.c: 50:             UART_send_string((char*)"OERR_ERROR");
 [e ( _UART_send_string (1 :s 1C ]
-"56
-[; ;main.c: 56:         }
+"51
+[; ;main.c: 51:         }
 }
-[e $U 638  ]
-"57
-[; ;main.c: 57:         else
-[e :U 637 ]
-"58
-[; ;main.c: 58:         {
+[e $U 637  ]
+"52
+[; ;main.c: 52:         else
+[e :U 636 ]
+"53
+[; ;main.c: 53:         {
 {
-"59
-[; ;main.c: 59:             UART_send_byte(command_interpreter());
+"54
+[; ;main.c: 54:             UART_send_byte(command_interpreter());
 [e ( _UART_send_byte (1 -> ( _command_interpreter ..  `uc ]
+"55
+[; ;main.c: 55:         }
+}
+[e :U 637 ]
+"56
+[; ;main.c: 56:     }
+}
+[e :U 635 ]
+"58
+[; ;main.c: 58:     if(TMR1IF)
+[e $ ! _TMR1IF 638  ]
+"59
+[; ;main.c: 59:     {
+{
 "60
-[; ;main.c: 60:         }
+[; ;main.c: 60:         TMR1H = 0xE1;
+[e = _TMR1H -> -> 225 `i `uc ]
+"61
+[; ;main.c: 61:         TMR1L = 0x83;
+[e = _TMR1L -> -> 131 `i `uc ]
+"62
+[; ;main.c: 62:         TMR1IF = 0;
+[e = _TMR1IF -> -> 0 `i `b ]
+"64
+[; ;main.c: 64:         v = read_ADC(0b01010);
+[e = _v ( _read_ADC (1 -> -> 10 `i `us ]
+"65
+[; ;main.c: 65:         i = read_ADC(0b01100);
+[e = _i ( _read_ADC (1 -> -> 12 `i `us ]
+"66
+[; ;main.c: 66:         i = (uint16_t) (abs ( 2048 - (int)i ) );
+[e = _i -> ( _abs (1 - -> 2048 `i -> _i `i `us ]
+"68
+[; ;main.c: 68:         if (conv) control_loop();
+[e $ ! != -> _conv `i -> 0 `i 639  ]
+[e ( _control_loop ..  ]
+[e $U 640  ]
+"69
+[; ;main.c: 69:         else pidi = 0;
+[e :U 639 ]
+[e = _pidi -> -> 0 `i `f ]
+[e :U 640 ]
+"71
+[; ;main.c: 71:         calculate_avg();
+[e ( _calculate_avg ..  ]
+"72
+[; ;main.c: 72:         timing();
+[e ( _timing ..  ]
+"74
+[; ;main.c: 74:         if (TMR1IF) UART_send_string((char*)"TIMING_ERROR");
+[e $ ! _TMR1IF 641  ]
+[e ( _UART_send_string (1 :s 2C ]
+[e :U 641 ]
+"75
+[; ;main.c: 75:     }
 }
 [e :U 638 ]
-"61
-[; ;main.c: 61:     }
-}
-[e :U 636 ]
-"63
-[; ;main.c: 63:     if(TMR1IF)
-[e $ ! _TMR1IF 639  ]
-"64
-[; ;main.c: 64:     {
-{
-"65
-[; ;main.c: 65:         TMR1H = 0xE1;
-[e = _TMR1H -> -> 225 `i `uc ]
-"66
-[; ;main.c: 66:         TMR1L = 0x83;
-[e = _TMR1L -> -> 131 `i `uc ]
-"67
-[; ;main.c: 67:         TMR1IF = 0;
-[e = _TMR1IF -> -> 0 `i `b ]
-"68
-[; ;main.c: 68:         v = read_ADC(0b01010);
-[e = _v ( _read_ADC (1 -> -> 10 `i `us ]
-"69
-[; ;main.c: 69:         i = read_ADC(0b01100);
-[e = _i ( _read_ADC (1 -> -> 12 `i `us ]
-"70
-[; ;main.c: 70:         i = (uint16_t) (abs ( 2048 - (int)i ) );
-[e = _i -> ( _abs (1 - -> 2048 `i -> _i `i `us ]
-"71
-[; ;main.c: 71:         if (conv) control_loop();
-[e $ ! != -> _conv `i -> 0 `i 640  ]
-[e ( _control_loop ..  ]
-[e $U 641  ]
-"72
-[; ;main.c: 72:         else pidi = 0;
-[e :U 640 ]
-[e = _pidi -> -> 0 `i `f ]
-[e :U 641 ]
-"73
-[; ;main.c: 73:         calculate_avg();
-[e ( _calculate_avg ..  ]
-"74
-[; ;main.c: 74:         timing();
-[e ( _timing ..  ]
-"75
-[; ;main.c: 75:         if (TMR1IF) UART_send_string((char*)"TIMING_ERROR");
-[e $ ! _TMR1IF 642  ]
-[e ( _UART_send_string (1 :s 2C ]
-[e :U 642 ]
 "76
-[; ;main.c: 76:     }
-}
-[e :U 639 ]
-"77
-[; ;main.c: 77: }
-[e :UE 635 ]
+[; ;main.c: 76: }
+[e :UE 634 ]
 }
 [a 1C 79 69 82 82 95 69 82 82 79 82 0 ]
 [a 2C 84 73 77 73 78 71 95 69 82 82 79 82 0 ]

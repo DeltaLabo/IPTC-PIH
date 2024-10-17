@@ -9544,8 +9544,6 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void set_DC();
     uint16_t read_ADC(uint16_t channel);
     void scaling(void);
-    void log_control(void);
-    void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status);
     void control_loop(void);
     void calculate_avg(void);
     void interrupt_enable(void);
@@ -9556,23 +9554,18 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void UART_send_byte(uint8_t byte);
     void UART_get_some_bytes(uint8_t length, uint8_t* data);
     void UART_send_some_bytes(uint8_t length, uint8_t* data);
-    uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data);
     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
     void UART_send_string(char* st_pt);
     void Cell_ON(void);
     void Cell_OFF(void);
     void timing(void);
-# 113 "./charger_discharger.h"
+# 101 "./charger_discharger.h"
     typedef struct basic_configuration_struct {
-        uint8_t version;
         uint16_t const_voltage;
-        uint16_t const_current_char;
-        uint16_t const_current_disc;
+        uint16_t const_current;
         uint16_t capacity;
         uint16_t end_of_charge;
-        uint16_t end_of_precharge;
         uint16_t end_of_discharge;
-        uint16_t end_of_postdischarge;
     }basic_configuration_type, *basic_configuration_type_ptr;
 
     typedef struct converter_configuration_struct {
@@ -9586,12 +9579,10 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     }converter_configuration_type, *converter_configuration_type_ptr;
 
     typedef struct log_data_struct {
-        uint16_t elapsed_time;
         uint16_t voltage;
         uint16_t current;
         uint16_t capacity;
         uint16_t temperature;
-        uint16_t duty_cycle;
     }log_data_type, *log_data_type_ptr;
 
 
@@ -9616,8 +9607,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     float CV_kd = 0.020;
 
 
-    float CC_char_kp = 0.0130;
-    float CC_char_ki = 0.0025;
+    float CC_char_kp = 0.003;
+    float CC_char_ki = 0.0005;
     float CC_disc_kp = 0.006;
     float CC_disc_ki = 0.001;
     uint8_t CC_char_disc_kd = 0;
@@ -9640,8 +9631,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     float kp;
     float ki;
     float kd;
-    float vref = 0;
-    uint16_t iref = 0;
+    float v_ref = 0;
+    uint16_t i_ref = 0;
     _Bool cmode = 1;
     float pidt = 0;
     float er = 0;
@@ -9663,10 +9654,6 @@ void main(void)
         if (SECF)
         {
             scaling();
-            log_control();
-            if (basic_configuration.version == 1){
-                cc_cv_mode(vavg, basic_configuration.const_voltage, cmode);
-            }
             SECF = 0;
         }
  }
@@ -9683,7 +9670,6 @@ void __attribute__((picinterrupt(("")))) ISR(void)
         {
             RC1STAbits.CREN = 0;
             RC1STAbits.CREN = 1;
-
             UART_send_string((char*)"OERR_ERROR");
         }
         else
@@ -9697,13 +9683,17 @@ void __attribute__((picinterrupt(("")))) ISR(void)
         TMR1H = 0xE1;
         TMR1L = 0x83;
         TMR1IF = 0;
+
         v = read_ADC(0b01010);
         i = read_ADC(0b01100);
         i = (uint16_t) (abs ( 2048 - (int)i ) );
+
         if (conv) control_loop();
         else pidi = 0;
+
         calculate_avg();
         timing();
+
         if (TMR1IF) UART_send_string((char*)"TIMING_ERROR");
     }
 }

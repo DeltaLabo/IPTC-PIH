@@ -1,16 +1,16 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"113 ./charger_discharger.h
-[; ;./charger_discharger.h: 113:     typedef struct basic_configuration_struct {
-[s S626 `uc 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
-[n S626 basic_configuration_struct version const_voltage const_current_char const_current_disc capacity end_of_charge end_of_precharge end_of_discharge end_of_postdischarge ]
-"125
-[; ;./charger_discharger.h: 125:     typedef struct converter_configuration_struct {
+"101 ./charger_discharger.h
+[; ;./charger_discharger.h: 101:     typedef struct basic_configuration_struct {
+[s S626 `us 1 `us 1 `us 1 `us 1 `us 1 ]
+[n S626 basic_configuration_struct const_voltage const_current capacity end_of_charge end_of_discharge ]
+"109
+[; ;./charger_discharger.h: 109:     typedef struct converter_configuration_struct {
 [s S627 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
 [n S627 converter_configuration_struct CVKp CVKi CVKd CCKpC CCKiC CCKpD CCKiD ]
-"135
-[; ;./charger_discharger.h: 135:     typedef struct log_data_struct {
-[s S628 `us 1 `us 1 `us 1 `us 1 `us 1 `us 1 ]
-[n S628 log_data_struct elapsed_time voltage current capacity temperature duty_cycle ]
+"119
+[; ;./charger_discharger.h: 119:     typedef struct log_data_struct {
+[s S628 `us 1 `us 1 `us 1 `us 1 ]
+[n S628 log_data_struct voltage current capacity temperature ]
 "17285 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 17285: extern volatile __bit nWPUEN __attribute__((address(0x4AF)));
 [v _nWPUEN `Vb ~T0 @X0 0 e@1199 ]
@@ -86,8 +86,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17207
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 17207: extern volatile __bit WPUB5 __attribute__((address(0x106D)));
 [v _WPUB5 `Vb ~T0 @X0 0 e@4205 ]
-"71 ./charger_discharger.h
-[; ;./charger_discharger.h: 71:     void Cell_OFF(void);
+"68 ./charger_discharger.h
+[; ;./charger_discharger.h: 68:     void Cell_OFF(void);
 [v _Cell_OFF `(v ~T0 @X0 0 ef ]
 "17279 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 17279: extern volatile __bit nT1SYNC __attribute__((address(0xC2)));
@@ -317,26 +317,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 "52 ./charger_discharger.h
 [; ;./charger_discharger.h: 52:     void set_DC();
 [v _set_DC `(v ~T0 @X0 0 e? ]
-"62
-[; ;./charger_discharger.h: 62:     uint8_t UART_get_byte(void);
+"60
+[; ;./charger_discharger.h: 60:     uint8_t UART_get_byte(void);
 [v _UART_get_byte `(uc ~T0 @X0 0 ef ]
-"65
-[; ;./charger_discharger.h: 65:     void UART_get_some_bytes(uint8_t length, uint8_t* data);
-[v _UART_get_some_bytes `(v ~T0 @X0 0 ef2`uc`*uc ]
-"67
-[; ;./charger_discharger.h: 67:     uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data);
-[v _calculate_checksum `(us ~T0 @X0 0 ef3`uc`uc`*uc ]
 "63
-[; ;./charger_discharger.h: 63:     void UART_send_header(uint8_t start, uint8_t operation, uint8_t code);
+[; ;./charger_discharger.h: 63:     void UART_get_some_bytes(uint8_t length, uint8_t* data);
+[v _UART_get_some_bytes `(v ~T0 @X0 0 ef2`uc`*uc ]
+"61
+[; ;./charger_discharger.h: 61:     void UART_send_header(uint8_t start, uint8_t operation, uint8_t code);
 [v _UART_send_header `(v ~T0 @X0 0 ef3`uc`uc`uc ]
-"64
-[; ;./charger_discharger.h: 64:     void UART_send_byte(uint8_t byte);
+"62
+[; ;./charger_discharger.h: 62:     void UART_send_byte(uint8_t byte);
 [v _UART_send_byte `(v ~T0 @X0 0 ef1`uc ]
-"66
-[; ;./charger_discharger.h: 66:     void UART_send_some_bytes(uint8_t length, uint8_t* data);
+"64
+[; ;./charger_discharger.h: 64:     void UART_send_some_bytes(uint8_t length, uint8_t* data);
 [v _UART_send_some_bytes `(v ~T0 @X0 0 ef2`uc`*uc ]
-"68
-[; ;./charger_discharger.h: 68:     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
+"65
+[; ;./charger_discharger.h: 65:     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
 [v _put_data_into_structure `(v ~T0 @X0 0 ef3`uc`*uc`*uc ]
 "49
 [; ;./charger_discharger.h: 49:     void converter_settings(void);
@@ -368,7 +365,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2031
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 2031: extern volatile unsigned char ADRESH __attribute__((address(0x09C)));
 [v _ADRESH `Vuc ~T0 @X0 0 e@156 ]
-"3878
+"67 ./charger_discharger.h
+[; ;./charger_discharger.h: 67:     void Cell_ON(void);
+[v _Cell_ON `(v ~T0 @X0 0 ef ]
+"3878 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 3878: extern volatile unsigned char RC1REG __attribute__((address(0x199)));
 [v _RC1REG `Vuc ~T0 @X0 0 e@409 ]
 "16652
@@ -1278,209 +1278,209 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13522
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1786.h: 13522: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"146 ./charger_discharger.h
-[; ;./charger_discharger.h: 146:     basic_configuration_type basic_configuration;
+"128 ./charger_discharger.h
+[; ;./charger_discharger.h: 128:     basic_configuration_type basic_configuration;
 [v _basic_configuration `S626 ~T0 @X0 1 e ]
-"147
-[; ;./charger_discharger.h: 147:     basic_configuration_type_ptr basic_configuration_ptr;
+"129
+[; ;./charger_discharger.h: 129:     basic_configuration_type_ptr basic_configuration_ptr;
 [v _basic_configuration_ptr `*S626 ~T0 @X0 1 e ]
-"148
-[; ;./charger_discharger.h: 148:     converter_configuration_type converter_configuration;
+"130
+[; ;./charger_discharger.h: 130:     converter_configuration_type converter_configuration;
 [v _converter_configuration `S627 ~T0 @X0 1 e ]
-"149
-[; ;./charger_discharger.h: 149:     converter_configuration_type_ptr converter_configuration_ptr;
+"131
+[; ;./charger_discharger.h: 131:     converter_configuration_type_ptr converter_configuration_ptr;
 [v _converter_configuration_ptr `*S627 ~T0 @X0 1 e ]
-"150
-[; ;./charger_discharger.h: 150:     log_data_type log_data;
+"132
+[; ;./charger_discharger.h: 132:     log_data_type log_data;
 [v _log_data `S628 ~T0 @X0 1 e ]
-"151
-[; ;./charger_discharger.h: 151:     log_data_type_ptr log_data_ptr;
+"133
+[; ;./charger_discharger.h: 133:     log_data_type_ptr log_data_ptr;
 [v _log_data_ptr `*S628 ~T0 @X0 1 e ]
-"152
-[; ;./charger_discharger.h: 152:     _Bool start = 0;
+"134
+[; ;./charger_discharger.h: 134:     _Bool start = 0;
 [v _start `a ~T0 @X0 1 e ]
 [i _start
 -> -> 0 `i `a
 ]
-"153
-[; ;./charger_discharger.h: 153:     _Bool SECF = 1;
+"135
+[; ;./charger_discharger.h: 135:     _Bool SECF = 1;
 [v _SECF `a ~T0 @X0 1 e ]
 [i _SECF
 -> -> 1 `i `a
 ]
-"154
-[; ;./charger_discharger.h: 154:     _Bool SRXF = 0;
+"136
+[; ;./charger_discharger.h: 136:     _Bool SRXF = 0;
 [v _SRXF `a ~T0 @X0 1 e ]
 [i _SRXF
 -> -> 0 `i `a
 ]
-"155
-[; ;./charger_discharger.h: 155:     uint16_t capacity;
+"137
+[; ;./charger_discharger.h: 137:     uint16_t capacity;
 [v _capacity `us ~T0 @X0 1 e ]
-"156
-[; ;./charger_discharger.h: 156:     uint16_t i_char;
+"138
+[; ;./charger_discharger.h: 138:     uint16_t i_char;
 [v _i_char `us ~T0 @X0 1 e ]
-"157
-[; ;./charger_discharger.h: 157:     uint16_t i_disc;
+"139
+[; ;./charger_discharger.h: 139:     uint16_t i_disc;
 [v _i_disc `us ~T0 @X0 1 e ]
-"158
-[; ;./charger_discharger.h: 158:     unsigned char cell_count = 1;
+"140
+[; ;./charger_discharger.h: 140:     unsigned char cell_count = 1;
 [v _cell_count `uc ~T0 @X0 1 e ]
 [i _cell_count
 -> -> 1 `i `uc
 ]
-"161
-[; ;./charger_discharger.h: 161:     float CV_kp = 0.0018;
+"143
+[; ;./charger_discharger.h: 143:     float CV_kp = 0.0018;
 [v _CV_kp `f ~T0 @X0 1 e ]
 [i _CV_kp
 -> .0.0018 `f
 ]
-"162
-[; ;./charger_discharger.h: 162:     float CV_ki = 0.0005;
+"144
+[; ;./charger_discharger.h: 144:     float CV_ki = 0.0005;
 [v _CV_ki `f ~T0 @X0 1 e ]
 [i _CV_ki
 -> .0.0005 `f
 ]
-"163
-[; ;./charger_discharger.h: 163:     float CV_kd = 0.020;
+"145
+[; ;./charger_discharger.h: 145:     float CV_kd = 0.020;
 [v _CV_kd `f ~T0 @X0 1 e ]
 [i _CV_kd
 -> .0.020 `f
 ]
-"166
-[; ;./charger_discharger.h: 166:     float CC_char_kp = 0.0130;
+"148
+[; ;./charger_discharger.h: 148:     float CC_char_kp = 0.003;
 [v _CC_char_kp `f ~T0 @X0 1 e ]
 [i _CC_char_kp
--> .0.0130 `f
+-> .0.003 `f
 ]
-"167
-[; ;./charger_discharger.h: 167:     float CC_char_ki = 0.0025;
+"149
+[; ;./charger_discharger.h: 149:     float CC_char_ki = 0.0005;
 [v _CC_char_ki `f ~T0 @X0 1 e ]
 [i _CC_char_ki
--> .0.0025 `f
+-> .0.0005 `f
 ]
-"168
-[; ;./charger_discharger.h: 168:     float CC_disc_kp = 0.006;
+"150
+[; ;./charger_discharger.h: 150:     float CC_disc_kp = 0.006;
 [v _CC_disc_kp `f ~T0 @X0 1 e ]
 [i _CC_disc_kp
 -> .0.006 `f
 ]
-"169
-[; ;./charger_discharger.h: 169:     float CC_disc_ki = 0.001;
+"151
+[; ;./charger_discharger.h: 151:     float CC_disc_ki = 0.001;
 [v _CC_disc_ki `f ~T0 @X0 1 e ]
 [i _CC_disc_ki
 -> .0.001 `f
 ]
-"170
-[; ;./charger_discharger.h: 170:     uint8_t CC_char_disc_kd = 0;
+"152
+[; ;./charger_discharger.h: 152:     uint8_t CC_char_disc_kd = 0;
 [v _CC_char_disc_kd `uc ~T0 @X0 1 e ]
 [i _CC_char_disc_kd
 -> -> 0 `i `uc
 ]
-"172
-[; ;./charger_discharger.h: 172:     _Bool conv = 0;
+"154
+[; ;./charger_discharger.h: 154:     _Bool conv = 0;
 [v _conv `a ~T0 @X0 1 e ]
 [i _conv
 -> -> 0 `i `a
 ]
-"173
-[; ;./charger_discharger.h: 173:     uint16_t count = 1024;
+"155
+[; ;./charger_discharger.h: 155:     uint16_t count = 1024;
 [v _count `us ~T0 @X0 1 e ]
 [i _count
 -> -> 1024 `i `us
 ]
-"177
-[; ;./charger_discharger.h: 177:     uint16_t v;
+"159
+[; ;./charger_discharger.h: 159:     uint16_t v;
 [v _v `us ~T0 @X0 1 e ]
-"178
-[; ;./charger_discharger.h: 178:     uint16_t i;
+"160
+[; ;./charger_discharger.h: 160:     uint16_t i;
 [v _i `us ~T0 @X0 1 e ]
-"179
-[; ;./charger_discharger.h: 179:     uint24_t vacum = 0;
+"161
+[; ;./charger_discharger.h: 161:     uint24_t vacum = 0;
 [v _vacum `um ~T0 @X0 1 e ]
 [i _vacum
 -> -> -> 0 `i `m `um
 ]
-"180
-[; ;./charger_discharger.h: 180:     uint24_t iacum = 0;
+"162
+[; ;./charger_discharger.h: 162:     uint24_t iacum = 0;
 [v _iacum `um ~T0 @X0 1 e ]
 [i _iacum
 -> -> -> 0 `i `m `um
 ]
-"182
-[; ;./charger_discharger.h: 182:     uint16_t vavg = 0;
+"164
+[; ;./charger_discharger.h: 164:     uint16_t vavg = 0;
 [v _vavg `us ~T0 @X0 1 e ]
 [i _vavg
 -> -> 0 `i `us
 ]
-"183
-[; ;./charger_discharger.h: 183:     uint16_t iavg = 0;
+"165
+[; ;./charger_discharger.h: 165:     uint16_t iavg = 0;
 [v _iavg `us ~T0 @X0 1 e ]
 [i _iavg
 -> -> 0 `i `us
 ]
-"184
-[; ;./charger_discharger.h: 184:     float qavg = 0.0;
+"166
+[; ;./charger_discharger.h: 166:     float qavg = 0.0;
 [v _qavg `f ~T0 @X0 1 e ]
 [i _qavg
 -> .0.0 `f
 ]
-"185
-[; ;./charger_discharger.h: 185:     uint16_t vmax = 0;
+"167
+[; ;./charger_discharger.h: 167:     uint16_t vmax = 0;
 [v _vmax `us ~T0 @X0 1 e ]
 [i _vmax
 -> -> 0 `i `us
 ]
-"186
-[; ;./charger_discharger.h: 186:     float pidi;
+"168
+[; ;./charger_discharger.h: 168:     float pidi;
 [v _pidi `f ~T0 @X0 1 e ]
-"187
-[; ;./charger_discharger.h: 187:     float kp;
+"169
+[; ;./charger_discharger.h: 169:     float kp;
 [v _kp `f ~T0 @X0 1 e ]
-"188
-[; ;./charger_discharger.h: 188:     float ki;
+"170
+[; ;./charger_discharger.h: 170:     float ki;
 [v _ki `f ~T0 @X0 1 e ]
-"189
-[; ;./charger_discharger.h: 189:     float kd;
+"171
+[; ;./charger_discharger.h: 171:     float kd;
 [v _kd `f ~T0 @X0 1 e ]
-"190
-[; ;./charger_discharger.h: 190:     float vref = 0;
-[v _vref `f ~T0 @X0 1 e ]
-[i _vref
+"172
+[; ;./charger_discharger.h: 172:     float v_ref = 0;
+[v _v_ref `f ~T0 @X0 1 e ]
+[i _v_ref
 -> -> 0 `i `f
 ]
-"191
-[; ;./charger_discharger.h: 191:     uint16_t iref = 0;
-[v _iref `us ~T0 @X0 1 e ]
-[i _iref
+"173
+[; ;./charger_discharger.h: 173:     uint16_t i_ref = 0;
+[v _i_ref `us ~T0 @X0 1 e ]
+[i _i_ref
 -> -> 0 `i `us
 ]
-"192
-[; ;./charger_discharger.h: 192:     _Bool cmode = 1;
+"174
+[; ;./charger_discharger.h: 174:     _Bool cmode = 1;
 [v _cmode `a ~T0 @X0 1 e ]
 [i _cmode
 -> -> 1 `i `a
 ]
-"193
-[; ;./charger_discharger.h: 193:     float pidt = 0;
+"175
+[; ;./charger_discharger.h: 175:     float pidt = 0;
 [v _pidt `f ~T0 @X0 1 e ]
 [i _pidt
 -> -> 0 `i `f
 ]
-"194
-[; ;./charger_discharger.h: 194:     float er = 0;
+"176
+[; ;./charger_discharger.h: 176:     float er = 0;
 [v _er `f ~T0 @X0 1 e ]
 [i _er
 -> -> 0 `i `f
 ]
-"195
-[; ;./charger_discharger.h: 195:     uint16_t second = 0;
+"177
+[; ;./charger_discharger.h: 177:     uint16_t second = 0;
 [v _second `us ~T0 @X0 1 e ]
 [i _second
 -> -> 0 `i `us
 ]
-"196
-[; ;./charger_discharger.h: 196:     uint16_t timeout = 0;
+"178
+[; ;./charger_discharger.h: 178:     uint16_t timeout = 0;
 [v _timeout `us ~T0 @X0 1 e ]
 [i _timeout
 -> -> 0 `i `us
@@ -1810,8 +1810,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;charger_discharger.c: 131:     uint8_t length = 0x00;
 [v _length `uc ~T0 @X0 1 a ]
 [e = _length -> -> 0 `i `uc ]
-[v F5953 `uc ~T0 @X0 -> 20 `i s ]
-[i F5953
+[v F5938 `uc ~T0 @X0 -> 20 `i s ]
+[i F5938
 :U ..
 "132
 [; ;charger_discharger.c: 132:     uint8_t data[20] = {0x00};
@@ -1819,1335 +1819,1164 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _data `uc ~T0 @X0 -> 20 `i a ]
-[e = _data F5953 ]
+[e = _data F5938 ]
 "133
-[; ;charger_discharger.c: 133:     uint16_t checksum = 0x0000;
-[v _checksum `us ~T0 @X0 1 a ]
-[e = _checksum -> -> 0 `i `us ]
-"134
-[; ;charger_discharger.c: 134:     uint16_t calc_checksum = 0x0000;
-[v _calc_checksum `us ~T0 @X0 1 a ]
-[e = _calc_checksum -> -> 0 `i `us ]
-"135
-[; ;charger_discharger.c: 135:     basic_configuration_ptr = &basic_configuration;
+[; ;charger_discharger.c: 133:     basic_configuration_ptr = &basic_configuration;
 [e = _basic_configuration_ptr &U _basic_configuration ]
-"136
-[; ;charger_discharger.c: 136:     converter_configuration_ptr = &converter_configuration;
+"134
+[; ;charger_discharger.c: 134:     converter_configuration_ptr = &converter_configuration;
 [e = _converter_configuration_ptr &U _converter_configuration ]
-"137
-[; ;charger_discharger.c: 137:     if (!start)
+"135
+[; ;charger_discharger.c: 135:     if (!start)
 [e $ ! ! != -> _start `i -> 0 `i 631  ]
+"136
+[; ;charger_discharger.c: 136:     {
+{
+"137
+[; ;charger_discharger.c: 137:         if(UART_get_byte()==0xDD)
+[e $ ! == -> ( _UART_get_byte ..  `i -> 221 `i 632  ]
 "138
-[; ;charger_discharger.c: 138:     {
+[; ;charger_discharger.c: 138:         {
 {
 "139
-[; ;charger_discharger.c: 139:         if(UART_get_byte()==0xDD)
-[e $ ! == -> ( _UART_get_byte ..  `i -> 221 `i 632  ]
-"140
-[; ;charger_discharger.c: 140:         {
-{
-"141
-[; ;charger_discharger.c: 141:             operation = UART_get_byte();
+[; ;charger_discharger.c: 139:             operation = UART_get_byte();
 [e = _operation ( _UART_get_byte ..  ]
-"142
-[; ;charger_discharger.c: 142:             code = UART_get_byte();
+"140
+[; ;charger_discharger.c: 140:             code = UART_get_byte();
 [e = _code ( _UART_get_byte ..  ]
-"143
-[; ;charger_discharger.c: 143:             length = UART_get_byte();
+"141
+[; ;charger_discharger.c: 141:             length = UART_get_byte();
 [e = _length ( _UART_get_byte ..  ]
-"144
-[; ;charger_discharger.c: 144:             if (length>0) UART_get_some_bytes(length, (uint8_t*)data);
+"142
+[; ;charger_discharger.c: 142:             if (length>0) UART_get_some_bytes(length, (uint8_t*)data);
 [e $ ! > -> _length `i -> 0 `i 633  ]
 [e ( _UART_get_some_bytes (2 , _length &U _data ]
 [e :U 633 ]
+"143
+[; ;charger_discharger.c: 143:             if(!start)
+[e $ ! ! != -> _start `i -> 0 `i 634  ]
+"144
+[; ;charger_discharger.c: 144:             {
+{
 "145
-[; ;charger_discharger.c: 145:             checksum = UART_get_byte();
-[e = _checksum -> ( _UART_get_byte ..  `us ]
+[; ;charger_discharger.c: 145:                 switch (operation)
+[e $U 636  ]
 "146
-[; ;charger_discharger.c: 146:             checksum += UART_get_byte()* 256;
-[e =+ _checksum -> * -> ( _UART_get_byte ..  `i -> 256 `i `us ]
+[; ;charger_discharger.c: 146:                 {
+{
 "147
-[; ;charger_discharger.c: 147:             calc_checksum = calculate_checksum(code, length, (uint8_t*)data);
-[e = _calc_checksum ( _calculate_checksum (3 , , _code _length &U _data ]
+[; ;charger_discharger.c: 147:                     case 0xA5:
+[e :U 637 ]
 "148
-[; ;charger_discharger.c: 148:             if(UART_get_byte() != 0x77)
-[e $ ! != -> ( _UART_get_byte ..  `i -> 119 `i 634  ]
-"149
-[; ;charger_discharger.c: 149:             {
-{
-"150
-[; ;charger_discharger.c: 150:                 test = 0;
-[e = _test -> -> 0 `i `a ]
-"151
-[; ;charger_discharger.c: 151:             }
-}
-[e :U 634 ]
-"152
-[; ;charger_discharger.c: 152:             if (checksum != calc_checksum)
-[e $ ! != -> _checksum `ui -> _calc_checksum `ui 635  ]
-"153
-[; ;charger_discharger.c: 153:             {
-{
-"154
-[; ;charger_discharger.c: 154:                 test = 0;
-[e = _test -> -> 0 `i `a ]
-"155
-[; ;charger_discharger.c: 155:             }
-}
-[e :U 635 ]
-"156
-[; ;charger_discharger.c: 156:             if(!start)
-[e $ ! ! != -> _start `i -> 0 `i 636  ]
-"157
-[; ;charger_discharger.c: 157:             {
-{
-"158
-[; ;charger_discharger.c: 158:                 switch (operation)
-[e $U 638  ]
-"159
-[; ;charger_discharger.c: 159:                 {
-{
-"160
-[; ;charger_discharger.c: 160:                     case 0xA5:
-[e :U 639 ]
-"161
-[; ;charger_discharger.c: 161:                         UART_send_header(0xDD, operation, code);
+[; ;charger_discharger.c: 148:                         UART_send_header(0xDD, operation, code);
 [e ( _UART_send_header (3 , , -> -> 221 `i `uc _operation _code ]
-"162
-[; ;charger_discharger.c: 162:                         switch (code)
-[e $U 641  ]
-"163
-[; ;charger_discharger.c: 163:                         {
+"149
+[; ;charger_discharger.c: 149:                         switch (code)
+[e $U 639  ]
+"150
+[; ;charger_discharger.c: 150:                         {
 {
+"151
+[; ;charger_discharger.c: 151:                             case 0x03:
+[e :U 640 ]
+"152
+[; ;charger_discharger.c: 152:                                 length = sizeof(basic_configuration);
+[e = _length -> -> # _basic_configuration `ui `uc ]
+"153
+[; ;charger_discharger.c: 153:                                 UART_send_byte(length);
+[e ( _UART_send_byte (1 _length ]
+"154
+[; ;charger_discharger.c: 154:                                 UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
+[e ( _UART_send_some_bytes (2 , _length -> _basic_configuration_ptr `*uc ]
+"155
+[; ;charger_discharger.c: 155:                                 break;
+[e $U 638  ]
+"156
+[; ;charger_discharger.c: 156:                             case 0x07:
+[e :U 641 ]
+"157
+[; ;charger_discharger.c: 157:                                 length = sizeof(converter_configuration);
+[e = _length -> -> # _converter_configuration `ui `uc ]
+"158
+[; ;charger_discharger.c: 158:                                 UART_send_byte(length);
+[e ( _UART_send_byte (1 _length ]
+"159
+[; ;charger_discharger.c: 159:                                 UART_send_some_bytes(length, (uint8_t*)converter_configuration_ptr);
+[e ( _UART_send_some_bytes (2 , _length -> _converter_configuration_ptr `*uc ]
+"160
+[; ;charger_discharger.c: 160:                                 break;
+[e $U 638  ]
+"161
+[; ;charger_discharger.c: 161:                         }
+}
+[e $U 638  ]
+[e :U 639 ]
+[e [\ -> _code `i , $ -> 3 `i 640
+ , $ -> 7 `i 641
+ 638 ]
+[e :U 638 ]
+"162
+[; ;charger_discharger.c: 162:                         UART_send_byte(0x77);
+[e ( _UART_send_byte (1 -> -> 119 `i `uc ]
+"163
+[; ;charger_discharger.c: 163:                         break;
+[e $U 635  ]
 "164
-[; ;charger_discharger.c: 164:                             case 0x03:
+[; ;charger_discharger.c: 164:                     case 0x5A:
 [e :U 642 ]
 "165
-[; ;charger_discharger.c: 165:                                 length = sizeof(basic_configuration);
-[e = _length -> -> # _basic_configuration `ui `uc ]
+[; ;charger_discharger.c: 165:                         switch (code)
+[e $U 644  ]
 "166
-[; ;charger_discharger.c: 166:                                 UART_send_byte(length);
-[e ( _UART_send_byte (1 _length ]
+[; ;charger_discharger.c: 166:                         {
+{
 "167
-[; ;charger_discharger.c: 167:                                 UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
-[e ( _UART_send_some_bytes (2 , _length -> _basic_configuration_ptr `*uc ]
-"168
-[; ;charger_discharger.c: 168:                                 calc_checksum = calculate_checksum(code, length, (uint8_t*)basic_configuration_ptr);
-[e = _calc_checksum ( _calculate_checksum (3 , , _code _length -> _basic_configuration_ptr `*uc ]
-"169
-[; ;charger_discharger.c: 169:                                 break;
-[e $U 640  ]
-"170
-[; ;charger_discharger.c: 170:                             case 0x07:
-[e :U 643 ]
-"171
-[; ;charger_discharger.c: 171:                                 length = sizeof(converter_configuration);
-[e = _length -> -> # _converter_configuration `ui `uc ]
-"172
-[; ;charger_discharger.c: 172:                                 UART_send_byte(length);
-[e ( _UART_send_byte (1 _length ]
-"173
-[; ;charger_discharger.c: 173:                                 UART_send_some_bytes(length, (uint8_t*)converter_configuration_ptr);
-[e ( _UART_send_some_bytes (2 , _length -> _converter_configuration_ptr `*uc ]
-"174
-[; ;charger_discharger.c: 174:                                 calc_checksum = calculate_checksum(code, length, (uint8_t*)converter_configuration_ptr);
-[e = _calc_checksum ( _calculate_checksum (3 , , _code _length -> _converter_configuration_ptr `*uc ]
-"175
-[; ;charger_discharger.c: 175:                                 break;
-[e $U 640  ]
-"176
-[; ;charger_discharger.c: 176:                         }
-}
-[e $U 640  ]
-[e :U 641 ]
-[e [\ -> _code `i , $ -> 3 `i 642
- , $ -> 7 `i 643
- 640 ]
-[e :U 640 ]
-"177
-[; ;charger_discharger.c: 177:                         UART_send_some_bytes(2,(uint8_t*)&calc_checksum);
-[e ( _UART_send_some_bytes (2 , -> -> 2 `i `uc -> &U _calc_checksum `*uc ]
-"178
-[; ;charger_discharger.c: 178:                         UART_send_byte(0x77);
-[e ( _UART_send_byte (1 -> -> 119 `i `uc ]
-"179
-[; ;charger_discharger.c: 179:                         break;
-[e $U 637  ]
-"180
-[; ;charger_discharger.c: 180:                     case 0x5A:
-[e :U 644 ]
-"181
-[; ;charger_discharger.c: 181:                         switch (code)
-[e $U 646  ]
-"182
-[; ;charger_discharger.c: 182:                         {
-{
-"183
-[; ;charger_discharger.c: 183:                             case 0x03:
-[e :U 647 ]
-"184
-[; ;charger_discharger.c: 184:                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)basic_configuration_ptr);
-[e ( _put_data_into_structure (3 , , _length &U _data -> _basic_configuration_ptr `*uc ]
-"185
-[; ;charger_discharger.c: 185:                                 vref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ;
-[e = _vref -> + / * -> -> . _basic_configuration 1 `f `d .4096.0 .5000.0 .0.5 `f ]
-"186
-[; ;charger_discharger.c: 186:                                 i_char = (uint16_t) ( ( ( (float) basic_configuration.const_current_char * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
-[e = _i_char -> + / * -> -> . _basic_configuration 2 `f `d .4096.0 * .5000.0 .2.5 .0.5 `us ]
-"187
-[; ;charger_discharger.c: 187:                                 i_disc = (uint16_t) ( ( ( (float) basic_configuration.const_current_disc * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
-[e = _i_disc -> + / * -> -> . _basic_configuration 3 `f `d .4096.0 * .5000.0 .2.5 .0.5 `us ]
-"188
-[; ;charger_discharger.c: 188:                                 capacity = basic_configuration.capacity;
-[e = _capacity . _basic_configuration 4 ]
-"189
-[; ;charger_discharger.c: 189:                                 break;
-[e $U 645  ]
-"190
-[; ;charger_discharger.c: 190:                             case 0x07:
-[e :U 648 ]
-"191
-[; ;charger_discharger.c: 191:                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)converter_configuration_ptr);
-[e ( _put_data_into_structure (3 , , _length &U _data -> _converter_configuration_ptr `*uc ]
-"192
-[; ;charger_discharger.c: 192:                                 CV_kp = (float) ((converter_configuration.CVKp) / 1000000.0);
-[e = _CV_kp -> / -> -> . _converter_configuration 0 `ui `d .1000000.0 `f ]
-"193
-[; ;charger_discharger.c: 193:                                 CV_ki = (float) ((converter_configuration.CVKi) / 1000000.0);
-[e = _CV_ki -> / -> -> . _converter_configuration 1 `ui `d .1000000.0 `f ]
-"194
-[; ;charger_discharger.c: 194:                                 CV_kd = (float) ((converter_configuration.CVKd) / 1000.0);
-[e = _CV_kd -> / -> -> . _converter_configuration 2 `ui `d .1000.0 `f ]
-"195
-[; ;charger_discharger.c: 195:                                 CC_char_kp = (float) ((converter_configuration.CCKpC) / 1000000.0);
-[e = _CC_char_kp -> / -> -> . _converter_configuration 3 `ui `d .1000000.0 `f ]
-"196
-[; ;charger_discharger.c: 196:                                 CC_char_ki = (float) ((converter_configuration.CCKiC) / 1000000.0);
-[e = _CC_char_ki -> / -> -> . _converter_configuration 4 `ui `d .1000000.0 `f ]
-"197
-[; ;charger_discharger.c: 197:                                 CC_disc_kp = (float) ((converter_configuration.CCKpD) / 1000000.0);
-[e = _CC_disc_kp -> / -> -> . _converter_configuration 5 `ui `d .1000000.0 `f ]
-"198
-[; ;charger_discharger.c: 198:                                 CC_disc_ki = (float) ((converter_configuration.CCKiD) / 1000000.0);
-[e = _CC_disc_ki -> / -> -> . _converter_configuration 6 `ui `d .1000000.0 `f ]
-"199
-[; ;charger_discharger.c: 199:                                 break;
-[e $U 645  ]
-"200
-[; ;charger_discharger.c: 200:                         }
-}
-[e $U 645  ]
-[e :U 646 ]
-[e [\ -> _code `i , $ -> 3 `i 647
- , $ -> 7 `i 648
- 645 ]
+[; ;charger_discharger.c: 167:                             case 0x03:
 [e :U 645 ]
-"201
-[; ;charger_discharger.c: 201:                         break;
-[e $U 637  ]
-"202
-[; ;charger_discharger.c: 202:                     case 0x0F:
-[e :U 649 ]
-"203
-[; ;charger_discharger.c: 203:                         if (code == 0x05)
-[e $ ! == -> _code `i -> 5 `i 650  ]
-"204
-[; ;charger_discharger.c: 204:                         {
+"168
+[; ;charger_discharger.c: 168:                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)basic_configuration_ptr);
+[e ( _put_data_into_structure (3 , , _length &U _data -> _basic_configuration_ptr `*uc ]
+"169
+[; ;charger_discharger.c: 169:                                 v_ref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ;
+[e = _v_ref -> + / * -> -> . _basic_configuration 0 `f `d .4096.0 .5000.0 .0.5 `f ]
+"170
+[; ;charger_discharger.c: 170:                                 i_ref = (uint16_t) ( ( ( (float) basic_configuration.const_current * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
+[e = _i_ref -> + / * -> -> . _basic_configuration 1 `f `d .4096.0 * .5000.0 .2.5 .0.5 `us ]
+"171
+[; ;charger_discharger.c: 171:                                 capacity = basic_configuration.capacity;
+[e = _capacity . _basic_configuration 2 ]
+"172
+[; ;charger_discharger.c: 172:                                 break;
+[e $U 643  ]
+"173
+[; ;charger_discharger.c: 173:                             case 0x07:
+[e :U 646 ]
+"174
+[; ;charger_discharger.c: 174:                                 put_data_into_structure(length, (uint8_t*)data, (uint8_t*)converter_configuration_ptr);
+[e ( _put_data_into_structure (3 , , _length &U _data -> _converter_configuration_ptr `*uc ]
+"175
+[; ;charger_discharger.c: 175:                                 CV_kp = (float) ((converter_configuration.CVKp) / 1000000.0);
+[e = _CV_kp -> / -> -> . _converter_configuration 0 `ui `d .1000000.0 `f ]
+"176
+[; ;charger_discharger.c: 176:                                 CV_ki = (float) ((converter_configuration.CVKi) / 1000000.0);
+[e = _CV_ki -> / -> -> . _converter_configuration 1 `ui `d .1000000.0 `f ]
+"177
+[; ;charger_discharger.c: 177:                                 CV_kd = (float) ((converter_configuration.CVKd) / 1000.0);
+[e = _CV_kd -> / -> -> . _converter_configuration 2 `ui `d .1000.0 `f ]
+"178
+[; ;charger_discharger.c: 178:                                 CC_char_kp = (float) ((converter_configuration.CCKpC) / 1000000.0);
+[e = _CC_char_kp -> / -> -> . _converter_configuration 3 `ui `d .1000000.0 `f ]
+"179
+[; ;charger_discharger.c: 179:                                 CC_char_ki = (float) ((converter_configuration.CCKiC) / 1000000.0);
+[e = _CC_char_ki -> / -> -> . _converter_configuration 4 `ui `d .1000000.0 `f ]
+"180
+[; ;charger_discharger.c: 180:                                 CC_disc_kp = (float) ((converter_configuration.CCKpD) / 1000000.0);
+[e = _CC_disc_kp -> / -> -> . _converter_configuration 5 `ui `d .1000000.0 `f ]
+"181
+[; ;charger_discharger.c: 181:                                 CC_disc_ki = (float) ((converter_configuration.CCKiD) / 1000000.0);
+[e = _CC_disc_ki -> / -> -> . _converter_configuration 6 `ui `d .1000000.0 `f ]
+"182
+[; ;charger_discharger.c: 182:                                 break;
+[e $U 643  ]
+"183
+[; ;charger_discharger.c: 183:                         }
+}
+[e $U 643  ]
+[e :U 644 ]
+[e [\ -> _code `i , $ -> 3 `i 645
+ , $ -> 7 `i 646
+ 643 ]
+[e :U 643 ]
+"184
+[; ;charger_discharger.c: 184:                         break;
+[e $U 635  ]
+"185
+[; ;charger_discharger.c: 185:                     case 0x0F:
+[e :U 647 ]
+"186
+[; ;charger_discharger.c: 186:                         if (code == 0x05)
+[e $ ! == -> _code `i -> 5 `i 648  ]
+"187
+[; ;charger_discharger.c: 187:                         {
 {
-"205
-[; ;charger_discharger.c: 205:                             cell_count = 0x01;
+"188
+[; ;charger_discharger.c: 188:                             cell_count = 0x01;
 [e = _cell_count -> -> 1 `i `uc ]
-"206
-[; ;charger_discharger.c: 206:                             converter_settings();
+"189
+[; ;charger_discharger.c: 189:                             converter_settings();
 [e ( _converter_settings ..  ]
-"207
-[; ;charger_discharger.c: 207:                             start = 1;
+"190
+[; ;charger_discharger.c: 190:                             start = 1;
 [e = _start -> -> 1 `i `a ]
-"208
-[; ;charger_discharger.c: 208:                         }
+"191
+[; ;charger_discharger.c: 191:                         }
 }
-[e :U 650 ]
-"209
-[; ;charger_discharger.c: 209:                         break;
-[e $U 637  ]
-"210
-[; ;charger_discharger.c: 210:                 }
+[e :U 648 ]
+"192
+[; ;charger_discharger.c: 192:                         break;
+[e $U 635  ]
+"193
+[; ;charger_discharger.c: 193:                 }
 }
-[e $U 637  ]
-[e :U 638 ]
-[e [\ -> _operation `i , $ -> 165 `i 639
- , $ -> 90 `i 644
- , $ -> 15 `i 649
- 637 ]
-[e :U 637 ]
-"211
-[; ;charger_discharger.c: 211:             }
-}
+[e $U 635  ]
 [e :U 636 ]
-"212
-[; ;charger_discharger.c: 212:         }else test = 0;
+[e [\ -> _operation `i , $ -> 165 `i 637
+ , $ -> 90 `i 642
+ , $ -> 15 `i 647
+ 635 ]
+[e :U 635 ]
+"194
+[; ;charger_discharger.c: 194:             }
 }
-[e $U 651  ]
+[e :U 634 ]
+"195
+[; ;charger_discharger.c: 195:         }else test = 0;
+}
+[e $U 649  ]
 [e :U 632 ]
 [e = _test -> -> 0 `i `a ]
-[e :U 651 ]
-"213
-[; ;charger_discharger.c: 213:     }else
+[e :U 649 ]
+"196
+[; ;charger_discharger.c: 196:     }else
 }
-[e $U 652  ]
+[e $U 650  ]
 [e :U 631 ]
+"197
+[; ;charger_discharger.c: 197:     {
+{
+"198
+[; ;charger_discharger.c: 198:         code = UART_get_byte();
+[e = _code ( _UART_get_byte ..  ]
+"199
+[; ;charger_discharger.c: 199:         switch (code)
+[e $U 652  ]
+"200
+[; ;charger_discharger.c: 200:         {
+{
+"201
+[; ;charger_discharger.c: 201:             default:
+[e :U 653 ]
+"202
+[; ;charger_discharger.c: 202:                 test = 0;
+[e = _test -> -> 0 `i `a ]
+"203
+[; ;charger_discharger.c: 203:                 break;
+[e $U 651  ]
+"204
+[; ;charger_discharger.c: 204:         }
+}
+[e $U 651  ]
+[e :U 652 ]
+[e [\ -> _code `i 653 ]
+[e :U 651 ]
+"205
+[; ;charger_discharger.c: 205:     }
+}
+[e :U 650 ]
+"206
+[; ;charger_discharger.c: 206:     return (test);
+[e ) _test ]
+[e $UE 630  ]
+"207
+[; ;charger_discharger.c: 207: }
+[e :UE 630 ]
+}
+"211
+[; ;charger_discharger.c: 211: void control_loop()
+[v _control_loop `(v ~T0 @X0 1 ef ]
+"212
+[; ;charger_discharger.c: 212: {
+{
+[e :U _control_loop ]
+[f ]
+"213
+[; ;charger_discharger.c: 213:     if(!cmode)
+[e $ ! ! != -> _cmode `i -> 0 `i 655  ]
 "214
 [; ;charger_discharger.c: 214:     {
 {
 "215
-[; ;charger_discharger.c: 215:         code = UART_get_byte();
-[e = _code ( _UART_get_byte ..  ]
+[; ;charger_discharger.c: 215:         pid(v, v_ref);
+[e ( _pid (2 , -> _v `f _v_ref ]
 "216
-[; ;charger_discharger.c: 216:         switch (code)
-[e $U 654  ]
+[; ;charger_discharger.c: 216:     }else
+}
+[e $U 656  ]
+[e :U 655 ]
 "217
-[; ;charger_discharger.c: 217:         {
+[; ;charger_discharger.c: 217:     {
 {
 "218
-[; ;charger_discharger.c: 218:             default:
-[e :U 655 ]
+[; ;charger_discharger.c: 218:         pid(i, i_ref);
+[e ( _pid (2 , -> _i `f -> _i_ref `f ]
 "219
-[; ;charger_discharger.c: 219:                 test = 0;
-[e = _test -> -> 0 `i `a ]
+[; ;charger_discharger.c: 219:     }
+}
+[e :U 656 ]
 "220
-[; ;charger_discharger.c: 220:                 break;
-[e $U 653  ]
-"221
-[; ;charger_discharger.c: 221:         }
-}
-[e $U 653  ]
-[e :U 654 ]
-[e [\ -> _code `i 655 ]
-[e :U 653 ]
-"222
-[; ;charger_discharger.c: 222:     }
-}
-[e :U 652 ]
-"223
-[; ;charger_discharger.c: 223:     return (test);
-[e ) _test ]
-[e $UE 630  ]
-"224
-[; ;charger_discharger.c: 224: }
-[e :UE 630 ]
-}
-"228
-[; ;charger_discharger.c: 228: void control_loop()
-[v _control_loop `(v ~T0 @X0 1 ef ]
-"229
-[; ;charger_discharger.c: 229: {
-{
-[e :U _control_loop ]
-[f ]
-"230
-[; ;charger_discharger.c: 230:     if(!cmode)
-[e $ ! ! != -> _cmode `i -> 0 `i 657  ]
-"231
-[; ;charger_discharger.c: 231:     {
-{
-"232
-[; ;charger_discharger.c: 232:         pid(v, vref);
-[e ( _pid (2 , -> _v `f _vref ]
-"233
-[; ;charger_discharger.c: 233:     }else
-}
-[e $U 658  ]
-[e :U 657 ]
-"234
-[; ;charger_discharger.c: 234:     {
-{
-"235
-[; ;charger_discharger.c: 235:         pid(i, iref);
-[e ( _pid (2 , -> _i `f -> _iref `f ]
-"236
-[; ;charger_discharger.c: 236:     }
-}
-[e :U 658 ]
-"237
-[; ;charger_discharger.c: 237:     set_DC();
+[; ;charger_discharger.c: 220:     set_DC();
 [e ( _set_DC ..  ]
-"238
-[; ;charger_discharger.c: 238: }
-[e :UE 656 ]
+"221
+[; ;charger_discharger.c: 221: }
+[e :UE 654 ]
 }
-"244
-[; ;charger_discharger.c: 244: void pid(float feedback, float setpoint)
+"227
+[; ;charger_discharger.c: 227: void pid(float feedback, float setpoint)
 [v _pid `(v ~T0 @X0 1 ef2`f`f ]
-"245
-[; ;charger_discharger.c: 245: {
+"228
+[; ;charger_discharger.c: 228: {
 {
 [e :U _pid ]
-"244
-[; ;charger_discharger.c: 244: void pid(float feedback, float setpoint)
+"227
+[; ;charger_discharger.c: 227: void pid(float feedback, float setpoint)
 [v _feedback `f ~T0 @X0 1 r1 ]
 [v _setpoint `f ~T0 @X0 1 r2 ]
-"245
-[; ;charger_discharger.c: 245: {
+"228
+[; ;charger_discharger.c: 228: {
 [f ]
-"246
-[; ;charger_discharger.c: 246:     pidt += kd * (setpoint - feedback - er);
+"229
+[; ;charger_discharger.c: 229:     pidt += kd * (setpoint - feedback - er);
 [e =+ _pidt * _kd - - _setpoint _feedback _er ]
-"248
-[; ;charger_discharger.c: 248:     er = setpoint - feedback;
+"231
+[; ;charger_discharger.c: 231:     er = setpoint - feedback;
 [e = _er - _setpoint _feedback ]
-"249
-[; ;charger_discharger.c: 249:     if(er > 1000) er = 1000;
-[e $ ! > _er -> -> 1000 `i `f 660  ]
+"232
+[; ;charger_discharger.c: 232:     if(er > 1000) er = 1000;
+[e $ ! > _er -> -> 1000 `i `f 658  ]
 [e = _er -> -> 1000 `i `f ]
-[e :U 660 ]
-"250
-[; ;charger_discharger.c: 250:     if(er < -1000) er = -1000;
-[e $ ! < _er -> -U -> 1000 `i `f 661  ]
+[e :U 658 ]
+"233
+[; ;charger_discharger.c: 233:     if(er < -1000) er = -1000;
+[e $ ! < _er -> -U -> 1000 `i `f 659  ]
 [e = _er -> -U -> 1000 `i `f ]
-[e :U 661 ]
-"252
-[; ;charger_discharger.c: 252:  pidi += (ki * er);
+[e :U 659 ]
+"235
+[; ;charger_discharger.c: 235:  pidi += (ki * er);
 [e =+ _pidi * _ki _er ]
-"253
-[; ;charger_discharger.c: 253:     pidt += (er * kp + pidi);
+"236
+[; ;charger_discharger.c: 236:     pidt += (er * kp + pidi);
 [e =+ _pidt + * _er _kp _pidi ]
-"255
-[; ;charger_discharger.c: 255:     if (pidt >= 300.0) pidt = 300.0;
-[e $ ! >= -> _pidt `d .300.0 662  ]
+"238
+[; ;charger_discharger.c: 238:     if (pidt >= 300.0) pidt = 300.0;
+[e $ ! >= -> _pidt `d .300.0 660  ]
 [e = _pidt -> .300.0 `f ]
-[e $U 663  ]
-"256
-[; ;charger_discharger.c: 256:     else if (pidt <= 50.0) pidt = 50.0;
-[e :U 662 ]
-[e $ ! <= -> _pidt `d .50.0 664  ]
+[e $U 661  ]
+"239
+[; ;charger_discharger.c: 239:     else if (pidt <= 50.0) pidt = 50.0;
+[e :U 660 ]
+[e $ ! <= -> _pidt `d .50.0 662  ]
 [e = _pidt -> .50.0 `f ]
-[e :U 664 ]
-[e :U 663 ]
-"257
-[; ;charger_discharger.c: 257: }
-[e :UE 659 ]
+[e :U 662 ]
+[e :U 661 ]
+"240
+[; ;charger_discharger.c: 240: }
+[e :UE 657 ]
 }
-"260
-[; ;charger_discharger.c: 260: void set_DC()
+"243
+[; ;charger_discharger.c: 243: void set_DC()
 [v _set_DC `(v ~T0 @X0 1 ef ]
-"261
-[; ;charger_discharger.c: 261: {
+"244
+[; ;charger_discharger.c: 244: {
 {
 [e :U _set_DC ]
 [f ]
-"263
-[; ;charger_discharger.c: 263:     uint16_t dc = (uint16_t) pidt;
+"246
+[; ;charger_discharger.c: 246:     uint16_t dc = (uint16_t) pidt;
 [v _dc `us ~T0 @X0 1 a ]
 [e = _dc -> _pidt `us ]
-"265
-[; ;charger_discharger.c: 265:     PSMC1DCL = dc & 0x00FF;
+"248
+[; ;charger_discharger.c: 248:     PSMC1DCL = dc & 0x00FF;
 [e = _PSMC1DCL -> & -> _dc `ui -> -> 255 `i `ui `uc ]
-"266
-[; ;charger_discharger.c: 266:     PSMC1DCH = (dc >> 8) & 0x01;
+"249
+[; ;charger_discharger.c: 249:     PSMC1DCH = (dc >> 8) & 0x01;
 [e = _PSMC1DCH -> & >> -> _dc `ui -> 8 `i -> -> 1 `i `ui `uc ]
-"267
-[; ;charger_discharger.c: 267:     PSMC1CONbits.PSMC1LD = 1;
+"250
+[; ;charger_discharger.c: 250:     PSMC1CONbits.PSMC1LD = 1;
 [e = . . _PSMC1CONbits 0 3 -> -> 1 `i `uc ]
-"268
-[; ;charger_discharger.c: 268: }
-[e :UE 665 ]
+"251
+[; ;charger_discharger.c: 251: }
+[e :UE 663 ]
 }
-"275
-[; ;charger_discharger.c: 275: void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status)
-[v _cc_cv_mode `(v ~T0 @X0 1 ef3`us`us`a ]
-"276
-[; ;charger_discharger.c: 276: {
-{
-[e :U _cc_cv_mode ]
-"275
-[; ;charger_discharger.c: 275: void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status)
-[v _current_voltage `us ~T0 @X0 1 r1 ]
-[v _reference_voltage `us ~T0 @X0 1 r2 ]
-[v _CC_mode_status `a ~T0 @X0 1 r3 ]
-"276
-[; ;charger_discharger.c: 276: {
-[f ]
-"278
-[; ;charger_discharger.c: 278:     if( ( ( (uint16_t) ( ( ( (float)current_voltage * 5000.0 ) / 4096.0 ) + 0.5 ) ) > reference_voltage ) && CC_mode_status )
-[e $ ! && > -> -> + / * -> -> _current_voltage `f `d .5000.0 .4096.0 .0.5 `us `ui -> _reference_voltage `ui != -> _CC_mode_status `i -> 0 `i 667  ]
-"279
-[; ;charger_discharger.c: 279:     {
-{
-"280
-[; ;charger_discharger.c: 280:         pidi = 0;
-[e = _pidi -> -> 0 `i `f ]
-"281
-[; ;charger_discharger.c: 281:         cmode = 0;
-[e = _cmode -> -> 0 `i `a ]
-"282
-[; ;charger_discharger.c: 282:         kp = CV_kp;
-[e = _kp _CV_kp ]
-"283
-[; ;charger_discharger.c: 283:         ki = CV_ki;
-[e = _ki _CV_ki ]
-"284
-[; ;charger_discharger.c: 284:         kd = CV_kd;
-[e = _kd _CV_kd ]
-"285
-[; ;charger_discharger.c: 285:     }
-}
-[e :U 667 ]
-"286
-[; ;charger_discharger.c: 286: }
-[e :UE 666 ]
-}
-"289
-[; ;charger_discharger.c: 289: void scaling()
+"255
+[; ;charger_discharger.c: 255: void scaling()
 [v _scaling `(v ~T0 @X0 1 ef ]
-"290
-[; ;charger_discharger.c: 290: {
+"256
+[; ;charger_discharger.c: 256: {
 {
 [e :U _scaling ]
 [f ]
-"291
-[; ;charger_discharger.c: 291:     log_data.current = (uint16_t) ( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 );
-[e = . _log_data 2 -> + / * * -> -> _iavg `f `d .2.5 .5000.0 .4096.0 .0.5 `us ]
-"292
-[; ;charger_discharger.c: 292:     log_data.voltage = (uint16_t) ( ( ( (float)vavg * 5000.0 ) / 4096.0 ) + 0.5 );
-[e = . _log_data 1 -> + / * -> -> _vavg `f `d .5000.0 .4096.0 .0.5 `us ]
-"293
-[; ;charger_discharger.c: 293:     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0;
+"257
+[; ;charger_discharger.c: 257:     log_data.current = (uint16_t) ( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 );
+[e = . _log_data 1 -> + / * * -> -> _iavg `f `d .2.5 .5000.0 .4096.0 .0.5 `us ]
+"258
+[; ;charger_discharger.c: 258:     log_data.voltage = (uint16_t) ( ( ( (float)vavg * 5000.0 ) / 4096.0 ) + 0.5 );
+[e = . _log_data 0 -> + / * -> -> _vavg `f `d .5000.0 .4096.0 .0.5 `us ]
+"259
+[; ;charger_discharger.c: 259:     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0;
 [e =+ _qavg -> / -> -> + / * * -> -> _iavg `f `d .2.5 .5000.0 .4096.0 .0.5 `f `d .3600.0 `f ]
-"294
-[; ;charger_discharger.c: 294:     log_data.capacity = (uint16_t) (qavg);
-[e = . _log_data 3 -> _qavg `us ]
-"295
-[; ;charger_discharger.c: 295:     if (basic_configuration.version == 2)
-[e $ ! == -> . _basic_configuration 0 `i -> 2 `i 669  ]
-"296
-[; ;charger_discharger.c: 296:     {
-{
-"297
-[; ;charger_discharger.c: 297:         if (vavg > vmax)
-[e $ ! > -> _vavg `ui -> _vmax `ui 670  ]
-"298
-[; ;charger_discharger.c: 298:         {
-{
-"299
-[; ;charger_discharger.c: 299:             (vmax = vavg);
-[e = _vmax _vavg ]
-"300
-[; ;charger_discharger.c: 300:         }
+"260
+[; ;charger_discharger.c: 260:     log_data.capacity = (uint16_t) (qavg);
+[e = . _log_data 2 -> _qavg `us ]
+"261
+[; ;charger_discharger.c: 261: }
+[e :UE 664 ]
 }
-[e :U 670 ]
-"301
-[; ;charger_discharger.c: 301:     }
-}
-[e :U 669 ]
-"302
-[; ;charger_discharger.c: 302: }
-[e :UE 668 ]
-}
-"305
-[; ;charger_discharger.c: 305: void log_control()
-[v _log_control `(v ~T0 @X0 1 ef ]
-"306
-[; ;charger_discharger.c: 306: {
-{
-[e :U _log_control ]
-[f ]
-"307
-[; ;charger_discharger.c: 307:     if(start)
-[e $ ! != -> _start `i -> 0 `i 672  ]
-"308
-[; ;charger_discharger.c: 308:     {
-{
-"309
-[; ;charger_discharger.c: 309:         log_data_ptr = &log_data;
-[e = _log_data_ptr &U _log_data ]
-"310
-[; ;charger_discharger.c: 310:         log_data.elapsed_time = second;
-[e = . _log_data 0 _second ]
-"311
-[; ;charger_discharger.c: 311:         log_data.duty_cycle = (uint16_t) pidt;
-[e = . _log_data 5 -> _pidt `us ]
-"312
-[; ;charger_discharger.c: 312:         UART_send_byte(0xDD);
-[e ( _UART_send_byte (1 -> -> 221 `i `uc ]
-"313
-[; ;charger_discharger.c: 313:         UART_send_some_bytes(sizeof(log_data),(uint8_t*)log_data_ptr);
-[e ( _UART_send_some_bytes (2 , -> -> # _log_data `ui `uc -> _log_data_ptr `*uc ]
-"314
-[; ;charger_discharger.c: 314:         UART_send_byte(0x77);
-[e ( _UART_send_byte (1 -> -> 119 `i `uc ]
-"315
-[; ;charger_discharger.c: 315:     }else second = 0;
-}
-[e $U 673  ]
-[e :U 672 ]
-[e = _second -> -> 0 `i `us ]
-[e :U 673 ]
-"316
-[; ;charger_discharger.c: 316: }
-[e :UE 671 ]
-}
-"320
-[; ;charger_discharger.c: 320: uint16_t read_ADC(uint16_t channel)
+"278
+[; ;charger_discharger.c: 278: uint16_t read_ADC(uint16_t channel)
 [v _read_ADC `(us ~T0 @X0 1 ef1`us ]
-"321
-[; ;charger_discharger.c: 321: {
+"279
+[; ;charger_discharger.c: 279: {
 {
 [e :U _read_ADC ]
-"320
-[; ;charger_discharger.c: 320: uint16_t read_ADC(uint16_t channel)
+"278
+[; ;charger_discharger.c: 278: uint16_t read_ADC(uint16_t channel)
 [v _channel `us ~T0 @X0 1 r1 ]
-"321
-[; ;charger_discharger.c: 321: {
+"279
+[; ;charger_discharger.c: 279: {
 [f ]
-"322
-[; ;charger_discharger.c: 322:     uint16_t ad_res = 0;
+"280
+[; ;charger_discharger.c: 280:     uint16_t ad_res = 0;
 [v _ad_res `us ~T0 @X0 1 a ]
 [e = _ad_res -> -> 0 `i `us ]
-"323
-[; ;charger_discharger.c: 323:     _delay((unsigned long)((10)*(32000000/4000000.0)));
+"281
+[; ;charger_discharger.c: 281:     _delay((unsigned long)((10)*(32000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-"324
-[; ;charger_discharger.c: 324:     ADCON0bits.CHS = channel;
+"282
+[; ;charger_discharger.c: 282:     ADCON0bits.CHS = channel;
 [e = . . _ADCON0bits 1 2 -> _channel `uc ]
-"325
-[; ;charger_discharger.c: 325:     _delay((unsigned long)((10)*(32000000/4000000.0)));
+"283
+[; ;charger_discharger.c: 283:     _delay((unsigned long)((10)*(32000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-"326
-[; ;charger_discharger.c: 326:     GO_nDONE = 1;
+"284
+[; ;charger_discharger.c: 284:     GO_nDONE = 1;
 [e = _GO_nDONE -> -> 1 `i `b ]
-"327
-[; ;charger_discharger.c: 327:     while(GO_nDONE);
-[e $U 675  ]
-[e :U 676 ]
-[e :U 675 ]
-[e $ _GO_nDONE 676  ]
-[e :U 677 ]
-"328
-[; ;charger_discharger.c: 328:     ad_res = (uint16_t)((ADRESL & 0xFF)|((ADRESH << 8) & 0xF00));
+"285
+[; ;charger_discharger.c: 285:     while(GO_nDONE);
+[e $U 666  ]
+[e :U 667 ]
+[e :U 666 ]
+[e $ _GO_nDONE 667  ]
+[e :U 668 ]
+"286
+[; ;charger_discharger.c: 286:     ad_res = (uint16_t)((ADRESL & 0xFF)|((ADRESH << 8) & 0xF00));
 [e = _ad_res -> | & -> _ADRESL `i -> 255 `i & << -> _ADRESH `i -> 8 `i -> 3840 `i `us ]
-"329
-[; ;charger_discharger.c: 329:     return ad_res;
+"287
+[; ;charger_discharger.c: 287:     return ad_res;
 [e ) _ad_res ]
-[e $UE 674  ]
-"330
-[; ;charger_discharger.c: 330: }
-[e :UE 674 ]
+[e $UE 665  ]
+"288
+[; ;charger_discharger.c: 288: }
+[e :UE 665 ]
 }
-"334
-[; ;charger_discharger.c: 334: void timing()
+"292
+[; ;charger_discharger.c: 292: void timing()
 [v _timing `(v ~T0 @X0 1 ef ]
-"335
-[; ;charger_discharger.c: 335: {
+"293
+[; ;charger_discharger.c: 293: {
 {
 [e :U _timing ]
 [f ]
-"336
-[; ;charger_discharger.c: 336:     if(!count)
-[e $ ! ! != -> _count `ui -> -> 0 `i `ui 679  ]
-"337
-[; ;charger_discharger.c: 337:     {
+"294
+[; ;charger_discharger.c: 294:     if(!count)
+[e $ ! ! != -> _count `ui -> -> 0 `i `ui 670  ]
+"295
+[; ;charger_discharger.c: 295:     {
 {
-"338
-[; ;charger_discharger.c: 338:         SECF = 1;
+"296
+[; ;charger_discharger.c: 296:         SECF = 1;
 [e = _SECF -> -> 1 `i `a ]
-"339
-[; ;charger_discharger.c: 339:         count = 1024;
+"297
+[; ;charger_discharger.c: 297:         count = 1024;
 [e = _count -> -> 1024 `i `us ]
-"340
-[; ;charger_discharger.c: 340:         second++;
+"298
+[; ;charger_discharger.c: 298:         second++;
 [e ++ _second -> -> 1 `i `us ]
-"341
-[; ;charger_discharger.c: 341:     }else
+"299
+[; ;charger_discharger.c: 299:     }else
 }
-[e $U 680  ]
-[e :U 679 ]
-"342
-[; ;charger_discharger.c: 342:     {
+[e $U 671  ]
+[e :U 670 ]
+"300
+[; ;charger_discharger.c: 300:     {
 {
-"343
-[; ;charger_discharger.c: 343:         count--;
+"301
+[; ;charger_discharger.c: 301:         count--;
 [e -- _count -> -> 1 `i `us ]
-"344
-[; ;charger_discharger.c: 344:     }
+"302
+[; ;charger_discharger.c: 302:     }
 }
-[e :U 680 ]
-"345
-[; ;charger_discharger.c: 345: }
-[e :UE 678 ]
+[e :U 671 ]
+"303
+[; ;charger_discharger.c: 303: }
+[e :UE 669 ]
 }
-"348
-[; ;charger_discharger.c: 348: void calculate_avg()
+"306
+[; ;charger_discharger.c: 306: void calculate_avg()
 [v _calculate_avg `(v ~T0 @X0 1 ef ]
-"349
-[; ;charger_discharger.c: 349: {
+"307
+[; ;charger_discharger.c: 307: {
 {
 [e :U _calculate_avg ]
 [f ]
-"350
-[; ;charger_discharger.c: 350:     switch(count)
-[e $U 683  ]
-"351
-[; ;charger_discharger.c: 351:     {
+"308
+[; ;charger_discharger.c: 308:     switch(count)
+[e $U 674  ]
+"309
+[; ;charger_discharger.c: 309:     {
 {
-"352
-[; ;charger_discharger.c: 352:         case 1024:
-[e :U 684 ]
-"353
-[; ;charger_discharger.c: 353:             iacum = (uint24_t) i;
+"310
+[; ;charger_discharger.c: 310:         case 1024:
+[e :U 675 ]
+"311
+[; ;charger_discharger.c: 311:             iacum = (uint24_t) i;
 [e = _iacum -> _i `um ]
-"354
-[; ;charger_discharger.c: 354:             vacum = (uint24_t) v;
+"312
+[; ;charger_discharger.c: 312:             vacum = (uint24_t) v;
 [e = _vacum -> _v `um ]
-"355
-[; ;charger_discharger.c: 355:             break;
-[e $U 682  ]
-"356
-[; ;charger_discharger.c: 356:         case 0:
-[e :U 685 ]
-"357
-[; ;charger_discharger.c: 357:             iavg = ((iacum >> 10) + ((iacum >> 9) & 0x01));
+"313
+[; ;charger_discharger.c: 313:             break;
+[e $U 673  ]
+"314
+[; ;charger_discharger.c: 314:         case 0:
+[e :U 676 ]
+"315
+[; ;charger_discharger.c: 315:             iavg = ((iacum >> 10) + ((iacum >> 9) & 0x01));
 [e = _iavg -> + >> _iacum -> 10 `i & >> _iacum -> 9 `i -> -> -> 1 `i `m `um `us ]
-"358
-[; ;charger_discharger.c: 358:             vavg = ((vacum >> 10) + ((vacum >> 9) & 0x01));
+"316
+[; ;charger_discharger.c: 316:             vavg = ((vacum >> 10) + ((vacum >> 9) & 0x01));
 [e = _vavg -> + >> _vacum -> 10 `i & >> _vacum -> 9 `i -> -> -> 1 `i `m `um `us ]
-"359
-[; ;charger_discharger.c: 359:             break;
-[e $U 682  ]
-"360
-[; ;charger_discharger.c: 360:         default:
-[e :U 686 ]
-"361
-[; ;charger_discharger.c: 361:             iacum += (uint24_t) i;
+"317
+[; ;charger_discharger.c: 317:             break;
+[e $U 673  ]
+"318
+[; ;charger_discharger.c: 318:         default:
+[e :U 677 ]
+"319
+[; ;charger_discharger.c: 319:             iacum += (uint24_t) i;
 [e =+ _iacum -> _i `um ]
-"362
-[; ;charger_discharger.c: 362:             vacum += (uint24_t) v;
+"320
+[; ;charger_discharger.c: 320:             vacum += (uint24_t) v;
 [e =+ _vacum -> _v `um ]
-"363
-[; ;charger_discharger.c: 363:     }
+"321
+[; ;charger_discharger.c: 321:     }
 }
-[e $U 682  ]
-[e :U 683 ]
-[e [\ -> _count `ui , $ -> -> 1024 `i `ui 684
- , $ -> -> 0 `i `ui 685
- 686 ]
-[e :U 682 ]
-"364
-[; ;charger_discharger.c: 364: }
-[e :UE 681 ]
+[e $U 673  ]
+[e :U 674 ]
+[e [\ -> _count `ui , $ -> -> 1024 `i `ui 675
+ , $ -> -> 0 `i `ui 676
+ 677 ]
+[e :U 673 ]
+"322
+[; ;charger_discharger.c: 322: }
+[e :UE 672 ]
 }
-"367
-[; ;charger_discharger.c: 367: void interrupt_enable()
+"326
+[; ;charger_discharger.c: 326: void converter_settings()
+[v _converter_settings `(v ~T0 @X0 1 ef ]
+"327
+[; ;charger_discharger.c: 327: {
+{
+[e :U _converter_settings ]
+[f ]
+"329
+[; ;charger_discharger.c: 329:     cmode = 1;
+[e = _cmode -> -> 1 `i `a ]
+"330
+[; ;charger_discharger.c: 330:     pidi = 0;
+[e = _pidi -> -> 0 `i `f ]
+"331
+[; ;charger_discharger.c: 331:     qavg = 0;
+[e = _qavg -> -> 0 `i `f ]
+"332
+[; ;charger_discharger.c: 332:     vmax = 0;
+[e = _vmax -> -> 0 `i `us ]
+"333
+[; ;charger_discharger.c: 333:     pidt = 50.0;
+[e = _pidt -> .50.0 `f ]
+"334
+[; ;charger_discharger.c: 334:     set_DC();
+[e ( _set_DC ..  ]
+"335
+[; ;charger_discharger.c: 335:     Cell_ON();
+[e ( _Cell_ON ..  ]
+"341
+[; ;charger_discharger.c: 341:     _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"342
+[; ;charger_discharger.c: 342:     second = 0;
+[e = _second -> -> 0 `i `us ]
+"343
+[; ;charger_discharger.c: 343:     conv = 1;
+[e = _conv -> -> 1 `i `a ]
+"344
+[; ;charger_discharger.c: 344: }
+[e :UE 678 ]
+}
+"348
+[; ;charger_discharger.c: 348: void interrupt_enable()
 [v _interrupt_enable `(v ~T0 @X0 1 ef ]
-"368
-[; ;charger_discharger.c: 368: {
+"349
+[; ;charger_discharger.c: 349: {
 {
 [e :U _interrupt_enable ]
 [f ]
-"369
-[; ;charger_discharger.c: 369:     char clear_buffer = 0;
+"350
+[; ;charger_discharger.c: 350:     char clear_buffer = 0;
 [v _clear_buffer `uc ~T0 @X0 1 a ]
 [e = _clear_buffer -> -> 0 `i `uc ]
-"370
-[; ;charger_discharger.c: 370:     while(RCIF){
-[e $U 688  ]
-[e :U 689 ]
+"351
+[; ;charger_discharger.c: 351:     while(RCIF){
+[e $U 680  ]
+[e :U 681 ]
 {
-"371
-[; ;charger_discharger.c: 371:         clear_buffer = RC1REG;
+"352
+[; ;charger_discharger.c: 352:         clear_buffer = RC1REG;
 [e = _clear_buffer -> _RC1REG `uc ]
-"372
-[; ;charger_discharger.c: 372:     }
+"353
+[; ;charger_discharger.c: 353:     }
 }
-[e :U 688 ]
-"370
-[; ;charger_discharger.c: 370:     while(RCIF){
-[e $ _RCIF 689  ]
-[e :U 690 ]
-"373
-[; ;charger_discharger.c: 373:     RCIE = 1;
+[e :U 680 ]
+"351
+[; ;charger_discharger.c: 351:     while(RCIF){
+[e $ _RCIF 681  ]
+[e :U 682 ]
+"354
+[; ;charger_discharger.c: 354:     RCIE = 1;
 [e = _RCIE -> -> 1 `i `b ]
-"374
-[; ;charger_discharger.c: 374:     TXIE = 0;
+"355
+[; ;charger_discharger.c: 355:     TXIE = 0;
 [e = _TXIE -> -> 0 `i `b ]
-"375
-[; ;charger_discharger.c: 375:     TMR1IE = 1;
+"356
+[; ;charger_discharger.c: 356:     TMR1IE = 1;
 [e = _TMR1IE -> -> 1 `i `b ]
-"376
-[; ;charger_discharger.c: 376:     PEIE = 1;
+"357
+[; ;charger_discharger.c: 357:     PEIE = 1;
 [e = _PEIE -> -> 1 `i `b ]
-"377
-[; ;charger_discharger.c: 377:     GIE = 1;
+"358
+[; ;charger_discharger.c: 358:     GIE = 1;
 [e = _GIE -> -> 1 `i `b ]
-"378
-[; ;charger_discharger.c: 378:     count = 1024;
+"359
+[; ;charger_discharger.c: 359:     count = 1024;
 [e = _count -> -> 1024 `i `us ]
-"379
-[; ;charger_discharger.c: 379:     TMR1IF = 0;
+"360
+[; ;charger_discharger.c: 360:     TMR1IF = 0;
 [e = _TMR1IF -> -> 0 `i `b ]
-"380
-[; ;charger_discharger.c: 380:     TMR1ON = 1;
+"361
+[; ;charger_discharger.c: 361:     TMR1ON = 1;
 [e = _TMR1ON -> -> 1 `i `b ]
-"381
-[; ;charger_discharger.c: 381: }
-[e :UE 687 ]
+"362
+[; ;charger_discharger.c: 362: }
+[e :UE 679 ]
 }
-"386
-[; ;charger_discharger.c: 386: void UART_send_char(char bt)
+"367
+[; ;charger_discharger.c: 367: void UART_send_char(char bt)
 [v _UART_send_char `(v ~T0 @X0 1 ef1`uc ]
-"387
-[; ;charger_discharger.c: 387: {
+"368
+[; ;charger_discharger.c: 368: {
 {
 [e :U _UART_send_char ]
-"386
-[; ;charger_discharger.c: 386: void UART_send_char(char bt)
+"367
+[; ;charger_discharger.c: 367: void UART_send_char(char bt)
 [v _bt `uc ~T0 @X0 1 r1 ]
-"387
-[; ;charger_discharger.c: 387: {
+"368
+[; ;charger_discharger.c: 368: {
 [f ]
-"388
-[; ;charger_discharger.c: 388:     while(0 == TXIF)
-[e $U 692  ]
-[e :U 693 ]
-"389
-[; ;charger_discharger.c: 389:     {
+"369
+[; ;charger_discharger.c: 369:     while(0 == TXIF)
+[e $U 684  ]
+[e :U 685 ]
+"370
+[; ;charger_discharger.c: 370:     {
 {
-"390
-[; ;charger_discharger.c: 390:     }
+"371
+[; ;charger_discharger.c: 371:     }
 }
-[e :U 692 ]
-"388
-[; ;charger_discharger.c: 388:     while(0 == TXIF)
-[e $ == -> 0 `i -> _TXIF `i 693  ]
-[e :U 694 ]
-"391
-[; ;charger_discharger.c: 391:     TX1REG = bt;
+[e :U 684 ]
+"369
+[; ;charger_discharger.c: 369:     while(0 == TXIF)
+[e $ == -> 0 `i -> _TXIF `i 685  ]
+[e :U 686 ]
+"372
+[; ;charger_discharger.c: 372:     TX1REG = bt;
 [e = _TX1REG -> _bt `uc ]
-"392
-[; ;charger_discharger.c: 392: }
-[e :UE 691 ]
+"373
+[; ;charger_discharger.c: 373: }
+[e :UE 683 ]
 }
-"394
-[; ;charger_discharger.c: 394: void UART_send_header(uint8_t start, uint8_t operation, uint8_t code)
+"375
+[; ;charger_discharger.c: 375: void UART_send_header(uint8_t start, uint8_t operation, uint8_t code)
 [v _UART_send_header `(v ~T0 @X0 1 ef3`uc`uc`uc ]
-"395
-[; ;charger_discharger.c: 395: {
+"376
+[; ;charger_discharger.c: 376: {
 {
 [e :U _UART_send_header ]
-"394
-[; ;charger_discharger.c: 394: void UART_send_header(uint8_t start, uint8_t operation, uint8_t code)
+"375
+[; ;charger_discharger.c: 375: void UART_send_header(uint8_t start, uint8_t operation, uint8_t code)
 [v _start `uc ~T0 @X0 1 r1 ]
 [v _operation `uc ~T0 @X0 1 r2 ]
 [v _code `uc ~T0 @X0 1 r3 ]
-"395
-[; ;charger_discharger.c: 395: {
+"376
+[; ;charger_discharger.c: 376: {
 [f ]
-"396
-[; ;charger_discharger.c: 396:     UART_send_byte(start);
+"377
+[; ;charger_discharger.c: 377:     UART_send_byte(start);
 [e ( _UART_send_byte (1 _start ]
-"397
-[; ;charger_discharger.c: 397:     UART_send_byte(operation);
+"378
+[; ;charger_discharger.c: 378:     UART_send_byte(operation);
 [e ( _UART_send_byte (1 _operation ]
-"398
-[; ;charger_discharger.c: 398:     UART_send_byte(code);
+"379
+[; ;charger_discharger.c: 379:     UART_send_byte(code);
 [e ( _UART_send_byte (1 _code ]
-"399
-[; ;charger_discharger.c: 399: }
-[e :UE 695 ]
+"380
+[; ;charger_discharger.c: 380: }
+[e :UE 687 ]
 }
-"404
-[; ;charger_discharger.c: 404: uint8_t UART_get_byte()
+"385
+[; ;charger_discharger.c: 385: uint8_t UART_get_byte()
 [v _UART_get_byte `(uc ~T0 @X0 1 ef ]
-"405
-[; ;charger_discharger.c: 405: {
+"386
+[; ;charger_discharger.c: 386: {
 {
 [e :U _UART_get_byte ]
 [f ]
-"406
-[; ;charger_discharger.c: 406:     if(OERR)
-[e $ ! _OERR 697  ]
-"407
-[; ;charger_discharger.c: 407:     {
+"387
+[; ;charger_discharger.c: 387:     if(OERR)
+[e $ ! _OERR 689  ]
+"388
+[; ;charger_discharger.c: 388:     {
 {
-"408
-[; ;charger_discharger.c: 408:         CREN = 0;
+"389
+[; ;charger_discharger.c: 389:         CREN = 0;
 [e = _CREN -> -> 0 `i `b ]
-"409
-[; ;charger_discharger.c: 409:         CREN = 1;
+"390
+[; ;charger_discharger.c: 390:         CREN = 1;
 [e = _CREN -> -> 1 `i `b ]
-"410
-[; ;charger_discharger.c: 410:     }
+"391
+[; ;charger_discharger.c: 391:     }
 }
-[e :U 697 ]
-"411
-[; ;charger_discharger.c: 411:     while(!RCIF);
-[e $U 698  ]
-[e :U 699 ]
-[e :U 698 ]
-[e $ ! _RCIF 699  ]
-[e :U 700 ]
-"412
-[; ;charger_discharger.c: 412:     return RC1REG;
+[e :U 689 ]
+"392
+[; ;charger_discharger.c: 392:     while(!RCIF);
+[e $U 690  ]
+[e :U 691 ]
+[e :U 690 ]
+[e $ ! _RCIF 691  ]
+[e :U 692 ]
+"393
+[; ;charger_discharger.c: 393:     return RC1REG;
 [e ) _RC1REG ]
-[e $UE 696  ]
-"413
-[; ;charger_discharger.c: 413: }
-[e :UE 696 ]
+[e $UE 688  ]
+"394
+[; ;charger_discharger.c: 394: }
+[e :UE 688 ]
 }
-"415
-[; ;charger_discharger.c: 415: void UART_get_some_bytes(uint8_t length, uint8_t* data)
+"396
+[; ;charger_discharger.c: 396: void UART_get_some_bytes(uint8_t length, uint8_t* data)
 [v _UART_get_some_bytes `(v ~T0 @X0 1 ef2`uc`*uc ]
-"416
-[; ;charger_discharger.c: 416: {
+"397
+[; ;charger_discharger.c: 397: {
 {
 [e :U _UART_get_some_bytes ]
-"415
-[; ;charger_discharger.c: 415: void UART_get_some_bytes(uint8_t length, uint8_t* data)
+"396
+[; ;charger_discharger.c: 396: void UART_get_some_bytes(uint8_t length, uint8_t* data)
 [v _length `uc ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"416
-[; ;charger_discharger.c: 416: {
+"397
+[; ;charger_discharger.c: 397: {
 [f ]
-"417
-[; ;charger_discharger.c: 417:     if(OERR)
-[e $ ! _OERR 702  ]
-"418
-[; ;charger_discharger.c: 418:     {
+"398
+[; ;charger_discharger.c: 398:     if(OERR)
+[e $ ! _OERR 694  ]
+"399
+[; ;charger_discharger.c: 399:     {
 {
-"419
-[; ;charger_discharger.c: 419:         CREN = 0;
+"400
+[; ;charger_discharger.c: 400:         CREN = 0;
 [e = _CREN -> -> 0 `i `b ]
-"420
-[; ;charger_discharger.c: 420:         CREN = 1;
+"401
+[; ;charger_discharger.c: 401:         CREN = 1;
 [e = _CREN -> -> 1 `i `b ]
-"421
-[; ;charger_discharger.c: 421:     }
+"402
+[; ;charger_discharger.c: 402:     }
 }
-[e :U 702 ]
-"422
-[; ;charger_discharger.c: 422:     while(length--)
-[e $U 703  ]
-[e :U 704 ]
-"423
-[; ;charger_discharger.c: 423:     {
+[e :U 694 ]
+"403
+[; ;charger_discharger.c: 403:     while(length--)
+[e $U 695  ]
+[e :U 696 ]
+"404
+[; ;charger_discharger.c: 404:     {
 {
-"424
-[; ;charger_discharger.c: 424:         *data++ = UART_get_byte();
+"405
+[; ;charger_discharger.c: 405:         *data++ = UART_get_byte();
 [e = *U ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ( _UART_get_byte ..  ]
-"425
-[; ;charger_discharger.c: 425:     }
+"406
+[; ;charger_discharger.c: 406:     }
 }
-[e :U 703 ]
-"422
-[; ;charger_discharger.c: 422:     while(length--)
-[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 704  ]
-[e :U 705 ]
-"426
-[; ;charger_discharger.c: 426: }
-[e :UE 701 ]
+[e :U 695 ]
+"403
+[; ;charger_discharger.c: 403:     while(length--)
+[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 696  ]
+[e :U 697 ]
+"407
+[; ;charger_discharger.c: 407: }
+[e :UE 693 ]
 }
-"428
-[; ;charger_discharger.c: 428: void UART_send_byte(uint8_t byte)
+"409
+[; ;charger_discharger.c: 409: void UART_send_byte(uint8_t byte)
 [v _UART_send_byte `(v ~T0 @X0 1 ef1`uc ]
-"429
-[; ;charger_discharger.c: 429: {
+"410
+[; ;charger_discharger.c: 410: {
 {
 [e :U _UART_send_byte ]
-"428
-[; ;charger_discharger.c: 428: void UART_send_byte(uint8_t byte)
+"409
+[; ;charger_discharger.c: 409: void UART_send_byte(uint8_t byte)
 [v _byte `uc ~T0 @X0 1 r1 ]
-"429
-[; ;charger_discharger.c: 429: {
+"410
+[; ;charger_discharger.c: 410: {
 [f ]
-"430
-[; ;charger_discharger.c: 430:     while(0 == TXIF)
-[e $U 707  ]
-[e :U 708 ]
-"431
-[; ;charger_discharger.c: 431:     {
+"411
+[; ;charger_discharger.c: 411:     while(0 == TXIF)
+[e $U 699  ]
+[e :U 700 ]
+"412
+[; ;charger_discharger.c: 412:     {
 {
-"432
-[; ;charger_discharger.c: 432:     }
+"413
+[; ;charger_discharger.c: 413:     }
 }
-[e :U 707 ]
-"430
-[; ;charger_discharger.c: 430:     while(0 == TXIF)
-[e $ == -> 0 `i -> _TXIF `i 708  ]
-[e :U 709 ]
-"433
-[; ;charger_discharger.c: 433:     TX1REG = byte;
+[e :U 699 ]
+"411
+[; ;charger_discharger.c: 411:     while(0 == TXIF)
+[e $ == -> 0 `i -> _TXIF `i 700  ]
+[e :U 701 ]
+"414
+[; ;charger_discharger.c: 414:     TX1REG = byte;
 [e = _TX1REG _byte ]
-"434
-[; ;charger_discharger.c: 434: }
-[e :UE 706 ]
+"415
+[; ;charger_discharger.c: 415: }
+[e :UE 698 ]
 }
-"436
-[; ;charger_discharger.c: 436: void UART_send_some_bytes(uint8_t length, uint8_t* data)
+"417
+[; ;charger_discharger.c: 417: void UART_send_some_bytes(uint8_t length, uint8_t* data)
 [v _UART_send_some_bytes `(v ~T0 @X0 1 ef2`uc`*uc ]
-"437
-[; ;charger_discharger.c: 437: {
+"418
+[; ;charger_discharger.c: 418: {
 {
 [e :U _UART_send_some_bytes ]
-"436
-[; ;charger_discharger.c: 436: void UART_send_some_bytes(uint8_t length, uint8_t* data)
+"417
+[; ;charger_discharger.c: 417: void UART_send_some_bytes(uint8_t length, uint8_t* data)
 [v _length `uc ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"437
-[; ;charger_discharger.c: 437: {
+"418
+[; ;charger_discharger.c: 418: {
 [f ]
-"438
-[; ;charger_discharger.c: 438:     while(length--)
-[e $U 711  ]
-[e :U 712 ]
-"439
-[; ;charger_discharger.c: 439:     {
+"419
+[; ;charger_discharger.c: 419:     while(length--)
+[e $U 703  ]
+[e :U 704 ]
+"420
+[; ;charger_discharger.c: 420:     {
 {
-"440
-[; ;charger_discharger.c: 440:         UART_send_byte(*data++);
+"421
+[; ;charger_discharger.c: 421:         UART_send_byte(*data++);
 [e ( _UART_send_byte (1 *U ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"441
-[; ;charger_discharger.c: 441:     }
+"422
+[; ;charger_discharger.c: 422:     }
 }
-[e :U 711 ]
-"438
-[; ;charger_discharger.c: 438:     while(length--)
-[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 712  ]
-[e :U 713 ]
-"442
-[; ;charger_discharger.c: 442: }
-[e :UE 710 ]
+[e :U 703 ]
+"419
+[; ;charger_discharger.c: 419:     while(length--)
+[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 704  ]
+[e :U 705 ]
+"423
+[; ;charger_discharger.c: 423: }
+[e :UE 702 ]
 }
-"444
-[; ;charger_discharger.c: 444: uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data)
-[v _calculate_checksum `(us ~T0 @X0 1 ef3`uc`uc`*uc ]
-"445
-[; ;charger_discharger.c: 445: {
-{
-[e :U _calculate_checksum ]
-"444
-[; ;charger_discharger.c: 444: uint16_t calculate_checksum(uint8_t code, uint8_t length, uint8_t* data)
-[v _code `uc ~T0 @X0 1 r1 ]
-[v _length `uc ~T0 @X0 1 r2 ]
-[v _data `*uc ~T0 @X0 1 r3 ]
-"445
-[; ;charger_discharger.c: 445: {
-[f ]
-"446
-[; ;charger_discharger.c: 446:     uint16_t result = 0x00;
-[v _result `us ~T0 @X0 1 a ]
-[e = _result -> -> 0 `i `us ]
-"447
-[; ;charger_discharger.c: 447:     result = (uint16_t)code + (uint16_t)length;
-[e = _result -> + -> -> _code `us `ui -> -> _length `us `ui `us ]
-"448
-[; ;charger_discharger.c: 448:     while(length--)
-[e $U 715  ]
-[e :U 716 ]
-"449
-[; ;charger_discharger.c: 449:     {
-{
-"450
-[; ;charger_discharger.c: 450:         result += *data++;
-[e =+ _result -> *U ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x `us ]
-"451
-[; ;charger_discharger.c: 451:     }
-}
-[e :U 715 ]
-"448
-[; ;charger_discharger.c: 448:     while(length--)
-[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 716  ]
-[e :U 717 ]
-"452
-[; ;charger_discharger.c: 452:     return (result);
-[e ) _result ]
-[e $UE 714  ]
-"453
-[; ;charger_discharger.c: 453: }
-[e :UE 714 ]
-}
-"455
-[; ;charger_discharger.c: 455: void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure)
+"425
+[; ;charger_discharger.c: 425: void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure)
 [v _put_data_into_structure `(v ~T0 @X0 1 ef3`uc`*uc`*uc ]
-"456
-[; ;charger_discharger.c: 456: {
+"426
+[; ;charger_discharger.c: 426: {
 {
 [e :U _put_data_into_structure ]
-"455
-[; ;charger_discharger.c: 455: void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure)
+"425
+[; ;charger_discharger.c: 425: void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure)
 [v _length `uc ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
 [v _structure `*uc ~T0 @X0 1 r3 ]
-"456
-[; ;charger_discharger.c: 456: {
+"426
+[; ;charger_discharger.c: 426: {
 [f ]
+"427
+[; ;charger_discharger.c: 427:     while(length--)
+[e $U 707  ]
+[e :U 708 ]
+"428
+[; ;charger_discharger.c: 428:     {
+{
+"429
+[; ;charger_discharger.c: 429:         *structure++ = *data++;
+[e = *U ++ _structure * -> -> 1 `i `x -> -> # *U _structure `i `x *U ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
+"430
+[; ;charger_discharger.c: 430:     }
+}
+[e :U 707 ]
+"427
+[; ;charger_discharger.c: 427:     while(length--)
+[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 708  ]
+[e :U 709 ]
+"431
+[; ;charger_discharger.c: 431: }
+[e :UE 706 ]
+}
+"436
+[; ;charger_discharger.c: 436: void UART_send_string(char* st_pt)
+[v _UART_send_string `(v ~T0 @X0 1 ef1`*uc ]
+"437
+[; ;charger_discharger.c: 437: {
+{
+[e :U _UART_send_string ]
+"436
+[; ;charger_discharger.c: 436: void UART_send_string(char* st_pt)
+[v _st_pt `*uc ~T0 @X0 1 r1 ]
+"437
+[; ;charger_discharger.c: 437: {
+[f ]
+"438
+[; ;charger_discharger.c: 438:     while(*st_pt)
+[e $U 711  ]
+[e :U 712 ]
+"439
+[; ;charger_discharger.c: 439:         UART_send_char(*st_pt++);
+[e ( _UART_send_char (1 *U ++ _st_pt * -> -> 1 `i `x -> -> # *U _st_pt `i `x ]
+[e :U 711 ]
+"438
+[; ;charger_discharger.c: 438:     while(*st_pt)
+[e $ != -> *U _st_pt `i -> 0 `i 712  ]
+[e :U 713 ]
+"440
+[; ;charger_discharger.c: 440: }
+[e :UE 710 ]
+}
+"445
+[; ;charger_discharger.c: 445: void Cell_ON()
+[v _Cell_ON `(v ~T0 @X0 1 ef ]
+"446
+[; ;charger_discharger.c: 446: {
+{
+[e :U _Cell_ON ]
+[f ]
+"447
+[; ;charger_discharger.c: 447:     if (cell_count == 1)
+[e $ ! == -> _cell_count `i -> 1 `i 715  ]
+"448
+[; ;charger_discharger.c: 448:     {
+{
+"449
+[; ;charger_discharger.c: 449:         { RB2 = 1; };
+{
+[e = _RB2 -> -> 1 `i `b ]
+}
+"450
+[; ;charger_discharger.c: 450:         _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"451
+[; ;charger_discharger.c: 451:         { RB3 = 0; };
+{
+[e = _RB3 -> -> 0 `i `b ]
+}
+"452
+[; ;charger_discharger.c: 452:         _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"453
+[; ;charger_discharger.c: 453:         { RB4 = 0; };
+{
+[e = _RB4 -> -> 0 `i `b ]
+}
+"454
+[; ;charger_discharger.c: 454:         _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"455
+[; ;charger_discharger.c: 455:         { RB5 = 0; };
+{
+[e = _RB5 -> -> 0 `i `b ]
+}
+"456
+[; ;charger_discharger.c: 456:         _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "457
-[; ;charger_discharger.c: 457:     while(length--)
-[e $U 719  ]
-[e :U 720 ]
+[; ;charger_discharger.c: 457:     }else if (cell_count == 2)
+}
+[e $U 716  ]
+[e :U 715 ]
+[e $ ! == -> _cell_count `i -> 2 `i 717  ]
 "458
 [; ;charger_discharger.c: 458:     {
 {
 "459
-[; ;charger_discharger.c: 459:         *structure++ = *data++;
-[e = *U ++ _structure * -> -> 1 `i `x -> -> # *U _structure `i `x *U ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
-"460
-[; ;charger_discharger.c: 460:     }
-}
-[e :U 719 ]
-"457
-[; ;charger_discharger.c: 457:     while(length--)
-[e $ != -> -- _length -> -> 1 `i `uc `i -> 0 `i 720  ]
-[e :U 721 ]
-"461
-[; ;charger_discharger.c: 461: }
-[e :UE 718 ]
-}
-"466
-[; ;charger_discharger.c: 466: void UART_send_string(char* st_pt)
-[v _UART_send_string `(v ~T0 @X0 1 ef1`*uc ]
-"467
-[; ;charger_discharger.c: 467: {
-{
-[e :U _UART_send_string ]
-"466
-[; ;charger_discharger.c: 466: void UART_send_string(char* st_pt)
-[v _st_pt `*uc ~T0 @X0 1 r1 ]
-"467
-[; ;charger_discharger.c: 467: {
-[f ]
-"468
-[; ;charger_discharger.c: 468:     while(*st_pt)
-[e $U 723  ]
-[e :U 724 ]
-"469
-[; ;charger_discharger.c: 469:         UART_send_char(*st_pt++);
-[e ( _UART_send_char (1 *U ++ _st_pt * -> -> 1 `i `x -> -> # *U _st_pt `i `x ]
-[e :U 723 ]
-"468
-[; ;charger_discharger.c: 468:     while(*st_pt)
-[e $ != -> *U _st_pt `i -> 0 `i 724  ]
-[e :U 725 ]
-"470
-[; ;charger_discharger.c: 470: }
-[e :UE 722 ]
-}
-"475
-[; ;charger_discharger.c: 475: void Cell_ON()
-[v _Cell_ON `(v ~T0 @X0 1 ef ]
-"476
-[; ;charger_discharger.c: 476: {
-{
-[e :U _Cell_ON ]
-[f ]
-"477
-[; ;charger_discharger.c: 477:     if (cell_count == 1)
-[e $ ! == -> _cell_count `i -> 1 `i 727  ]
-"478
-[; ;charger_discharger.c: 478:     {
-{
-"479
-[; ;charger_discharger.c: 479:         { RB2 = 1; };
-{
-[e = _RB2 -> -> 1 `i `b ]
-}
-"480
-[; ;charger_discharger.c: 480:         _delay((unsigned long)((10)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"481
-[; ;charger_discharger.c: 481:         { RB3 = 0; };
-{
-[e = _RB3 -> -> 0 `i `b ]
-}
-"482
-[; ;charger_discharger.c: 482:         _delay((unsigned long)((10)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"483
-[; ;charger_discharger.c: 483:         { RB4 = 0; };
-{
-[e = _RB4 -> -> 0 `i `b ]
-}
-"484
-[; ;charger_discharger.c: 484:         _delay((unsigned long)((10)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"485
-[; ;charger_discharger.c: 485:         { RB5 = 0; };
-{
-[e = _RB5 -> -> 0 `i `b ]
-}
-"486
-[; ;charger_discharger.c: 486:         _delay((unsigned long)((10)*(32000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"487
-[; ;charger_discharger.c: 487:     }else if (cell_count == 2)
-}
-[e $U 728  ]
-[e :U 727 ]
-[e $ ! == -> _cell_count `i -> 2 `i 729  ]
-"488
-[; ;charger_discharger.c: 488:     {
-{
-"489
-[; ;charger_discharger.c: 489:         { RB2 = 0; };
+[; ;charger_discharger.c: 459:         { RB2 = 0; };
 {
 [e = _RB2 -> -> 0 `i `b ]
 }
-"490
-[; ;charger_discharger.c: 490:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"460
+[; ;charger_discharger.c: 460:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"491
-[; ;charger_discharger.c: 491:         { RB3 = 1; };
+"461
+[; ;charger_discharger.c: 461:         { RB3 = 1; };
 {
 [e = _RB3 -> -> 1 `i `b ]
 }
-"492
-[; ;charger_discharger.c: 492:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"462
+[; ;charger_discharger.c: 462:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"493
-[; ;charger_discharger.c: 493:         { RB4 = 0; };
+"463
+[; ;charger_discharger.c: 463:         { RB4 = 0; };
 {
 [e = _RB4 -> -> 0 `i `b ]
 }
-"494
-[; ;charger_discharger.c: 494:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"464
+[; ;charger_discharger.c: 464:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"495
-[; ;charger_discharger.c: 495:         { RB5 = 0; };
+"465
+[; ;charger_discharger.c: 465:         { RB5 = 0; };
 {
 [e = _RB5 -> -> 0 `i `b ]
 }
-"496
-[; ;charger_discharger.c: 496:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"466
+[; ;charger_discharger.c: 466:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"497
-[; ;charger_discharger.c: 497:     }else if (cell_count == 3)
+"467
+[; ;charger_discharger.c: 467:     }else if (cell_count == 3)
 }
-[e $U 730  ]
-[e :U 729 ]
-[e $ ! == -> _cell_count `i -> 3 `i 731  ]
-"498
-[; ;charger_discharger.c: 498:     {
+[e $U 718  ]
+[e :U 717 ]
+[e $ ! == -> _cell_count `i -> 3 `i 719  ]
+"468
+[; ;charger_discharger.c: 468:     {
 {
-"499
-[; ;charger_discharger.c: 499:         { RB2 = 0; };
+"469
+[; ;charger_discharger.c: 469:         { RB2 = 0; };
 {
 [e = _RB2 -> -> 0 `i `b ]
 }
-"500
-[; ;charger_discharger.c: 500:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"470
+[; ;charger_discharger.c: 470:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"501
-[; ;charger_discharger.c: 501:         { RB3 = 0; };
+"471
+[; ;charger_discharger.c: 471:         { RB3 = 0; };
 {
 [e = _RB3 -> -> 0 `i `b ]
 }
-"502
-[; ;charger_discharger.c: 502:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"472
+[; ;charger_discharger.c: 472:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"503
-[; ;charger_discharger.c: 503:         { RB4 = 1; };
+"473
+[; ;charger_discharger.c: 473:         { RB4 = 1; };
 {
 [e = _RB4 -> -> 1 `i `b ]
 }
-"504
-[; ;charger_discharger.c: 504:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"474
+[; ;charger_discharger.c: 474:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"505
-[; ;charger_discharger.c: 505:         { RB5 = 0; };
+"475
+[; ;charger_discharger.c: 475:         { RB5 = 0; };
 {
 [e = _RB5 -> -> 0 `i `b ]
 }
-"506
-[; ;charger_discharger.c: 506:     }else if (cell_count == 4)
+"476
+[; ;charger_discharger.c: 476:     }else if (cell_count == 4)
 }
-[e $U 732  ]
-[e :U 731 ]
-[e $ ! == -> _cell_count `i -> 4 `i 733  ]
-"507
-[; ;charger_discharger.c: 507:     {
+[e $U 720  ]
+[e :U 719 ]
+[e $ ! == -> _cell_count `i -> 4 `i 721  ]
+"477
+[; ;charger_discharger.c: 477:     {
 {
-"508
-[; ;charger_discharger.c: 508:         { RB2 = 0; };
+"478
+[; ;charger_discharger.c: 478:         { RB2 = 0; };
 {
 [e = _RB2 -> -> 0 `i `b ]
 }
-"509
-[; ;charger_discharger.c: 509:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"479
+[; ;charger_discharger.c: 479:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"510
-[; ;charger_discharger.c: 510:         { RB3 = 0; };
+"480
+[; ;charger_discharger.c: 480:         { RB3 = 0; };
 {
 [e = _RB3 -> -> 0 `i `b ]
 }
-"511
-[; ;charger_discharger.c: 511:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"481
+[; ;charger_discharger.c: 481:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"512
-[; ;charger_discharger.c: 512:         { RB4 = 0; };
+"482
+[; ;charger_discharger.c: 482:         { RB4 = 0; };
 {
 [e = _RB4 -> -> 0 `i `b ]
 }
-"513
-[; ;charger_discharger.c: 513:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"483
+[; ;charger_discharger.c: 483:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"514
-[; ;charger_discharger.c: 514:         { RB5 = 1; };
+"484
+[; ;charger_discharger.c: 484:         { RB5 = 1; };
 {
 [e = _RB5 -> -> 1 `i `b ]
 }
-"515
-[; ;charger_discharger.c: 515:         _delay((unsigned long)((10)*(32000000/4000.0)));
+"485
+[; ;charger_discharger.c: 485:         _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"516
-[; ;charger_discharger.c: 516:     }
+"486
+[; ;charger_discharger.c: 486:     }
 }
-[e :U 733 ]
-[e :U 732 ]
-[e :U 730 ]
-[e :U 728 ]
-"517
-[; ;charger_discharger.c: 517: }
-[e :UE 726 ]
+[e :U 721 ]
+[e :U 720 ]
+[e :U 718 ]
+[e :U 716 ]
+"487
+[; ;charger_discharger.c: 487: }
+[e :UE 714 ]
 }
-"520
-[; ;charger_discharger.c: 520: void Cell_OFF()
+"490
+[; ;charger_discharger.c: 490: void Cell_OFF()
 [v _Cell_OFF `(v ~T0 @X0 1 ef ]
-"521
-[; ;charger_discharger.c: 521: {
+"491
+[; ;charger_discharger.c: 491: {
 {
 [e :U _Cell_OFF ]
 [f ]
-"522
-[; ;charger_discharger.c: 522:     { RB2 = 0; };
+"492
+[; ;charger_discharger.c: 492:     { RB2 = 0; };
 {
 [e = _RB2 -> -> 0 `i `b ]
 }
-"523
-[; ;charger_discharger.c: 523:     _delay((unsigned long)((10)*(32000000/4000.0)));
+"493
+[; ;charger_discharger.c: 493:     _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"524
-[; ;charger_discharger.c: 524:     { RB3 = 0; };
+"494
+[; ;charger_discharger.c: 494:     { RB3 = 0; };
 {
 [e = _RB3 -> -> 0 `i `b ]
 }
-"525
-[; ;charger_discharger.c: 525:     _delay((unsigned long)((10)*(32000000/4000.0)));
+"495
+[; ;charger_discharger.c: 495:     _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"526
-[; ;charger_discharger.c: 526:     { RB4 = 0; };
+"496
+[; ;charger_discharger.c: 496:     { RB4 = 0; };
 {
 [e = _RB4 -> -> 0 `i `b ]
 }
-"527
-[; ;charger_discharger.c: 527:     _delay((unsigned long)((10)*(32000000/4000.0)));
+"497
+[; ;charger_discharger.c: 497:     _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"528
-[; ;charger_discharger.c: 528:     { RB5 = 0; };
+"498
+[; ;charger_discharger.c: 498:     { RB5 = 0; };
 {
 [e = _RB5 -> -> 0 `i `b ]
 }
-"529
-[; ;charger_discharger.c: 529:     _delay((unsigned long)((10)*(32000000/4000.0)));
+"499
+[; ;charger_discharger.c: 499:     _delay((unsigned long)((10)*(32000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"530
-[; ;charger_discharger.c: 530: }
-[e :UE 734 ]
+"500
+[; ;charger_discharger.c: 500: }
+[e :UE 722 ]
 }
