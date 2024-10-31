@@ -126,82 +126,66 @@ void initialize()
 bool command_interpreter()
 {
     bool test = true;
-    uint8_t operation = 0x00;
-    uint8_t code = 0x00;
-    uint8_t length = 0x00;
-    uint8_t data[20] = {0x00};
-    basic_configuration_ptr = &basic_configuration;
-    converter_configuration_ptr = &converter_configuration;
-    if (!start)
+    uint8_t subcommand = 0x00;
+    char data[20];
+    UART_read_until(data, ASCII_NEWLINE);
+    
+    if (0 == strcmp(data, '*IDN?'))
     {
-        if(UART_get_byte()==0xDD)
-        {
-            operation = UART_get_byte();
-            code = UART_get_byte();
-            length = UART_get_byte();
-            if (length>0) UART_get_some_bytes(length, (uint8_t*)data);     
-            if(!start)
+        UART_send_some_char((uint8_t) strlen(ASCII_SELF), (char*) ASCII_SELF);
+    }
+    
+    subcommand = data[0];
+    
+    switch (subcommand)
+    {
+        case 0x4D: // MEAS
+            if (data[5] == 0x56) // Voltage reading
             {
-                switch (operation)
-                {
-                    case 0xA5:
-                        UART_send_header(0xDD, operation, code);
-                        switch (code)
-                        {
-                            case 0x03:
-                                length = sizeof(basic_configuration);
-                                UART_send_byte(length);
-                                UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
-                                break;
-                            case 0x07:
-                                length = sizeof(converter_configuration);
-                                UART_send_byte(length);
-                                UART_send_some_bytes(length, (uint8_t*)converter_configuration_ptr);
-                                break;
-                        }
-                        UART_send_byte(0x77);                
-                        break;   
-                    case 0x5A:
-                        switch (code)
-                        {
-                            case 0x03: //BASIC CONFIGURATION
-                                put_data_into_structure(length, (uint8_t*)data, (uint8_t*)basic_configuration_ptr);
-                                v_ref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ; //Scale the voltage reference to be compare with v;
-                                i_ref = (uint16_t) ( ( ( (float) basic_configuration.const_current * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
-                                capacity = basic_configuration.capacity;
-                                break;
-                            case 0x07: // CONVERTER CONFIGURATION
-                                put_data_into_structure(length, (uint8_t*)data, (uint8_t*)converter_configuration_ptr);
-                                CV_kp = (float) ((converter_configuration.CVKp) / 1000000.0);
-                                CV_ki = (float) ((converter_configuration.CVKi) / 1000000.0);
-                                CV_kd = (float) ((converter_configuration.CVKd) / 1000.0);
-                                CC_char_kp = (float) ((converter_configuration.CCKpC) / 1000000.0);
-                                CC_char_ki = (float) ((converter_configuration.CCKiC) / 1000000.0);
-                                CC_disc_kp = (float) ((converter_configuration.CCKpD) / 1000000.0);
-                                CC_disc_ki = (float) ((converter_configuration.CCKiD) / 1000000.0);
-                                break;
-                        }
-                        break;
-                    case 0x0F:  // START CONVERTER
-                        if (code == 0x05)
-                        {
-                            cell_count = 0x01;
-                            converter_settings();
-                            start = true;
-                        }
-                        break;
-                }
+                
             }
-        }else test = false;
-    }else 
-    {
-        code = UART_get_byte();
-        switch (code)
-        {
-            default:
-                test = false;
-                break;
-        }
+            else if (data[5] == 0x43) // Current reading
+            {
+                
+            }
+            
+        case 0x4F: // OUTP
+            if (data[7] == 0x41) // Otput Start
+            {
+                cell_count = 0x01;
+                converter_settings();
+            }
+            else if (data[7] == 0x4F) // Output Stop
+            {
+                STOP_CONVERTER();
+            }
+            
+        case (0x43): // CURR
+            if (data[4] == 0x3A) // Set Protection
+            {
+                
+            }
+            else if (data[4] == 0x20) // Set Variable
+            {
+                //READ VALUE
+                cmode = 1;
+                i_ref = (uint16_t) ( ( ( (float) const_cur * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
+            }
+            
+        case (0x56): // VOLT
+            if (data[4] == 0x3A) // Set Protection
+            {
+                
+            }
+            else if (data[4] == 0x20) // Set Variable
+            {
+                // READ VALUE
+                cmode = 0;
+                v_ref = ( ( (float) const_vol * 4096.0 ) / 5000.0 ) + 0.5 ;
+            }
+            
+        default:
+            return test = false;
     }
     return (test);
 }
@@ -250,6 +234,19 @@ void set_DC()
     PSMC1CONbits.PSMC1LD = 1; /// * Set the load register. This will load all the setting as once*/
 }
 
+void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, bool CC_mode_status)
+{
+/// If the current voltage is bigger than the CV setpoint and the system is in CC mode, then:
+    if( ( ( (uint16_t) ( ( ( (float)current_voltage * 5000.0 ) / 4096.0 ) + 0.5 ) ) > reference_voltage ) && CC_mode_status )
+    {        
+        pidi = 0;       /// <ol> <li> The integral acummulator is cleared
+        cmode = 0;      /// <li> The system is set in CV mode by clearing the #cmode variable
+        kp = CV_kp;     /// <li> The proportional constant is set to #CV_kp 
+        ki = CV_ki;     /// <li> The integral constant is set to #CV_ki
+        kd = CV_kd;     /// <li> The derivative constant is set to #CV_kd
+    }    
+}
+
 /**@brief This function takes care of scaling the average values to correspond with their real values.
 */
 void scaling() /// This function performs the folowing tasks:
@@ -259,19 +256,6 @@ void scaling() /// This function performs the folowing tasks:
     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0; /// <li> Perform the discrete integration of #iavg over one second and accumulate in #qavg 
     log_data.capacity = (uint16_t) (qavg);
 }
-
-///**@brief This function takes care of calculating the average values printing the log data using the UART.
-//*/
-//void log_control()
-//{
-//    if(start)
-//    {
-//        log_data_ptr = &log_data;
-//        UART_send_byte(0xDD);
-//        UART_send_some_bytes(sizeof(log_data),(uint8_t*)log_data_ptr);
-//        UART_send_byte(0x77);
-//    }else second = 0;
-//}
 
 /**@brief This function read the ADC and store the data in the coresponding variable
 */
@@ -406,6 +390,26 @@ void UART_get_some_bytes(uint8_t length, uint8_t* data)
     }
 }
 
+// Function to read ASCII characters from UART until a terminator is found
+void UART_read_until(char *data, char terminator)
+{
+    int index = 0;
+    char received_byte;
+
+    while (index < 20 - 1) { // Leave space for null terminator
+        received_byte = UART_get_byte(); // Read a byte from UART
+
+        // Check if the received byte is the terminator
+        if (received_byte == terminator) {
+            break; // Exit the loop if the terminator is received
+        }
+
+        data[index++] = received_byte; // Store the byte in the buffer
+    }
+
+    data[index] = '\0'; // Null-terminate the string
+}
+
 void UART_send_byte(uint8_t byte)  
 {
     while(0 == TXIF)
@@ -419,6 +423,14 @@ void UART_send_some_bytes(uint8_t length, uint8_t* data)
     while(length--)
     {
         UART_send_byte(*data++); /// * send a byte      
+    }
+}
+
+void UART_send_some_char(uint8_t length, char* data)
+{
+    while(length--)
+    {
+        UART_send_byte((uint8_t)*data++); /// * send a byte      
     }
 }
 

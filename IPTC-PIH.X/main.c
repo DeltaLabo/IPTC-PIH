@@ -31,6 +31,11 @@ void main(void) /// This function performs the folowing tasks:
         if (SECF) /// <ul> <li> Check the #SECF flag, if it is set, 1 second has passed since last execution, so the folowing task are executed:
         {
             scaling(); /// <li> Scale the average measured values by calling the #scaling function
+            
+            if (cmode == 1){ // When on CC, the voltage limit is reached, it pases to CV
+                cc_cv_mode(vavg, const_vol, cmode); /// <li> Check if the system shall change to CV mode by calling the #cc_cv_mode function
+            }
+            
             SECF = 0; /// <ol> <li> Clear the #SECF flag to restart the 1 second timer
         }
 	}

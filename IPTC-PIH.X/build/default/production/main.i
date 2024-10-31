@@ -9544,6 +9544,7 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void set_DC();
     uint16_t read_ADC(uint16_t channel);
     void scaling(void);
+    void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status);
     void control_loop(void);
     void calculate_avg(void);
     void interrupt_enable(void);
@@ -9553,31 +9554,15 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void UART_send_header(uint8_t start, uint8_t operation, uint8_t code);
     void UART_send_byte(uint8_t byte);
     void UART_get_some_bytes(uint8_t length, uint8_t* data);
+    void UART_read_until(char* data, char terminator);
     void UART_send_some_bytes(uint8_t length, uint8_t* data);
+    void UART_send_some_char(uint8_t length, char* data);
     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
     void UART_send_string(char* st_pt);
     void Cell_ON(void);
     void Cell_OFF(void);
     void timing(void);
-# 101 "./charger_discharger.h"
-    typedef struct basic_configuration_struct {
-        uint16_t const_voltage;
-        uint16_t const_current;
-        uint16_t capacity;
-        uint16_t end_of_charge;
-        uint16_t end_of_discharge;
-    }basic_configuration_type, *basic_configuration_type_ptr;
-
-    typedef struct converter_configuration_struct {
-        uint16_t CVKp;
-        uint16_t CVKi;
-        uint16_t CVKd;
-        uint16_t CCKpC;
-        uint16_t CCKiC;
-        uint16_t CCKpD;
-        uint16_t CCKiD;
-    }converter_configuration_type, *converter_configuration_type_ptr;
-
+# 107 "./charger_discharger.h"
     typedef struct log_data_struct {
         uint16_t voltage;
         uint16_t current;
@@ -9587,13 +9572,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 
 
-    basic_configuration_type basic_configuration;
-    basic_configuration_type_ptr basic_configuration_ptr;
-    converter_configuration_type converter_configuration;
-    converter_configuration_type_ptr converter_configuration_ptr;
     log_data_type log_data;
     log_data_type_ptr log_data_ptr;
-    _Bool start = 0;
     _Bool SECF = 1;
     _Bool SRXF = 0;
     uint16_t capacity;
@@ -9624,7 +9604,9 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     uint24_t iacum = 0;
 
     uint16_t vavg = 0;
+    uint16_t const_vol = 0;
     uint16_t iavg = 0;
+    uint16_t const_cur = 0;
     float qavg = 0.0;
     uint16_t vmax = 0;
     float pidi;
@@ -9654,6 +9636,11 @@ void main(void)
         if (SECF)
         {
             scaling();
+
+            if (cmode == 1){
+                cc_cv_mode(vavg, const_vol, cmode);
+            }
+
             SECF = 0;
         }
  }

@@ -9544,6 +9544,7 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void set_DC();
     uint16_t read_ADC(uint16_t channel);
     void scaling(void);
+    void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status);
     void control_loop(void);
     void calculate_avg(void);
     void interrupt_enable(void);
@@ -9553,31 +9554,15 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     void UART_send_header(uint8_t start, uint8_t operation, uint8_t code);
     void UART_send_byte(uint8_t byte);
     void UART_get_some_bytes(uint8_t length, uint8_t* data);
+    void UART_read_until(char* data, char terminator);
     void UART_send_some_bytes(uint8_t length, uint8_t* data);
+    void UART_send_some_char(uint8_t length, char* data);
     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
     void UART_send_string(char* st_pt);
     void Cell_ON(void);
     void Cell_OFF(void);
     void timing(void);
-# 101 "./charger_discharger.h"
-    typedef struct basic_configuration_struct {
-        uint16_t const_voltage;
-        uint16_t const_current;
-        uint16_t capacity;
-        uint16_t end_of_charge;
-        uint16_t end_of_discharge;
-    }basic_configuration_type, *basic_configuration_type_ptr;
-
-    typedef struct converter_configuration_struct {
-        uint16_t CVKp;
-        uint16_t CVKi;
-        uint16_t CVKd;
-        uint16_t CCKpC;
-        uint16_t CCKiC;
-        uint16_t CCKpD;
-        uint16_t CCKiD;
-    }converter_configuration_type, *converter_configuration_type_ptr;
-
+# 107 "./charger_discharger.h"
     typedef struct log_data_struct {
         uint16_t voltage;
         uint16_t current;
@@ -9587,13 +9572,8 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 
 
-    basic_configuration_type basic_configuration;
-    basic_configuration_type_ptr basic_configuration_ptr;
-    converter_configuration_type converter_configuration;
-    converter_configuration_type_ptr converter_configuration_ptr;
     log_data_type log_data;
     log_data_type_ptr log_data_ptr;
-    _Bool start = 0;
     _Bool SECF = 1;
     _Bool SRXF = 0;
     uint16_t capacity;
@@ -9624,7 +9604,9 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
     uint24_t iacum = 0;
 
     uint16_t vavg = 0;
+    uint16_t const_vol = 0;
     uint16_t iavg = 0;
+    uint16_t const_cur = 0;
     float qavg = 0.0;
     uint16_t vmax = 0;
     float pidi;
@@ -9754,82 +9736,66 @@ void initialize()
 _Bool command_interpreter()
 {
     _Bool test = 1;
-    uint8_t operation = 0x00;
-    uint8_t code = 0x00;
-    uint8_t length = 0x00;
-    uint8_t data[20] = {0x00};
-    basic_configuration_ptr = &basic_configuration;
-    converter_configuration_ptr = &converter_configuration;
-    if (!start)
+    uint8_t subcommand = 0x00;
+    char data[20];
+    UART_read_until(data, '\n');
+
+    if (0 == strcmp(data, '*IDN?'))
     {
-        if(UART_get_byte()==0xDD)
-        {
-            operation = UART_get_byte();
-            code = UART_get_byte();
-            length = UART_get_byte();
-            if (length>0) UART_get_some_bytes(length, (uint8_t*)data);
-            if(!start)
+        UART_send_some_char((uint8_t) strlen('AlexSQ,FQPS,0001,1.0'), (char*) 'AlexSQ,FQPS,0001,1.0');
+    }
+
+    subcommand = data[0];
+
+    switch (subcommand)
+    {
+        case 0x4D:
+            if (data[5] == 0x56)
             {
-                switch (operation)
-                {
-                    case 0xA5:
-                        UART_send_header(0xDD, operation, code);
-                        switch (code)
-                        {
-                            case 0x03:
-                                length = sizeof(basic_configuration);
-                                UART_send_byte(length);
-                                UART_send_some_bytes(length, (uint8_t*)basic_configuration_ptr);
-                                break;
-                            case 0x07:
-                                length = sizeof(converter_configuration);
-                                UART_send_byte(length);
-                                UART_send_some_bytes(length, (uint8_t*)converter_configuration_ptr);
-                                break;
-                        }
-                        UART_send_byte(0x77);
-                        break;
-                    case 0x5A:
-                        switch (code)
-                        {
-                            case 0x03:
-                                put_data_into_structure(length, (uint8_t*)data, (uint8_t*)basic_configuration_ptr);
-                                v_ref = ( ( (float) basic_configuration.const_voltage * 4096.0 ) / 5000.0 ) + 0.5 ;
-                                i_ref = (uint16_t) ( ( ( (float) basic_configuration.const_current * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
-                                capacity = basic_configuration.capacity;
-                                break;
-                            case 0x07:
-                                put_data_into_structure(length, (uint8_t*)data, (uint8_t*)converter_configuration_ptr);
-                                CV_kp = (float) ((converter_configuration.CVKp) / 1000000.0);
-                                CV_ki = (float) ((converter_configuration.CVKi) / 1000000.0);
-                                CV_kd = (float) ((converter_configuration.CVKd) / 1000.0);
-                                CC_char_kp = (float) ((converter_configuration.CCKpC) / 1000000.0);
-                                CC_char_ki = (float) ((converter_configuration.CCKiC) / 1000000.0);
-                                CC_disc_kp = (float) ((converter_configuration.CCKpD) / 1000000.0);
-                                CC_disc_ki = (float) ((converter_configuration.CCKiD) / 1000000.0);
-                                break;
-                        }
-                        break;
-                    case 0x0F:
-                        if (code == 0x05)
-                        {
-                            cell_count = 0x01;
-                            converter_settings();
-                            start = 1;
-                        }
-                        break;
-                }
+
             }
-        }else test = 0;
-    }else
-    {
-        code = UART_get_byte();
-        switch (code)
-        {
-            default:
-                test = 0;
-                break;
-        }
+            else if (data[5] == 0x43)
+            {
+
+            }
+
+        case 0x4F:
+            if (data[7] == 0x41)
+            {
+                cell_count = 0x01;
+                converter_settings();
+            }
+            else if (data[7] == 0x4F)
+            {
+                { RC3 = 0; RC4 = 0; conv = 0; RC5 = 0; pidt = 50.0; set_DC(); Cell_OFF();};
+            }
+
+        case (0x43):
+            if (data[4] == 0x3A)
+            {
+
+            }
+            else if (data[4] == 0x20)
+            {
+
+                cmode = 1;
+                i_ref = (uint16_t) ( ( ( (float) const_cur * 4096.0 ) / (5000.0 * 2.5 ) ) + 0.5 );
+            }
+
+        case (0x56):
+            if (data[4] == 0x3A)
+            {
+
+            }
+            else if (data[4] == 0x20)
+            {
+
+                cmode = 0;
+                v_ref = ( ( (float) const_vol * 4096.0 ) / 5000.0 ) + 0.5 ;
+            }
+
+        default:
+            return test = 0;
     }
     return (test);
 }
@@ -9878,6 +9844,19 @@ void set_DC()
     PSMC1CONbits.PSMC1LD = 1;
 }
 
+void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, _Bool CC_mode_status)
+{
+
+    if( ( ( (uint16_t) ( ( ( (float)current_voltage * 5000.0 ) / 4096.0 ) + 0.5 ) ) > reference_voltage ) && CC_mode_status )
+    {
+        pidi = 0;
+        cmode = 0;
+        kp = CV_kp;
+        ki = CV_ki;
+        kd = CV_kd;
+    }
+}
+
 
 
 void scaling()
@@ -9887,7 +9866,9 @@ void scaling()
     qavg += (float)( ( ( (float)iavg * 2.5 * 5000.0 ) / 4096.0 ) + 0.5 ) / 3600.0;
     log_data.capacity = (uint16_t) (qavg);
 }
-# 278 "charger_discharger.c"
+
+
+
 uint16_t read_ADC(uint16_t channel)
 {
     uint16_t ad_res = 0;
@@ -10019,6 +10000,26 @@ void UART_get_some_bytes(uint8_t length, uint8_t* data)
     }
 }
 
+
+void UART_read_until(char *data, char terminator)
+{
+    int index = 0;
+    char received_byte;
+
+    while (index < 20 - 1) {
+        received_byte = UART_get_byte();
+
+
+        if (received_byte == terminator) {
+            break;
+        }
+
+        data[index++] = received_byte;
+    }
+
+    data[index] = '\0';
+}
+
 void UART_send_byte(uint8_t byte)
 {
     while(0 == TXIF)
@@ -10032,6 +10033,14 @@ void UART_send_some_bytes(uint8_t length, uint8_t* data)
     while(length--)
     {
         UART_send_byte(*data++);
+    }
+}
+
+void UART_send_some_char(uint8_t length, char* data)
+{
+    while(length--)
+    {
+        UART_send_byte((uint8_t)*data++);
     }
 }
 

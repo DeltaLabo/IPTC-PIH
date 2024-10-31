@@ -52,6 +52,7 @@
     void set_DC();
     uint16_t read_ADC(uint16_t channel);
     void scaling(void);
+    void cc_cv_mode(uint16_t current_voltage, uint16_t reference_voltage, bool CC_mode_status);
     void control_loop(void);
     void calculate_avg(void);
     void interrupt_enable(void);
@@ -61,12 +62,17 @@
     void UART_send_header(uint8_t start, uint8_t operation, uint8_t code);
     void UART_send_byte(uint8_t byte);
     void UART_get_some_bytes(uint8_t length, uint8_t* data);
+    void UART_read_until(char* data, char terminator);
     void UART_send_some_bytes(uint8_t length, uint8_t* data);
+    void UART_send_some_char(uint8_t length, char* data);
     void put_data_into_structure(uint8_t length, uint8_t* data, uint8_t* structure);
     void UART_send_string(char* st_pt);
     void Cell_ON(void);
     void Cell_OFF(void);
     void timing(void);
+    
+    #define     ASCII_SELF              'AlexSQ,FQPS,0001,1.0'
+    #define     ASCII_NEWLINE           '\n'
     
     #define     _XTAL_FREQ              32000000 ///< Frequency to coordinate delays, 32 MHz
     #define     ERR_MAX                 1000 ///< Maximum permisible error, useful to avoid ringing
@@ -97,25 +103,7 @@
     #define     SET_DISC()              { RC3 = 0; RC4 = 0; __delay_ms(100); RC3 = 1; __delay_ms(100); RC3 = 0; __delay_ms(100); RC5 = 1; __delay_ms(100); kp = CC_disc_kp; ki = CC_disc_ki; kd = (float) (CC_char_disc_kd); pidi = 0.0;}
     #define     SET_CHAR()              { RC3 = 0; RC4 = 0; __delay_ms(100); RC4 = 1; __delay_ms(100); RC4 = 0; __delay_ms(100); RC5 = 1; __delay_ms(100); kp = CC_char_kp; ki = CC_char_ki; kd = (float) (CC_char_disc_kd); pidi = 0.0;}
     
-    //Structs
-    typedef struct basic_configuration_struct {
-        uint16_t const_voltage;
-        uint16_t const_current;
-        uint16_t capacity;
-        uint16_t end_of_charge;
-        uint16_t end_of_discharge;  
-    }basic_configuration_type, *basic_configuration_type_ptr;
-    
-    typedef struct converter_configuration_struct {
-        uint16_t CVKp;
-        uint16_t CVKi;
-        uint16_t CVKd;
-        uint16_t CCKpC;
-        uint16_t CCKiC;
-        uint16_t CCKpD;
-        uint16_t CCKiD;
-    }converter_configuration_type, *converter_configuration_type_ptr;
-    
+    //Structs  
     typedef struct log_data_struct {
         uint16_t voltage;
         uint16_t current;
@@ -124,14 +112,9 @@
     }log_data_type, *log_data_type_ptr;
     
     //Variables
-    
-    basic_configuration_type            basic_configuration;
-    basic_configuration_type_ptr        basic_configuration_ptr;  
-    converter_configuration_type        converter_configuration;
-    converter_configuration_type_ptr    converter_configuration_ptr; 
+      
     log_data_type                       log_data;
     log_data_type_ptr                   log_data_ptr;
-    bool                                start = false;
     bool                                SECF = 1; ///< 1 second flag
     bool                                SRXF = 0; ///< Serial Reception Flag
     uint16_t                            capacity; ///< Definition of capacity per cell according to each chemistry
@@ -162,7 +145,9 @@
     uint24_t                            iacum = 0;
     //qavg does not need accumulator
     uint16_t                            vavg = 0;  ///< Last one-second-average of #v . Initialized as 0
+    uint16_t                            const_vol = 0;
     uint16_t                            iavg = 0;  ///< Last one-second-average of #i . Initialized as 0
+    uint16_t                            const_cur = 0;
     float                               qavg = 0.0;  ///< Integration of #i . Initialized as 0
     uint16_t                            vmax = 0;   ///< Maximum recorded average voltage. 
     float                               pidi;   ///< Integral acumulator of PI compensator
